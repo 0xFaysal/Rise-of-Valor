@@ -1,4 +1,9 @@
 # Rise of Valor
+### **About the Game**
+Rise of Valor is a multiplayer pixel-art action game where 4-5 players team up to battle waves of enemies in an epic co-op survival mode. Designed to deliver fast-paced gameplay with strategic teamwork, players can communicate via in-game voice chat, coordinate attacks, and dominate the battlefield.
+
+This project is built using Java and JavaFX, combining retro-inspired graphics with modern multiplayer mechanics.
+
 
 
 
