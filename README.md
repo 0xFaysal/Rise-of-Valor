@@ -7,7 +7,7 @@ This project is built using Java and JavaFX, combining retro-inspired graphics w
 
 
 
-## Project Structure
+## **Project Structure**
 ````
 src/
 ├── client/
@@ -29,3 +29,7 @@ To get started:
 1. Fork the repository. 
 2. Create a feature branch: bash Copy code <br>`git checkout -b feature/your-feature-name`
 3. Submit a pull request with a detailed description of your changes.”
+
+
+### **License**
+This project is licensed under the MIT License.
