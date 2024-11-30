@@ -1,18 +1,18 @@
 package game.rise_of_valor.models;
 
-public class Player {
+public class Enemy {
     private String name;
     private int health;
     private int damage;
     private int speed;
-    private int money;
+    private int reward;
 
-    public Player(String name, int health, int damage, int speed, int money) {
+    public Enemy(String name, int health, int damage, int speed, int reward) {
         this.name = name;
         this.health = health;
         this.damage = damage;
         this.speed = speed;
-        this.money = money;
+        this.reward = reward;
     }
 
     public String getName() {
@@ -31,8 +31,8 @@ public class Player {
         return speed;
     }
 
-    public int getMoney() {
-        return money;
+    public int getReward() {
+        return reward;
     }
 
     public void setName(String name) {
@@ -51,7 +51,7 @@ public class Player {
         this.speed = speed;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
+    public void setReward(int reward) {
+        this.reward = reward;
     }
 }
