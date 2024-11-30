@@ -17,6 +17,6 @@ public class GameLauncher {
         GAME_WIDTH = (int) canvas.getWidth();
         GAME_HEIGHT = (int) canvas.getHeight();
         System.out.println("Game Width: " + GAME_WIDTH + " Game Height: " + GAME_HEIGHT);
-        gc.fillRect(0, 0, GAME_WIDTH/2, GAME_HEIGHT/2);
+
     }
 }
