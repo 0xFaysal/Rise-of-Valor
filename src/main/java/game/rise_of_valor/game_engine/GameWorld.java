@@ -18,6 +18,7 @@ public class GameWorld {
     private final List<KeyCode> keys = new ArrayList<>();
 
     Player player ;
+//    Player player2;
 
    public GameWorld(Canvas canvas, Scene scene) {
        this.canvas = canvas;
@@ -25,6 +26,8 @@ public class GameWorld {
        this.GAME_WIDTH = (int) canvas.getWidth();
        this.GAME_HEIGHT = (int) canvas.getHeight();
          player = new Player(100, 100);
+//            player2 = new Player(200, 200);
+
 
 
        // Add key press listener
@@ -44,8 +47,10 @@ public class GameWorld {
 
     public void update(double deltaTime) {
         player.update(scene , deltaTime, keys);
+//        player2.update(scene , deltaTime, keys);
     }
     public void render(GraphicsContext gc) {
         player.draw(gc);
+//        player2.draw(gc);
     }
 }
