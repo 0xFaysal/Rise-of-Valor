@@ -1,57 +1,42 @@
 package game.rise_of_valor.models;
 
-public class Player {
-    private String name;
-    private int health;
-    private int damage;
-    private int speed;
-    private int money;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 
-    public Player(String name, int health, int damage, int speed, int money) {
-        this.name = name;
-        this.health = health;
-        this.damage = damage;
-        this.speed = speed;
-        this.money = money;
+import java.util.List;
+
+public class Player extends Character {
+
+
+    public Player(int inertiaPositionX, int inertiaPositionY) {
+        super(inertiaPositionX, inertiaPositionY);
+        speed = 200;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public int getHealth() {
-        return health;
-    }
 
-    public int getDamage() {
-        return damage;
-    }
 
-    public int getSpeed() {
-        return speed;
-    }
+    public void update(Scene scene , double deltaTime , List<KeyCode> keys) {
 
-    public int getMoney() {
-        return money;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
+        if(!keys.isEmpty()){
+            KeyCode key = keys.get(0);
+            if(key == KeyCode.W || key == KeyCode.UP){
+                inertiaPositionY -= (int) (speed * deltaTime);
+            }
+            if(key == KeyCode.S|| key == KeyCode.DOWN){
+                inertiaPositionY += (int) (speed * deltaTime);
+            }
+            if(key == KeyCode.A|| key == KeyCode.LEFT){
+                inertiaPositionX -= (int) (speed * deltaTime);
+            }
+            if(key == KeyCode.D|| key == KeyCode.RIGHT){
+                inertiaPositionX += (int) (speed * deltaTime);
+            }
+        }
+        else {
+            inertiaPositionX += 0;
+            inertiaPositionY += 0;
+        }
     }
 }
