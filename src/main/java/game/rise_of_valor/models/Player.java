@@ -4,6 +4,10 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.RadialGradient;
+import javafx.scene.paint.Stop;
 
 import java.util.List;
 import java.util.Objects;
@@ -69,6 +73,26 @@ public class Player extends Character {
             double width = sprite.getWidth();
             double height = sprite.getHeight();
             double scaledSize = tileSize * tileScale;
+
+            int shadowWidth = 35;
+            int shadowXOffset = 45;
+
+            // Draw shadow of the character under the character
+//            gc.setFill(Color.rgb(0, 0, 0, 0.4));
+//            gc.fillOval(inertiaPositionX+shadowWidth + 35, inertiaPositionY+scaledSize-30, shadowWidth, 10);
+
+            // Draw realistic shadow under the character
+            RadialGradient gradient = new RadialGradient(
+                    0, 0, inertiaPositionX + shadowWidth + 30, inertiaPositionY + scaledSize - 30, shadowWidth,
+                    false, CycleMethod.NO_CYCLE,
+                    new Stop(0, Color.rgb(0, 0, 0, 0.5)),
+                    new Stop(0.5, Color.rgb(0, 0, 0, 0.3)),
+                    new Stop(0.7, Color.rgb(0, 0, 0, 0.2)),
+                    new Stop(1, Color.rgb(0, 0, 0, 0.1))
+            );
+            gc.setFill(gradient);
+            gc.fillOval(inertiaPositionX + shadowWidth + shadowXOffset, inertiaPositionY + scaledSize - 30, shadowWidth, 10);
+
 
             if (facingLeft) {
                 gc.save();

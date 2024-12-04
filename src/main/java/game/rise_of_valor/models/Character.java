@@ -2,6 +2,7 @@ package game.rise_of_valor.models;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,11 @@ public class Character {
             Image sprite = movement.get(currentSprite);
             double width = sprite.getWidth();
             double height = sprite.getHeight();
+
+            //draw shadow of the character under the character
+            gc.setFill(Color.rgb(0, 0, 0, 1));
+            gc.fillOval(inertiaPositionX + 10, inertiaPositionY + scaledTileSize - 10, scaledTileSize - 20, 10);
+
 
             if (facingLeft) {
                 gc.save();

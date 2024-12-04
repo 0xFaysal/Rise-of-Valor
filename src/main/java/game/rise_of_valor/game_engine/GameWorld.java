@@ -11,7 +11,7 @@ import java.util.List;
 
 public class GameWorld {
 
-    public final int GAME_WIDTH, GAME_HEIGHT;
+    public final int CANVAS_WIDTH, CANVAS_HEIGHT;
 
     Canvas canvas;
     Scene scene;
@@ -21,13 +21,16 @@ public class GameWorld {
     Player player ;
 //    Player player2;
 
+    TileManager tileManager;
+
    public GameWorld(Canvas canvas, Scene scene) {
        this.canvas = canvas;
        this.scene = scene;
-       this.GAME_WIDTH = (int) canvas.getWidth();
-       this.GAME_HEIGHT = (int) canvas.getHeight();
+       this.CANVAS_WIDTH = (int) canvas.getWidth();
+       this.CANVAS_HEIGHT = (int) canvas.getHeight();
          player = new Player(100, 100);
 //            player2 = new Player(200, 200);
+         tileManager = new TileManager(CANVAS_WIDTH, CANVAS_HEIGHT);
 
 
 
@@ -51,6 +54,7 @@ public class GameWorld {
 //        player2.update(scene , deltaTime, keys);
     }
     public void render(GraphicsContext gc) {
+        tileManager.draw(gc);
         player.draw(gc);
 //        player2.draw(gc);
     }
