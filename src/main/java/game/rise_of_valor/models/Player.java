@@ -13,7 +13,7 @@ public class Player extends Character {
     private static final String SPRITE_PATH_TEMPLATE = "/game/rise_of_valor/assets/sprites/player%d/%s_%d.png";
     private static final String WALK = "walk";
     private static final String IDLE = "idle";
-    int playerCharacterId = 4;
+    int playerCharacterId = 3;
 
     public Player(int inertiaPositionX, int inertiaPositionY) {
         super(inertiaPositionX, inertiaPositionY);
