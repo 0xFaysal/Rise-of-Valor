@@ -36,7 +36,7 @@ public class Character {
 
     public void update(double deltaTime) {
         // Calculate frame duration based on speed
-        double frameDuration = baseFrameDuration / (speed / 32.0);
+        double frameDuration = baseFrameDuration / (120 *(speed/100.0) / 32.0);
 
         // Update animation time
         animationTime += deltaTime;
@@ -71,6 +71,14 @@ public class Character {
         } else {
             System.out.println("No sprites loaded.");
         }
+    }
+
+    public int getInertiaPositionX() {
+        return inertiaPositionX;
+    }
+
+    public int getInertiaPositionY() {
+        return inertiaPositionY;
     }
 
     public void setFacingLeft(boolean facingLeft) {

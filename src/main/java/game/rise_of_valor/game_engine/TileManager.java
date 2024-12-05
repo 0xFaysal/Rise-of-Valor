@@ -37,13 +37,29 @@ public class TileManager {
 
     }
 
-    public void draw(GraphicsContext gc){
-        for (int i = 0; i < COL; i++) {
-            for (int j= 0 ; j < ROW; j++) {
-                gc.drawImage(tiles[getTileMapData(MAP1,i,j)].image, i * 16, j * 16);
+
+    public void draw(GraphicsContext gc, Camera camera) {
+        int startCol = camera.getX() / Tile.TileSize;
+        int startRow = camera.getY() / Tile.TileSize;
+        int endCol = Math.min(startCol + CanvasWidth / Tile.TileSize + 1, COL);
+        int endRow = Math.min(startRow + CanvasHeight / Tile.TileSize + 1, ROW);
+
+        for (int i = startCol; i < endCol; i++) {
+            for (int j = startRow; j < endRow; j++) {
+                gc.drawImage(tiles[getTileMapData(MAP1, i, j)].image,
+                        (i * Tile.TileSize) - camera.getX(),
+                        (j * Tile.TileSize) - camera.getY());
             }
         }
     }
+
+//    public void draw(GraphicsContext gc){
+//        for (int i = 0; i < COL; i++) {
+//            for (int j= 0 ; j < ROW; j++) {
+//                gc.drawImage(tiles[getTileMapData(MAP1,i,j)].image, i * 16, j * 16);
+//            }
+//        }
+//    }
 
     public int getTileMapData(int[] mapData, int x, int y) {
         if (x < 0 || x >= COL || y < 0 || y >= ROW) {
