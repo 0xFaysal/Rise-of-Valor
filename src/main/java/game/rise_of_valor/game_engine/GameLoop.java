@@ -63,6 +63,6 @@ public class GameLoop {
 
     private void render(GraphicsContext gc, double interpolation) {
         gc.clearRect(0, 0, gameWorld.CANVAS_WIDTH, gameWorld.CANVAS_HEIGHT);
-        gameWorld.render(gc);
+        gameWorld.render(gc, interpolation);
     }
 }

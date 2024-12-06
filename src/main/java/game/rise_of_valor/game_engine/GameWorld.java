@@ -1,7 +1,6 @@
 package game.rise_of_valor.game_engine;
 
 import game.rise_of_valor.models.Player;
-import game.rise_of_valor.models.Weapon;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -24,7 +23,7 @@ public class GameWorld {
     Player player;
     TileManager tileManager;
 
-    Camera camera;
+//    Camera camera;
 
     final int WORLD_WIDTH = MAP1_WIDTH;
     final int WORLD_HEIGHT = MAP1_HEIGHT;
@@ -34,9 +33,9 @@ public class GameWorld {
         this.scene = scene;
         this.CANVAS_WIDTH = (int) canvas.getWidth();
         this.CANVAS_HEIGHT = (int) canvas.getHeight();
-        player = new Player(100, 100);
+        player = new Player(CANVAS_WIDTH, CANVAS_HEIGHT);
         tileManager = new TileManager(CANVAS_WIDTH, CANVAS_HEIGHT);
-        camera = new Camera(CANVAS_WIDTH, CANVAS_HEIGHT,WORLD_WIDTH,WORLD_HEIGHT);
+//        camera = new Camera(CANVAS_WIDTH, CANVAS_HEIGHT,WORLD_WIDTH,WORLD_HEIGHT);
 
 
         // Add key press listener
@@ -56,11 +55,11 @@ public class GameWorld {
 
     public void update(double deltaTime) {
         player.update(scene, deltaTime, keys);
-        camera.update(player.getInertiaPositionX(), player.getInertiaPositionY());
+//        camera.update(player.getWorldX(), player.getWorldY());
     }
 
-    public void render(GraphicsContext gc) {
-        tileManager.draw(gc, camera);
-        player.draw(gc, camera);
+    public void render(GraphicsContext gc, double interpolation) {
+        tileManager.draw(gc, player);
+        player.draw(gc, interpolation);
     }
 }

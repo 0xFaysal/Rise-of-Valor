@@ -8,13 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Character {
-    int inertiaPositionX;
-    int inertiaPositionY;
+    int worldX;
+    int worldY;
 
-    int tileSize = 32;
-    int tileScale = 6;
 
-    int scaledTileSize = tileSize * tileScale;
+
+//    int scaledTileSize = tileSize * tileScale;
 
     List<Image> movement = new ArrayList<>();
     int movementSpriteCount = 0;
@@ -29,9 +28,9 @@ public class Character {
     int speed = 10;
     boolean facingLeft = false;
 
-    public Character(int inertiaPositionX, int inertiaPositionY) {
-        this.inertiaPositionX = inertiaPositionX;
-        this.inertiaPositionY = inertiaPositionY;
+    public Character(int worldX, int worldY) {
+        this.worldX = worldX;
+        this.worldY = worldY;
     }
 
     public void update(double deltaTime) {
@@ -49,36 +48,36 @@ public class Character {
         }
     }
 
-    public void draw(GraphicsContext gc) {
-        if (!movement.isEmpty()) {
-            Image sprite = movement.get(currentSprite);
-            double width = sprite.getWidth();
-            double height = sprite.getHeight();
+//    public void draw(GraphicsContext gc) {
+//        if (!movement.isEmpty()) {
+//            Image sprite = movement.get(currentSprite);
+//            double width = sprite.getWidth();
+//            double height = sprite.getHeight();
+//
+//            //draw shadow of the character under the character
+//            gc.setFill(Color.rgb(0, 0, 0, 1));
+//            gc.fillOval(worldX + 10, worldY + scaledTileSize - 10, scaledTileSize - 20, 10);
+//
+//
+//            if (facingLeft) {
+//                gc.save();
+//                gc.scale(-1, 1);
+//                gc.drawImage(sprite, -worldX - scaledTileSize, worldY, scaledTileSize, scaledTileSize);
+//                gc.restore();
+//            } else {
+//                gc.drawImage(sprite, 0, 0, width, height, worldX, worldY, scaledTileSize, scaledTileSize);
+//            }
+//        } else {
+//            System.out.println("No sprites loaded.");
+//        }
+//    }
 
-            //draw shadow of the character under the character
-            gc.setFill(Color.rgb(0, 0, 0, 1));
-            gc.fillOval(inertiaPositionX + 10, inertiaPositionY + scaledTileSize - 10, scaledTileSize - 20, 10);
-
-
-            if (facingLeft) {
-                gc.save();
-                gc.scale(-1, 1);
-                gc.drawImage(sprite, -inertiaPositionX - scaledTileSize, inertiaPositionY, scaledTileSize, scaledTileSize);
-                gc.restore();
-            } else {
-                gc.drawImage(sprite, 0, 0, width, height, inertiaPositionX, inertiaPositionY, scaledTileSize, scaledTileSize);
-            }
-        } else {
-            System.out.println("No sprites loaded.");
-        }
+    public int getWorldX() {
+        return worldX;
     }
 
-    public int getInertiaPositionX() {
-        return inertiaPositionX;
-    }
-
-    public int getInertiaPositionY() {
-        return inertiaPositionY;
+    public int getWorldY() {
+        return worldY;
     }
 
     public void setFacingLeft(boolean facingLeft) {
