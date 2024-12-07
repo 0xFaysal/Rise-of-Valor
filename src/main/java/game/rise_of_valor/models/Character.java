@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Character {
-    public int inertiaPositionX;
-   public int inertiaPositionY;
+    public int worldPositionX;
+   public int worldPositionY;
 
     int tileSize = 32;
     int tileScale = 6;
@@ -29,9 +29,9 @@ public class Character {
     int speed = 10;
     boolean facingLeft = false;
 
-    public Character(int inertiaPositionX, int inertiaPositionY) {
-        this.inertiaPositionX = inertiaPositionX;
-        this.inertiaPositionY = inertiaPositionY;
+    public Character(int worldPositionX, int worldPositionY) {
+        this.worldPositionX = worldPositionX;
+        this.worldPositionY = worldPositionY;
     }
 
     public void update(double deltaTime) {
@@ -57,16 +57,16 @@ public class Character {
 
             //draw shadow of the character under the character
             gc.setFill(Color.rgb(0, 0, 0, 1));
-            gc.fillOval(inertiaPositionX + 10, inertiaPositionY + scaledTileSize - 10, scaledTileSize - 20, 10);
+            gc.fillOval(worldPositionX + 10, worldPositionY + scaledTileSize - 10, scaledTileSize - 20, 10);
 
 
             if (facingLeft) {
                 gc.save();
                 gc.scale(-1, 1);
-                gc.drawImage(sprite, -inertiaPositionX - scaledTileSize, inertiaPositionY, scaledTileSize, scaledTileSize);
+                gc.drawImage(sprite, -worldPositionX - scaledTileSize, worldPositionY, scaledTileSize, scaledTileSize);
                 gc.restore();
             } else {
-                gc.drawImage(sprite, 0, 0, width, height, inertiaPositionX, inertiaPositionY, scaledTileSize, scaledTileSize);
+                gc.drawImage(sprite, 0, 0, width, height, worldPositionX, worldPositionY, scaledTileSize, scaledTileSize);
             }
         } else {
             System.out.println("No sprites loaded.");
