@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Character {
-    int inertiaPositionX;
-    int inertiaPositionY;
+    public int inertiaPositionX;
+   public int inertiaPositionY;
 
     int tileSize = 32;
     int tileScale = 6;

@@ -12,6 +12,9 @@ import javafx.scene.paint.Stop;
 import java.util.List;
 import java.util.Objects;
 
+import static game.rise_of_valor.data.MapData.MAP1_HEIGHT;
+import static game.rise_of_valor.data.MapData.MAP1_WIDTH;
+
 public class Player extends Character {
     private boolean isMoving = false;
     private static final String SPRITE_PATH_TEMPLATE = "/game/rise_of_valor/assets/sprites/player%d/%s_%d.png";
@@ -57,6 +60,10 @@ public class Player extends Character {
                 isMoving = true;
             }
         }
+
+        // Clamp player position within map boundaries
+        inertiaPositionX = Math.max(0, Math.min(inertiaPositionX, MAP1_WIDTH - scaledTileSize));
+        inertiaPositionY = Math.max(0, Math.min(inertiaPositionY, MAP1_HEIGHT - scaledTileSize));
 
         // Update spriteCount based on movement state
         spriteCount = isMoving ? movementSpriteCount : idleSpriteCount;
