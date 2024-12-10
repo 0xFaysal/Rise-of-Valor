@@ -24,7 +24,7 @@ public class IntroAnimationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // First Fade Transition for Team Logo
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), imageView);
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(5), imageView);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
 
