@@ -17,55 +17,40 @@ import static game.rise_of_valor.data.MapData.MAP1_WIDTH;
 
 public class Player extends Character {
     private boolean isMoving = false;
-    private static final String SPRITE_PATH_TEMPLATE = "/game/rise_of_valor/assets/sprites/player%d/%s_%d.png";
-    private static final String WALK = "walk";
+
+
     private static final String IDLE = "idle";
-    int playerCharacterId = 3;
+    int playerCharacterId = 2;
 
-    //sprite size
-    int spriteWidth;
-    int spriteHeight;
-    int scaleFactor;
 
-    //shadow gradient
-    private final RadialGradient shadowGradient;
+
+
+
 
     public Player(int inertiaPositionX, int inertiaPositionY) {
         super(inertiaPositionX, inertiaPositionY);
+
+
+
+        speed = 200;
         scaleFactor = 10;
         spriteWidth = 600/scaleFactor;
         spriteHeight = 800/scaleFactor;
-        speed = 200;
+        spriteAnimetionFector = 250;
 
 
+        SPRITE_PATH_TEMPLATE = "/game/rise_of_valor/assets/sprites/player%d/%s_%d.png";
 
         this.movementSpriteCount = 7;
-        loadSprites(WALK, movementSpriteCount, movement);
+        loadSprites(WALK, movementSpriteCount, movement, playerCharacterId);
 
         this.idleSpriteCount = 5;
-        loadSprites(IDLE, idleSpriteCount, idle);
+        loadSprites(IDLE, idleSpriteCount, idle, playerCharacterId);
 
-        shadowGradient = new RadialGradient(
-                0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE,
-                new Stop(0, Color.rgb(0, 0, 0, 0.7)),
-                new Stop(0.2, Color.rgb(0, 0, 0, 0.5)),
-                new Stop(0.5, Color.rgb(0, 0, 0, 0.4)),
-                new Stop(0.7, Color.rgb(0, 0, 0, 0.3)),
-                new Stop(0.9, Color.rgb(0, 0, 0, 0.1)),
-                new Stop(1, Color.rgb(0, 0, 0, 0))
-        );
+
     }
 
-    private void loadSprites(String action, int count, List<Image> spriteList) {
-        for (int i = 0; i <= count; i++) {
-            try {
-                spriteList.add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(
-                        String.format(SPRITE_PATH_TEMPLATE, playerCharacterId, action, i)))));
-            } catch (Exception e) {
-                System.err.println("Error loading sprite: " + e.getMessage());
-            }
-        }
-    }
+
 
     public void update(Scene scene, double deltaTime, List<KeyCode> keys) {
         isMoving = false;
@@ -130,6 +115,11 @@ public class Player extends Character {
             gc.setFill(shadowGradient);
             gc.fillOval(shadowX, shadowY, shadowWidth, 15);
 
+            //draw box around character
+            gc.setStroke(Color.RED);
+//            gc.strokeRect(worldPositionX, worldPositionY, spriteWidth, spriteHeight);
+
+
             if (facingLeft) {
                 gc.save();
                 gc.scale(-1, 1);
@@ -140,16 +130,15 @@ public class Player extends Character {
             }
 
 
-//            if (facingLeft) {
-//                gc.save();
-//                gc.scale(-1, 1);
-//                gc.drawImage(sprite, -worldPositionX - scaledSize, worldPositionY, scaledSize, scaledSize);
-//                gc.restore();
-//            } else {
-//                gc.drawImage(sprite, 0, 0, width, height, worldPositionX, worldPositionY, scaledSize, scaledSize);
-//            }
         } else {
             System.out.println("No sprites loaded or invalid sprite index.");
         }
+    }
+
+    public int getPlayerWidth() {
+        return spriteWidth;
+    }
+    public int getPlayerHeight() {
+        return spriteHeight;
     }
 }
