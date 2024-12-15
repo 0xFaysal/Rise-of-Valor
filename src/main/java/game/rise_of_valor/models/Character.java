@@ -12,22 +12,26 @@ import java.util.List;
 import java.util.Objects;
 
 public class Character {
+
+    //world position of character
     public double worldPositionX;
-   public double worldPositionY;
+    public double worldPositionY;
 
-    int tileSize = 32;
-    int tileScale = 6;
 
-    int scaledTileSize = tileSize * tileScale;
-
-    //sprite size
+    //sprite size of character
     int spriteWidth;
     int spriteHeight;
     int scaleFactor;
+    int spriteX = 700;
+    int spriteY = 1030;
 
 
+    //movement actions of character CONSTANTS
     protected static final String WALK = "walk";
-    protected  String SPRITE_PATH_TEMPLATE ;
+    protected static final String FLY = "fly";
+
+
+    protected String SPRITE_PATH_TEMPLATE;
     List<Image> movement = new ArrayList<>();
     int movementSpriteCount = 0;
     List<Image> idle = new ArrayList<>();
@@ -39,6 +43,7 @@ public class Character {
     double baseFrameDuration = 1; // Base duration of each frame in seconds
 
     int speed = 100;
+    double diagonalSpeed;
     boolean facingLeft = false;
 
     //shadow gradient
@@ -52,8 +57,9 @@ public class Character {
         this.worldPositionY = worldPositionY;
 
         scaleFactor = 15;
-        spriteWidth = 600/scaleFactor;
-        spriteHeight = 800/scaleFactor;
+        spriteWidth = 600 / scaleFactor;// sprite width default 600
+        spriteHeight = 800 / scaleFactor;
+
 
         shadowGradient = new RadialGradient(
                 0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE,
@@ -84,15 +90,12 @@ public class Character {
     }
 
     public void draw(GraphicsContext gc) {
-        List<Image> sprites = movement ;
+        List<Image> sprites = movement;
         if (currentSprite < sprites.size()) {
             Image sprite = sprites.get(currentSprite);
 //            double width = sprite.getWidth();
 //            double height = sprite.getHeight();
 //            double scaledSize = tileSize * tileScale;
-
-            int spriteX = 700;
-            int spriteY = 1030;
 
 
 
@@ -112,16 +115,16 @@ public class Character {
 
             //draw box around character
             gc.setStroke(Color.RED);
-//            gc.strokeRect(worldPositionX, worldPositionY, spriteWidth, spriteHeight);
+            gc.strokeRect(worldPositionX, worldPositionY, spriteWidth, spriteHeight);
 
 
             if (facingLeft) {
                 gc.save();
                 gc.scale(-1, 1);
-                gc.drawImage(sprite, spriteX, spriteY, spriteWidth*scaleFactor, spriteHeight*scaleFactor, -worldPositionX - spriteWidth, worldPositionY, spriteWidth, spriteHeight);
+                gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, -worldPositionX - spriteWidth, worldPositionY, spriteWidth, spriteHeight);
                 gc.restore();
             } else {
-                gc.drawImage(sprite,spriteX,spriteY,spriteWidth*scaleFactor,spriteHeight*scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
+                gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
             }
 
 
@@ -129,7 +132,14 @@ public class Character {
             System.out.println("No sprites loaded or invalid sprite index.");
         }
     }
+
     protected void loadSprites(String action, int count, List<Image> spriteList, int playerCharacterId) {
+
+        if(action.equals(FLY)) {
+            spriteX-=200;
+            spriteWidth = 900 / scaleFactor;
+            spriteHeight = 800 / scaleFactor;
+        }
         for (int i = 0; i <= count; i++) {
             try {
                 spriteList.add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(

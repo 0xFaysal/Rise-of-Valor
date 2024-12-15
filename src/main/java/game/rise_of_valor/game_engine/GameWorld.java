@@ -24,7 +24,7 @@ public class GameWorld {
     private final List<KeyCode> keys = new ArrayList<>();
 
     Player player;
-    Enemy enemy;
+    ArrayList<Enemy> enemies = new ArrayList<>();
     TileManager tileManager;
 
     public GameWorld(Canvas canvas, Scene scene) {
@@ -34,7 +34,12 @@ public class GameWorld {
         this.CANVAS_HEIGHT = (int) canvas.getHeight();
         player = new Player(100, 100);
         tileManager = new TileManager(CANVAS_WIDTH, CANVAS_HEIGHT);
-        enemy = new Enemy(200, 200);
+        enemies.add(new Enemy(1,200, 200));
+        enemies.add(new Enemy(2,700, 300));
+        enemies.add(new Enemy(3,1300, 300));
+        enemies.add(new Enemy(4,400, 800));
+
+
 
         // Initialize camera position based on player's starting position
         cameraX = Math.max(0, Math.min(player.worldPositionX - CANVAS_WIDTH / 2.0, MAP1_WIDTH - CANVAS_WIDTH));
@@ -64,8 +69,17 @@ public class GameWorld {
         player.update(scene, deltaTime, keys);
 
         // Update enemy position
-        enemy.moveTowards(player.worldPositionX, player.worldPositionY,player.getPlayerWidth(),player.getPlayerHeight(), deltaTime);
-        enemy.update(deltaTime);
+//        enemy.moveTowards(player.worldPositionX, player.worldPositionY,player.getPlayerWidth(),player.getPlayerHeight(), deltaTime);
+//        enemy2.moveTowards(player.worldPositionX, player.worldPositionY,player.getPlayerWidth(),player.getPlayerHeight(), deltaTime);
+//        enemy3.moveTowards(player.worldPositionX, player.worldPositionY,player.getPlayerWidth(),player.getPlayerHeight(), deltaTime);
+//
+//        enemy2.update(deltaTime);
+//        enemy3.update(deltaTime);
+//        enemy.update(deltaTime);
+        for (Enemy enemy : enemies) {
+            enemy.moveTowards(player.worldPositionX, player.worldPositionY, player.getPlayerWidth(), player.getPlayerHeight(), deltaTime, enemies);
+            enemy.update(deltaTime);
+        }
 
         // Update camera position only if the player moved
         if (player.worldPositionX != previousPlayerX || player.worldPositionY != previousPlayerY) {
@@ -91,14 +105,17 @@ public class GameWorld {
         tileManager.draw(gc, cameraX, cameraY, CANVAS_WIDTH, CANVAS_HEIGHT);
 
         // Determine the drawing order based on the y-position
-        if (player.worldPositionY > enemy.worldPositionY) {
-            // Draw the enemy first, then the player
-            enemy.draw(gc);
-            player.draw(gc);
-        } else {
-            // Draw the player first, then the enemy
-            player.draw(gc);
-            enemy.draw(gc);
+        for (Enemy enemy : enemies) {
+            if (player.worldPositionY+player.getPlayerHeight() > enemy.worldPositionY+enemy.getPlayerHeight()) {
+
+                // Draw the enemy first, then the player
+                enemy.draw(gc);
+                player.draw(gc);
+            } else {
+                // Draw the player first, then the enemy
+                player.draw(gc);
+                enemy.draw(gc);
+            }
         }
 
         // Restore graphics context

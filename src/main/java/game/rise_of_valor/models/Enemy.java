@@ -7,23 +7,33 @@ import java.util.List;
 public class Enemy extends Character {
 
 
-    double diagonalSpeed;
+
     private double previousPositionX;
 
-    public Enemy(int worldPositionX, int worldPositionY) {
+    public Enemy(int characterId,int worldPositionX, int worldPositionY) {
         super(worldPositionX, worldPositionY);
 
         SPRITE_PATH_TEMPLATE = "/game/rise_of_valor/assets/sprites/enemy%d/%s_%d.png";
         scaleFactor = 15;
 
-        speed = 50;
-        diagonalSpeed = speed * 0.7071;
-        System.out.println("Diagonal Speed: " + diagonalSpeed);
-        spriteAnimetionFector = 200;
+        speed = 50; // Speed of the player in pixels per second
+        diagonalSpeed = speed * 0.7071; // Speed of the player in pixels per second when moving diagonally
+        spriteAnimetionFector = 200;// Sprite animation speed factor
 
-        movementSpriteCount=7;
-        loadSprites(WALK, movementSpriteCount, movement, 1);
-        spriteCount=movementSpriteCount-1;
+        if (characterId==4){
+            movementSpriteCount=5;
+            loadSprites(FLY, movementSpriteCount, movement, characterId);
+        } else if (characterId== 2) {
+            movementSpriteCount=7;
+            loadSprites(WALK, movementSpriteCount, movement, characterId);
+            spriteWidth = 650 / scaleFactor;
+        } else {
+            movementSpriteCount=7;
+            loadSprites(WALK, movementSpriteCount, movement, characterId);
+        }
+
+
+        spriteCount=movementSpriteCount-1; // set the sprite count to the last sprite
     }
 
     public void update(double deltaTime) {
@@ -32,10 +42,18 @@ public class Enemy extends Character {
 
     }
 
-    public void moveTowards(double targetX, double targetY,double targetWidth,double targetHeight, double deltaTime) {
+    public void moveTowards(double targetX, double targetY,double targetWidth,double targetHeight, double deltaTime, List<Enemy> enemies) {
+
+        double dx = 0;
+        double dy = 0;
         // Calculate the difference in position
-        double dx = (targetX + targetWidth/2) - worldPositionX;
-        double dy = (targetY+targetHeight/2) - worldPositionY;
+        if(targetX<worldPositionX){
+            dx = (targetX + targetWidth/2) - worldPositionX;
+            dy = (targetY+targetHeight/2) - worldPositionY;
+        }else {
+            dx = (targetX) - worldPositionX;
+            dy = (targetY) - worldPositionY;
+        }
 
         // Calculate the distance to the target
         double distance = Math.sqrt(dx * dx + dy * dy);
@@ -50,6 +68,26 @@ public class Enemy extends Character {
             double moveX = normalizedDx * speed * deltaTime;
             double moveY = normalizedDy * speed * deltaTime;
 
+
+
+            // Check distance with other enemies
+            for (Enemy enemy : enemies) {
+                if (enemy != this) {
+                    double distanceToEnemy = Math.sqrt(Math.pow(enemy.worldPositionX - worldPositionX, 2) + Math.pow(enemy.worldPositionY - worldPositionY, 2));
+                    if (distanceToEnemy < 25) {
+                        double avoidDx = worldPositionX - enemy.worldPositionX;
+                        double avoidDy = worldPositionY - enemy.worldPositionY;
+                        double avoidDistance = Math.sqrt(avoidDx * avoidDx + avoidDy * avoidDy);
+                        if (avoidDistance > 0) {
+                            avoidDx /= avoidDistance;
+                            avoidDy /= avoidDistance;
+                            moveX += avoidDx * speed * deltaTime;
+                            moveY += avoidDy * speed * deltaTime;
+                        }
+                    }
+                }
+            }
+
             // Update position
             worldPositionX += moveX;
             worldPositionY += moveY;
@@ -60,11 +98,7 @@ public class Enemy extends Character {
             // Update the previous position
             previousPositionX = worldPositionX;
 
-            // Debugging logs for movement
-            System.out.printf(
-                    "Enemy Position: (%.2f, %.2f), Target: (%.2f, %.2f), Move: (%.2f, %.2f)%n",
-                    worldPositionX, worldPositionY, targetX, targetY, moveX, moveY
-            );
+
         }
     }
 
@@ -72,5 +106,12 @@ public class Enemy extends Character {
     public void draw(GraphicsContext gc) {
         super.draw(gc);
 //        System.out.println("Enemy draw");
+    }
+
+    public int getPlayerWidth() {
+        return spriteWidth;
+    }
+    public int getPlayerHeight() {
+        return spriteHeight;
     }
 }
