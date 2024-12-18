@@ -5,12 +5,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.RadialGradient;
-import javafx.scene.paint.Stop;
+
 
 import java.util.List;
-import java.util.Objects;
+
 
 import static game.rise_of_valor.data.MapData.MAP1_HEIGHT;
 import static game.rise_of_valor.data.MapData.MAP1_WIDTH;
@@ -19,7 +17,7 @@ public class Player extends Character {
     private boolean isMoving = false;
 
 
-    private static final String IDLE = "idle";
+
     int playerCharacterId = 2;
 
 
@@ -92,9 +90,7 @@ public class Player extends Character {
         List<Image> sprites = isMoving ? movement : idle;
         if (currentSprite < sprites.size()) {
             Image sprite = sprites.get(currentSprite);
-//            double width = sprite.getWidth();
-//            double height = sprite.getHeight();
-//            double scaledSize = tileSize * tileScale;
+
 
             int spriteX = 700;
             int spriteY = 1030;

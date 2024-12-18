@@ -23,13 +23,18 @@ public class Enemy extends Character {
         if (characterId==4){
             movementSpriteCount=5;
             loadSprites(FLY, movementSpriteCount, movement, characterId);
+
         } else if (characterId== 2) {
             movementSpriteCount=7;
             loadSprites(WALK, movementSpriteCount, movement, characterId);
+            this.idleSpriteCount = 5;
+            loadSprites(IDLE, idleSpriteCount, idle, characterId);
             spriteWidth = 650 / scaleFactor;
         } else {
             movementSpriteCount=7;
             loadSprites(WALK, movementSpriteCount, movement, characterId);
+            this.idleSpriteCount = 5;
+            loadSprites(IDLE, idleSpriteCount, idle, characterId);
         }
 
 
@@ -69,24 +74,44 @@ public class Enemy extends Character {
             double moveY = normalizedDy * speed * deltaTime;
 
 
-
             // Check distance with other enemies
             for (Enemy enemy : enemies) {
                 if (enemy != this) {
                     double distanceToEnemy = Math.sqrt(Math.pow(enemy.worldPositionX - worldPositionX, 2) + Math.pow(enemy.worldPositionY - worldPositionY, 2));
-                    if (distanceToEnemy < 25) {
+                    if (distanceToEnemy < 35) {
                         double avoidDx = worldPositionX - enemy.worldPositionX;
                         double avoidDy = worldPositionY - enemy.worldPositionY;
                         double avoidDistance = Math.sqrt(avoidDx * avoidDx + avoidDy * avoidDy);
                         if (avoidDistance > 0) {
                             avoidDx /= avoidDistance;
                             avoidDy /= avoidDistance;
-                            moveX += avoidDx * speed * deltaTime;
-                            moveY += avoidDy * speed * deltaTime;
+                            double dampingFactor = Math.max(0, 1 - (distanceToEnemy / 35));
+                            moveX += avoidDx * speed * deltaTime * dampingFactor;
+                            moveY += avoidDy * speed * deltaTime * dampingFactor;
                         }
                     }
                 }
             }
+
+
+
+//            // Check distance with other enemies
+//            for (Enemy enemy : enemies) {
+//                if (enemy != this) {
+//                    double distanceToEnemy = Math.sqrt(Math.pow(enemy.worldPositionX - worldPositionX, 2) + Math.pow(enemy.worldPositionY - worldPositionY, 2));
+//                    if (distanceToEnemy < 25) {
+//                        double avoidDx = worldPositionX - enemy.worldPositionX;
+//                        double avoidDy = worldPositionY - enemy.worldPositionY;
+//                        double avoidDistance = Math.sqrt(avoidDx * avoidDx + avoidDy * avoidDy);
+//                        if (avoidDistance > 0) {
+//                            avoidDx /= avoidDistance;
+//                            avoidDy /= avoidDistance;
+//                            moveX += avoidDx * speed * deltaTime;
+//                            moveY += avoidDy * speed * deltaTime;
+//                        }
+//                    }
+//                }
+//            }
 
             // Update position
             worldPositionX += moveX;

@@ -28,6 +28,7 @@ public class Character {
 
     //movement actions of character CONSTANTS
     protected static final String WALK = "walk";
+    protected static final String IDLE = "idle";
     protected static final String FLY = "fly";
 
 
