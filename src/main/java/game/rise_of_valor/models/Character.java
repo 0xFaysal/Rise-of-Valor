@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static game.rise_of_valor.models.Sprite.FLY;
+
 public class Character {
 
     //world position of character
@@ -26,13 +28,10 @@ public class Character {
     int spriteY = 1030;
 
 
-    //movement actions of character CONSTANTS
-    protected static final String WALK = "walk";
-    protected static final String IDLE = "idle";
-    protected static final String FLY = "fly";
 
+    protected String model;
+    protected boolean isMoving = false;
 
-    protected String SPRITE_PATH_TEMPLATE;
     List<Image> movement = new ArrayList<>();
     int movementSpriteCount = 0;
     List<Image> idle = new ArrayList<>();
@@ -51,7 +50,7 @@ public class Character {
     protected final RadialGradient shadowGradient;
 
     //sprite animation factor
-    int spriteAnimetionFector = 32;
+    int spriteAnimationVector = 32;
 
     public Character(int worldPositionX, int worldPositionY) {
         this.worldPositionX = worldPositionX;
@@ -75,7 +74,7 @@ public class Character {
 
     public void update(double deltaTime) {
         // Calculate frame duration based on speed
-        double frameDuration = baseFrameDuration / (spriteAnimetionFector / 32.0);
+        double frameDuration = baseFrameDuration / (spriteAnimationVector / 32.0);
 
         // Update animation time
         animationTime += deltaTime;
@@ -91,7 +90,13 @@ public class Character {
     }
 
     public void draw(GraphicsContext gc) {
-        List<Image> sprites = movement;
+        List<Image> sprites;
+        if (model.equals(FLY)) {
+             sprites = movement;
+        }else{
+             sprites = isMoving ? movement : idle;
+        }
+
         if (currentSprite < sprites.size()) {
             Image sprite = sprites.get(currentSprite);
 //            double width = sprite.getWidth();
@@ -101,22 +106,24 @@ public class Character {
 
 
 
-            // Calculate shadow width using a sine wave function for smooth animation
-            double time = System.currentTimeMillis() / 1000.0;
-            double shadowWidth = 40 + 10 * Math.sin(time * 1 * Math.PI); // Adjust amplitude and frequency as needed
-            double shadowXOffset = (spriteWidth - shadowWidth) / 2;
+            if (!model.equals(FLY)) {
+                // Calculate shadow width using a sine wave function for smooth animation
+//            double time = System.currentTimeMillis() / 1000.0;
+//            double shadowWidth = 40 + 10 * Math.sin(time * 1 * Math.PI); // Adjust amplitude and frequency as needed
+                double shadowXOffset = (spriteWidth - 10) / 2;
 
-            // Calculate shadow position based on player's position
-            double shadowX = worldPositionX + shadowXOffset;
-            double shadowY = worldPositionY + spriteHeight - 10;
+                // Calculate shadow position based on player's position
+                double shadowX = worldPositionX + 5;
+                double shadowY = worldPositionY + spriteHeight - 10;
 
-            // Draw realistic shadow under the character
-            gc.setFill(shadowGradient);
-            gc.fillOval(shadowX, shadowY, shadowWidth, 15);
+                // Draw realistic shadow under the character
+                gc.setFill(shadowGradient);
+                gc.fillOval(shadowX, shadowY, 30, 15);
+            }
 
             //draw box around character
             gc.setStroke(Color.RED);
-            gc.strokeRect(worldPositionX, worldPositionY, spriteWidth, spriteHeight);
+//            gc.strokeRect(worldPositionX, worldPositionY, spriteWidth, spriteHeight);
 
 
             if (facingLeft) {
@@ -134,24 +141,16 @@ public class Character {
         }
     }
 
-    protected void loadSprites(String action, int count, List<Image> spriteList, int playerCharacterId) {
 
-        if(action.equals(FLY)) {
-            spriteX-=200;
-            spriteWidth = 900 / scaleFactor;
-            spriteHeight = 800 / scaleFactor;
-        }
-        for (int i = 0; i <= count; i++) {
-            try {
-                spriteList.add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(
-                        String.format(SPRITE_PATH_TEMPLATE, playerCharacterId, action, i)))));
-            } catch (Exception e) {
-                System.err.println("Error loading sprite: " + e.getMessage());
-            }
-        }
-    }
 
     public void setFacingLeft(boolean facingLeft) {
         this.facingLeft = facingLeft;
+    }
+
+    public int getPlayerWidth() {
+        return spriteWidth;
+    }
+    public int getPlayerHeight() {
+        return spriteHeight;
     }
 }

@@ -1,6 +1,7 @@
 package game.rise_of_valor.controllers;
 
 import game.rise_of_valor.game_engine.GameLoop;
+import game.rise_of_valor.game_engine.GameLoopT;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ public class GamePlayController implements Initializable {
             public void changed(ObservableValue<? extends Scene> observable, Scene oldScene, Scene newScene) {
                 if (newScene != null) {
                     new GameLoop(canvas, newScene);
+//                    new GameLoopT(canvas, newScene).start();
                 }
             }
         });

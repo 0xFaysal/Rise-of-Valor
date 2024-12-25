@@ -9,23 +9,25 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
+import static game.rise_of_valor.game_engine.MapManager.*;
 
-import static game.rise_of_valor.data.MapData.MAP1_HEIGHT;
-import static game.rise_of_valor.data.MapData.MAP1_WIDTH;
+
+//import static game.rise_of_valor.data.MapData.MAP1_HEIGHT;
+//import static game.rise_of_valor.data.MapData.MAP1_WIDTH;
 
 public class Player extends Character {
     private boolean isMoving = false;
 
 
 
-    int playerCharacterId = 2;
 
 
 
 
 
 
-    public Player(int inertiaPositionX, int inertiaPositionY) {
+
+    public Player(Sprite sprite,int inertiaPositionX, int inertiaPositionY) {
         super(inertiaPositionX, inertiaPositionY);
 
 
@@ -34,16 +36,19 @@ public class Player extends Character {
         scaleFactor = 10;
         spriteWidth = 600/scaleFactor;
         spriteHeight = 800/scaleFactor;
-        spriteAnimetionFector = 250;
+        spriteAnimationVector = 250;
 
 
-        SPRITE_PATH_TEMPLATE = "/game/rise_of_valor/assets/sprites/player%d/%s_%d.png";
+
+
 
         this.movementSpriteCount = 7;
-        loadSprites(WALK, movementSpriteCount, movement, playerCharacterId);
+        movement = sprite.movement;
+//        loadSprites(WALK, movementSpriteCount, movement, playerCharacterId);
 
         this.idleSpriteCount = 5;
-        loadSprites(IDLE, idleSpriteCount, idle, playerCharacterId);
+        idle = sprite.idle;
+//        loadSprites(IDLE, idleSpriteCount, idle, playerCharacterId);
 
 
     }
@@ -75,8 +80,8 @@ public class Player extends Character {
         }
 
         // Clamp player position within map boundaries
-        worldPositionX = Math.max(0, Math.min(worldPositionX, MAP1_WIDTH - spriteWidth));
-        worldPositionY = Math.max(0, Math.min(worldPositionY, MAP1_HEIGHT - spriteHeight));
+        worldPositionX = Math.max(space+40, Math.min(worldPositionX, MAP1_WIDTH-space-10 - spriteWidth));
+        worldPositionY = Math.max(space, Math.min(worldPositionY, MAP1_HEIGHT-space - spriteHeight));
 
         // Update spriteCount based on movement state
         spriteCount = isMoving ? movementSpriteCount : idleSpriteCount;
@@ -131,10 +136,4 @@ public class Player extends Character {
         }
     }
 
-    public int getPlayerWidth() {
-        return spriteWidth;
-    }
-    public int getPlayerHeight() {
-        return spriteHeight;
-    }
 }

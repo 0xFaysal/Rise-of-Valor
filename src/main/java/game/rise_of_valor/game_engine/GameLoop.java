@@ -37,6 +37,7 @@ public class GameLoop {
 
                 // Calculate delta time in seconds
                 double deltaTime = (now - lastTime) / 1e9;
+
                 lastTime = now;
 
                 // Accumulate time
@@ -44,6 +45,7 @@ public class GameLoop {
 
                 // Update at fixed intervals
                 while (accumulator >= TIME_PER_FRAME) {
+                    System.out.println(1/deltaTime);
                     update(TIME_PER_FRAME);
                     accumulator -= TIME_PER_FRAME;
                 }
@@ -51,6 +53,8 @@ public class GameLoop {
                 // Render with interpolation for smoothness
                 double interpolation = accumulator / TIME_PER_FRAME;
                 render(gc, interpolation);
+                //print fps
+
             }
         };
 

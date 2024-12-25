@@ -37,8 +37,11 @@ public class TileManager {
 
         for (int col = startCol; col < endCol; col++) {
             for (int row = startRow; row < endRow; row++) {
-                gc.drawImage(tiles[getTileMapData(MAP1, col, row)].image,
-                        col * Tile.TileSize, row * Tile.TileSize);
+
+                int tileIndex = getTileMapData(MAP1, col, row);
+                gc.drawImage(tiles[tileIndex].image, col * Tile.TileSize, row * Tile.TileSize);
+//                gc.drawImage(tiles[getTileMapData(MAP1, col, row)].image,
+//                        col * Tile.TileSize, row * Tile.TileSize);
             }
         }
     }
