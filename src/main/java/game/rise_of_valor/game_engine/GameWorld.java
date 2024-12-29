@@ -1,13 +1,17 @@
 package game.rise_of_valor.game_engine;
 
+import game.rise_of_valor.models.Bullet;
 import game.rise_of_valor.models.Character;
 import game.rise_of_valor.models.Enemy;
 import game.rise_of_valor.models.Player;
 import game.rise_of_valor.utils.LoadSprite;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -32,15 +36,20 @@ public class GameWorld {
 
     Player player;
     ArrayList<Enemy> enemies = new ArrayList<>();
-//    TileManager tileManager;
-    MapManager mapManager ;
+    ArrayList<Bullet> bullets = new ArrayList<>();
+    //    TileManager tileManager;
+    MapManager mapManager;
+    private long lastShotTime = 0;
+    private Timeline firingTimeline;
+
+    private double mouseX;
+    private double mouseY;
 
     public GameWorld(Canvas canvas, Scene scene) {
         this.canvas = canvas;
         this.scene = scene;
         this.CANVAS_WIDTH = (int) canvas.getWidth();
         this.CANVAS_HEIGHT = (int) canvas.getHeight();
-
 
 
 //        tileManager = new TileManager(CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -52,7 +61,7 @@ public class GameWorld {
 
         Random random = new Random();
 
-        for (int i = 0; i < 400; i++) {
+        for (int i = 0; i < 60; i++) {
             int x = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapWidth() - space)));
             int y = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapHeight() - space)));
             enemies.add(new Enemy(loadSprite.getEnemySprite(i % 4), Math.abs(x), Math.abs(y)));
@@ -65,23 +74,6 @@ public class GameWorld {
         // Clamp camera position to map boundaries
         cameraX = Math.max(0, Math.min(targetCameraX, mapManager.getMapWidth() - CANVAS_WIDTH));
         cameraY = Math.max(0, Math.min(targetCameraY, mapManager.getMapHeight() - CANVAS_HEIGHT));
-
-        // Initialize camera position based on player's starting position
-//        cameraX = player.worldPositionX - CANVAS_WIDTH / 2.0;
-//        cameraY = player.worldPositionY - CANVAS_HEIGHT / 2.0;
-
-
-
-
-
-        // Clamp camera position to map boundaries
-//        cameraX = Math.max(0, Math.min(cameraX, mapManager.getMapWidth() - CANVAS_WIDTH));
-//        cameraY = Math.max(0, Math.min(cameraY, mapManager.getMapHeight() - CANVAS_HEIGHT));
-
-        // Initialize camera position based on player's starting position
-//        cameraX = Math.max(0, Math.min(player.worldPositionX - CANVAS_WIDTH / 2.0, mapManager.getMapWidth() - CANVAS_WIDTH));
-//        cameraY = Math.max(0, Math.min(player.worldPositionY - CANVAS_HEIGHT / 2.0, mapManager.getMapHeight() - CANVAS_HEIGHT));
-
         // Track initial player position
         previousPlayerX = player.worldPositionX;
         previousPlayerY = player.worldPositionY;
@@ -99,6 +91,43 @@ public class GameWorld {
             KeyCode key = e.getCode();
             keys.remove(key); // Remove key when released
         });
+
+        // Add mouse move listener
+        canvas.setOnMouseMoved(e -> {
+            mouseX = e.getX();
+            mouseY = e.getY();
+            player.getGun().updateMousePosition(mouseX, mouseY);
+        });
+
+        canvas.setOnMouseClicked(e -> {
+            mouseX = e.getX();
+            mouseY = e.getY();
+            player.getGun().updateMousePosition(mouseX, mouseY);
+            bullets.add(new Bullet(player.getGun().getGunPointX(), player.getGun().getGunPointY(), mouseX + cameraX, mouseY + cameraY));
+        });
+
+
+        firingTimeline = new Timeline(new KeyFrame(Duration.seconds(1.0 / player.getGun().getShootSpeed()), e -> {
+            bullets.add(new Bullet(player.getGun().getGunPointX(), player.getGun().getGunPointY(), mouseX + cameraX, mouseY + cameraY));
+        }));
+        firingTimeline.setCycleCount(Timeline.INDEFINITE);
+
+        canvas.setOnMousePressed(e -> {
+            mouseX = e.getX();
+            mouseY = e.getY();
+            player.getGun().updateMousePosition(mouseX, mouseY);
+            firingTimeline.play();
+        });
+
+        canvas.setOnMouseReleased(e -> firingTimeline.stop());
+
+
+        canvas.setOnMouseDragged(e -> {
+            mouseX = e.getX();
+            mouseY = e.getY();
+            player.getGun().updateMousePosition(mouseX, mouseY);
+        });
+
     }
 
     public void update(double deltaTime) {
@@ -111,6 +140,9 @@ public class GameWorld {
             enemy.update(deltaTime);
         }
 
+        // Remove enemies with life less than or equal to 0
+        enemies.removeIf(enemy -> enemy.getLife() <= 0);
+
         if (player.worldPositionX != previousPlayerX || player.worldPositionY != previousPlayerY) {
             previousPlayerX = player.worldPositionX;
             previousPlayerY = player.worldPositionY;
@@ -120,11 +152,45 @@ public class GameWorld {
 
             targetCameraX = Math.max(0, Math.min(targetCameraX, mapManager.getMapWidth() - CANVAS_WIDTH));
             targetCameraY = Math.max(0, Math.min(targetCameraY, mapManager.getMapHeight() - CANVAS_HEIGHT));
+
         }
+
+//        player.updateCameraPosition(targetCameraX, targetCameraY);
+        player.getGun().updateCameraPosition(targetCameraX, targetCameraY);
+//        player.updateGunBoxAngle();
 
         // Smoothly interpolate the camera position towards the target position
         cameraX += (targetCameraX - cameraX) * 0.1;
         cameraY += (targetCameraY - cameraY) * 0.1;
+
+//        cameraX = targetCameraX;
+//        cameraY = targetCameraY;
+
+        // Update bullets
+        for (Bullet bullet : bullets) {
+            bullet.update(deltaTime);
+        }
+
+        // Remove bullets that are out of bounds
+        bullets.removeIf(bullet -> bullet.getX() < 0 || bullet.getX() > mapManager.getMapWidth() ||
+                bullet.getY() < 0 || bullet.getY() > mapManager.getMapHeight());
+
+        // Check for collisions between bullets and enemies
+        for (Bullet bullet : bullets) {
+            for (Enemy enemy : enemies) {
+                if (bullet.intersects(enemy.getBody())) {
+                    enemy.takeDamage(player.getGun().getDamage());
+                    bullet.setActive(false);
+                }
+            }
+        }
+
+        // Remove inactive bullets
+        bullets.removeIf(bullet -> !bullet.isActive());
+
+        System.out.println("Enemies: " + enemies.size());
+        System.out.println("Bullets: " + bullets.size());
+
     }
 
     public void render(GraphicsContext gc) {
@@ -150,6 +216,11 @@ public class GameWorld {
             if (isVisible(character)) {
                 character.draw(gc);
             }
+        }
+
+        // Draw bullets
+        for (Bullet bullet : bullets) {
+            bullet.draw(gc);
         }
 
         // Restore graphics context

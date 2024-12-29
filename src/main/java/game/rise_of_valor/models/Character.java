@@ -27,6 +27,10 @@ public class Character {
     int spriteX = 700;
     int spriteY = 1030;
 
+    protected double bodyX, bodyY;
+    protected double bodyWidth = 30;
+    protected double bodyHeight = 35;
+
 
 
     protected String model;
@@ -52,6 +56,8 @@ public class Character {
     //sprite animation factor
     int spriteAnimationVector = 32;
 
+    private int life;
+
     public Character(int worldPositionX, int worldPositionY) {
         this.worldPositionX = worldPositionX;
         this.worldPositionY = worldPositionY;
@@ -59,6 +65,8 @@ public class Character {
         scaleFactor = 15;
         spriteWidth = 600 / scaleFactor;// sprite width default 600
         spriteHeight = 800 / scaleFactor;
+
+        life =100;
 
 
         shadowGradient = new RadialGradient(
@@ -90,27 +98,17 @@ public class Character {
     }
 
     public void draw(GraphicsContext gc) {
-        List<Image> sprites;
-        if (model.equals(FLY)) {
-             sprites = movement;
-        }else{
-             sprites = isMoving ? movement : idle;
-        }
+        List<Image> sprites=model.equals(FLY) ? movement : (isMoving ? movement : idle);
+
 
         if (currentSprite < sprites.size()) {
             Image sprite = sprites.get(currentSprite);
-//            double width = sprite.getWidth();
-//            double height = sprite.getHeight();
-//            double scaledSize = tileSize * tileScale;
 
 
 
 
             if (!model.equals(FLY)) {
-                // Calculate shadow width using a sine wave function for smooth animation
-//            double time = System.currentTimeMillis() / 1000.0;
-//            double shadowWidth = 40 + 10 * Math.sin(time * 1 * Math.PI); // Adjust amplitude and frequency as needed
-                double shadowXOffset = (spriteWidth - 10) / 2;
+
 
                 // Calculate shadow position based on player's position
                 double shadowX = worldPositionX + 5;
@@ -122,7 +120,7 @@ public class Character {
             }
 
             //draw box around character
-            gc.setStroke(Color.RED);
+//            gc.setStroke(Color.RED);
 //            gc.strokeRect(worldPositionX, worldPositionY, spriteWidth, spriteHeight);
 
 
@@ -134,6 +132,11 @@ public class Character {
             } else {
                 gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
             }
+
+            //draw body box
+//            gc.setStroke(Color.RED);
+//            gc.strokeRect(bodyX, bodyY, bodyWidth, bodyHeight);
+//            gc.rect(bodyX, bodyY, bodyWidth, bodyHeight);
 
 
         } else {
@@ -152,5 +155,13 @@ public class Character {
     }
     public int getPlayerHeight() {
         return spriteHeight;
+    }
+
+    public void takeDamage(int damage){
+        life-= damage;
+    }
+
+    public int getLife(){
+        return life;
     }
 }

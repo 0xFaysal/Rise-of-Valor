@@ -6,53 +6,50 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
-
 import java.util.List;
 
 import static game.rise_of_valor.game_engine.MapManager.*;
-
-
-//import static game.rise_of_valor.data.MapData.MAP1_HEIGHT;
-//import static game.rise_of_valor.data.MapData.MAP1_WIDTH;
 
 public class Player extends Character {
     private boolean isMoving = false;
 
 
 
+    private double handPositionX;
+    private double handPositionY;
+
+    private Gun gun;
 
 
 
 
-
-
-
-    public Player(Sprite sprite,int inertiaPositionX, int inertiaPositionY) {
+    public Player(Sprite sprite, int inertiaPositionX, int inertiaPositionY) {
         super(inertiaPositionX, inertiaPositionY);
 
+        gun = new Gun("gun2", 10, 8);
 
 
         speed = 200;
         scaleFactor = 10;
-        spriteWidth = 600/scaleFactor;
-        spriteHeight = 800/scaleFactor;
+        spriteWidth = 600 / scaleFactor;
+        spriteHeight = 800 / scaleFactor;
         spriteAnimationVector = 250;
-
-
-
 
 
         this.movementSpriteCount = 7;
         movement = sprite.movement;
-//        loadSprites(WALK, movementSpriteCount, movement, playerCharacterId);
+
 
         this.idleSpriteCount = 5;
         idle = sprite.idle;
-//        loadSprites(IDLE, idleSpriteCount, idle, playerCharacterId);
+
+        handPositionX = worldPositionX + (facingLeft ? 0 : spriteWidth - 20);
+        handPositionY = worldPositionY + (spriteHeight / 2.0) + 10;
+        gun.setHandPosition(handPositionX, handPositionY);
+        gun.setGunPosition(handPositionX, handPositionY);
 
 
     }
-
 
 
     public void update(Scene scene, double deltaTime, List<KeyCode> keys) {
@@ -80,15 +77,28 @@ public class Player extends Character {
         }
 
         // Clamp player position within map boundaries
-        worldPositionX = Math.max(space+40, Math.min(worldPositionX, MAP1_WIDTH-space-10 - spriteWidth));
-        worldPositionY = Math.max(space, Math.min(worldPositionY, MAP1_HEIGHT-space - spriteHeight));
+        worldPositionX = Math.max(space + 40, Math.min(worldPositionX, MAP1_WIDTH - space - 10 - spriteWidth));
+        worldPositionY = Math.max(space, Math.min(worldPositionY, MAP1_HEIGHT - space - spriteHeight));
+
+        // Update hand position based on player's position
+        handPositionX = worldPositionX + (facingLeft ? 18 : spriteWidth - 20);
+        handPositionY = worldPositionY + (spriteHeight / 2.0) + 20;
+        gun.setHandPosition(handPositionX, handPositionY);
+
+        // Update gun box position based on player's position
+        gun.setGunPosition(handPositionX, handPositionY);
 
         // Update spriteCount based on movement state
         spriteCount = isMoving ? movementSpriteCount : idleSpriteCount;
 
+        // Update gun box angle
+        gun.updateGunBoxAngle();
+
         // Update animation
         super.update(deltaTime);
     }
+
+
 
     @Override
     public void draw(GraphicsContext gc) {
@@ -99,8 +109,6 @@ public class Player extends Character {
 
             int spriteX = 700;
             int spriteY = 1030;
-
-
 
 
             // Calculate shadow width using a sine wave function for smooth animation
@@ -116,24 +124,40 @@ public class Player extends Character {
             gc.setFill(shadowGradient);
             gc.fillOval(shadowX, shadowY, shadowWidth, 15);
 
-            //draw box around character
-            gc.setStroke(Color.RED);
+            // Draw box around character
+//            gc.setStroke(Color.RED);
 //            gc.strokeRect(worldPositionX, worldPositionY, spriteWidth, spriteHeight);
 
 
             if (facingLeft) {
                 gc.save();
                 gc.scale(-1, 1);
-                gc.drawImage(sprite, spriteX, spriteY, spriteWidth*scaleFactor, spriteHeight*scaleFactor, -worldPositionX - spriteWidth, worldPositionY, spriteWidth, spriteHeight);
+                gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, -worldPositionX - spriteWidth, worldPositionY, spriteWidth, spriteHeight);
                 gc.restore();
             } else {
-                gc.drawImage(sprite,spriteX,spriteY,spriteWidth*scaleFactor,spriteHeight*scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
+                gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
             }
 
+            gun.draw(gc);
+
+            // Draw hand
+            gc.setFill(Color.BLACK);
+            gc.fillOval(handPositionX-5, handPositionY-5, 10, 10);
+            // draw a circle at the hand position the radius of the circle is 20
+//            gc.strokeOval(handPositionX-40, handPositionY-40, 2*40, 2*40);
 
         } else {
             System.out.println("No sprites loaded or invalid sprite index.");
         }
+
+
     }
 
+    public void setGun(Gun gun){
+        this.gun = gun;
+    }
+
+    public Gun getGun(){
+        return gun;
+    }
 }
