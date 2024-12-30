@@ -22,12 +22,19 @@ public class LoadSprite {
     Sprite PlayerSprite = new Sprite();
     ArrayList<Sprite> EnemySprite = new ArrayList<>();
 
+
     public LoadSprite() {
         System.out.println("Loading sprites");
         //load enemy sprites
         Sprite enemySprite;
         for (int i = 1; i <= 3; i++) {
             enemySprite = new Sprite();
+            try (InputStream is = Objects.requireNonNull(getClass().getResourceAsStream("/game/rise_of_valor/assets/effects/portal.png"))) {
+                BufferedImage bufferedImage = ImageIO.read(is);
+                enemySprite.portal= SwingFXUtils.toFXImage(bufferedImage, null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             enemySprite.currentCharacterId = i;
             loadSprites(Sprite.WALK, 7, enemySprite.movement, i, SPRITE_PATH_TEMPLATE_ENEMY);
             loadSprites(Sprite.IDLE, 5, enemySprite.idle, i, SPRITE_PATH_TEMPLATE_ENEMY);
@@ -35,9 +42,19 @@ public class LoadSprite {
         }
         enemySprite = new Sprite();
         enemySprite.currentCharacterId = 4;
+
+        try (InputStream is = Objects.requireNonNull(getClass().getResourceAsStream("/game/rise_of_valor/assets/effects/portal.png"))) {
+            BufferedImage bufferedImage = ImageIO.read(is);
+            enemySprite.portal= SwingFXUtils.toFXImage(bufferedImage, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         loadSprites(Sprite.FLY, 5, enemySprite.movement, 4, SPRITE_PATH_TEMPLATE_ENEMY);
         EnemySprite.add(enemySprite);
         System.out.println(EnemySprite.size());
+
+
+
 
     }
 

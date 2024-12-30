@@ -56,7 +56,7 @@ public class GameWorld {
 
         LoadSprite loadSprite = new LoadSprite();
         loadSprite.loadPlayer(1);
-        player = new Player(loadSprite.getPlayerSprite(), 1600, 400);
+        player = new Player(loadSprite.getPlayerSprite(), (int) (mapManager.getMapWidth() / 2), (int) (mapManager.getMapHeight() / 2));
 
         Random random = new Random();
 
@@ -208,8 +208,8 @@ public class GameWorld {
             }
         }
 
-        System.out.println("Enemies: " + enemies.size());
-        System.out.println("Bullets: " + bullets.size());
+//        System.out.println("Enemies: " + enemies.size());
+//        System.out.println("Bullets: " + bullets.size());
 
     }
 

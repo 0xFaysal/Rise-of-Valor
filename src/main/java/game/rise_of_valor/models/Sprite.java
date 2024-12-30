@@ -13,5 +13,7 @@ public class Sprite {
     public static final String FLY = "fly";
     public List<Image> idle = new ArrayList<>();
     public List<Image> movement = new ArrayList<>();
+
+    public Image portal;
     public int currentCharacterId;
 }

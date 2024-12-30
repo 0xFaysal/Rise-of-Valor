@@ -85,9 +85,10 @@ public class DeathEffect {
 
         public void draw(GraphicsContext gc) {
             double alpha = life / MAX_LIFE;
+            double size = 8 * alpha; // Start large and decrease size
             gc.setGlobalAlpha(alpha);
             gc.setFill(color);
-            gc.fillOval(x - 2, y - 2, 4, 4);
+            gc.fillOval(x - size / 2, y - size / 2, size, size);
             gc.setGlobalAlpha(1.0); // Reset alpha
         }
     }

@@ -14,7 +14,7 @@ public class MapManager {
 
     public static double space;
     MapManager(int mapId) {
-        space=(16*4)*zoom;
+        space=(200)*zoom;
 
      map = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/game/rise_of_valor/assets/maps/map" + mapId + ".png")));
         MAP1_WIDTH =  map.getWidth()*zoom;
