@@ -28,8 +28,8 @@ public class Bullet {
     }
 
     public void update(double deltaTime) {
-        x += dx*deltaTime *60;
-        y += dy*deltaTime *60;
+        x += dx*deltaTime *100;
+        y += dy*deltaTime *100;
     }
 
     public boolean isOutOfBounds(int width, int height) {

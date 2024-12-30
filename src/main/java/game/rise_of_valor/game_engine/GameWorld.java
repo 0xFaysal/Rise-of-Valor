@@ -1,9 +1,7 @@
 package game.rise_of_valor.game_engine;
 
-import game.rise_of_valor.models.Bullet;
+import game.rise_of_valor.models.*;
 import game.rise_of_valor.models.Character;
-import game.rise_of_valor.models.Enemy;
-import game.rise_of_valor.models.Player;
 import game.rise_of_valor.utils.LoadSprite;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,10 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static game.rise_of_valor.game_engine.MapManager.space;
 
@@ -45,6 +40,10 @@ public class GameWorld {
     private double mouseX;
     private double mouseY;
 
+
+    private final List<DeathEffect> deathEffects = new ArrayList<>();
+
+
     public GameWorld(Canvas canvas, Scene scene) {
         this.canvas = canvas;
         this.scene = scene;
@@ -53,7 +52,7 @@ public class GameWorld {
 
 
 //        tileManager = new TileManager(CANVAS_WIDTH, CANVAS_HEIGHT);
-        mapManager = new MapManager(1);
+        mapManager = new MapManager(3);
 
         LoadSprite loadSprite = new LoadSprite();
         loadSprite.loadPlayer(1);
@@ -171,9 +170,13 @@ public class GameWorld {
             bullet.update(deltaTime);
         }
 
-        // Remove bullets that are out of bounds
-        bullets.removeIf(bullet -> bullet.getX() < 0 || bullet.getX() > mapManager.getMapWidth() ||
-                bullet.getY() < 0 || bullet.getY() > mapManager.getMapHeight());
+        // Remove bullets that are out of bounds or inactive
+        bullets.removeIf(bullet -> bullet.isOutOfBounds((int)mapManager.getMapWidth(), (int)mapManager.getMapHeight()) || !bullet.isActive());
+
+
+//        // Remove bullets that are out of bounds
+//        bullets.removeIf(bullet -> bullet.getX() < 0 || bullet.getX() > mapManager.getMapWidth() ||
+//                bullet.getY() < 0 || bullet.getY() > mapManager.getMapHeight());
 
         // Check for collisions between bullets and enemies
         for (Bullet bullet : bullets) {
@@ -185,8 +188,25 @@ public class GameWorld {
             }
         }
 
-        // Remove inactive bullets
-        bullets.removeIf(bullet -> !bullet.isActive());
+        // Update death effects
+        Iterator<DeathEffect> iterator = deathEffects.iterator();
+        while (iterator.hasNext()) {
+            DeathEffect effect = iterator.next();
+            effect.update(deltaTime);
+            if (effect.isExpired()) {
+                iterator.remove();
+            }
+        }
+
+        // Remove enemies with life less than or equal to 0 and add death effects
+        Iterator<Enemy> enemyIterator = enemies.iterator();
+        while (enemyIterator.hasNext()) {
+            Enemy enemy = enemyIterator.next();
+            if (enemy.getLife() <= 0) {
+                deathEffects.add(new DeathEffect(enemy.getBody()[0] + enemy.getBody()[2]/2.0, enemy.worldPositionY + enemy.getBody()[3]/2.0, enemy.getBody()[2], enemy.getBody()[3], enemy.getCurrentCharacterId()));
+                enemyIterator.remove();
+            }
+        }
 
         System.out.println("Enemies: " + enemies.size());
         System.out.println("Bullets: " + bullets.size());
@@ -201,6 +221,11 @@ public class GameWorld {
         // Render only the visible part of the tiles
 //        tileManager.draw(gc, cameraX, cameraY, CANVAS_WIDTH, CANVAS_HEIGHT);
         mapManager.drawMap(gc);
+
+        // Draw death effects
+        for (DeathEffect effect : deathEffects) {
+            effect.draw(gc);
+        }
 
         // Create a list to hold both the player and enemies
         List<Character> characters = new ArrayList<>();
@@ -222,6 +247,8 @@ public class GameWorld {
         for (Bullet bullet : bullets) {
             bullet.draw(gc);
         }
+
+
 
         // Restore graphics context
         gc.restore();

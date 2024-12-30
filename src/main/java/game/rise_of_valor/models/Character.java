@@ -6,12 +6,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
+import javafx.scene.text.Font;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static game.rise_of_valor.models.Sprite.FLY;
+import static javafx.scene.text.FontWeight.BOLD;
 
 public class Character {
 
@@ -57,6 +57,9 @@ public class Character {
     int spriteAnimationVector = 32;
 
     private int life;
+    private final List<DamageNumber> damageNumbers = new ArrayList<>();
+    private final Random random = new Random();
+
 
     public Character(int worldPositionX, int worldPositionY) {
         this.worldPositionX = worldPositionX;
@@ -67,6 +70,7 @@ public class Character {
         spriteHeight = 800 / scaleFactor;
 
         life =100;
+
 
 
         shadowGradient = new RadialGradient(
@@ -94,7 +98,16 @@ public class Character {
         if (currentSprite > spriteCount) {
             currentSprite = 0;
         }
-//        System.out.println("Update Current sprite: " + currentSprite);
+
+        // Update damage numbers
+        Iterator<DamageNumber> iterator = damageNumbers.iterator();
+        while (iterator.hasNext()) {
+            DamageNumber damageNumber = iterator.next();
+            damageNumber.update(deltaTime);
+            if (damageNumber.isExpired()) {
+                iterator.remove();
+            }
+        }
     }
 
     public void draw(GraphicsContext gc) {
@@ -133,6 +146,11 @@ public class Character {
                 gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
             }
 
+            // Draw damage numbers
+            for (DamageNumber damageNumber : damageNumbers) {
+                damageNumber.draw(gc);
+            }
+
             //draw body box
 //            gc.setStroke(Color.RED);
 //            gc.strokeRect(bodyX, bodyY, bodyWidth, bodyHeight);
@@ -159,9 +177,57 @@ public class Character {
 
     public void takeDamage(int damage){
         life-= damage;
+
+        // Add a new damage number
+        double offsetX = random.nextDouble() * 20 - 10; // Random offset between -10 and 10
+        double offsetY = random.nextDouble() * 20 - 10; // Random offset between -10 and 10
+        damageNumbers.add(new DamageNumber(worldPositionX + offsetX, worldPositionY + offsetY, damage));
+
     }
 
     public int getLife(){
         return life;
+    }
+
+
+    private static class DamageNumber {
+        private static final double DURATION = 1.0; // Duration in seconds
+        private static final double FADE_OUT_TIME = 0.5; // Fade out time in seconds
+
+        private final double x;
+        private final double y;
+        private final int damage;
+        private double timeElapsed;
+
+        public DamageNumber(double x, double y, int damage) {
+            this.x = x;
+            this.y = y;
+            this.damage = damage;
+            this.timeElapsed = 0;
+        }
+
+        public void update(double deltaTime) {
+            timeElapsed += deltaTime;
+        }
+
+        public boolean isExpired() {
+            return timeElapsed >= DURATION;
+        }
+
+        public void draw(GraphicsContext gc) {
+            double alpha = 1.0;
+            if (timeElapsed > DURATION - FADE_OUT_TIME) {
+                alpha = (DURATION - timeElapsed) / FADE_OUT_TIME;
+            }
+
+            gc.setGlobalAlpha(alpha);
+            gc.setFont(Font.font("Arial", BOLD, 12));
+            gc.setFill(Color.WHITE);
+            gc.setStroke(Color.BLACK);
+            gc.setLineWidth(1);
+            gc.strokeText(String.valueOf(damage), x, y);
+            gc.fillText(String.valueOf(damage), x, y);
+            gc.setGlobalAlpha(1.0); // Reset alpha
+        }
     }
 }

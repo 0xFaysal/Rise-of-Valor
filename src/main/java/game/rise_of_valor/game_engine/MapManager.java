@@ -8,7 +8,7 @@ import java.util.Objects;
 public class MapManager {
 
     Image map;
-    double zoom = 2;
+    double zoom = 1;
     public static double MAP1_WIDTH;
     public static double MAP1_HEIGHT;
 

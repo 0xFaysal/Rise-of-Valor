@@ -1,8 +1,6 @@
 package game.rise_of_valor.controllers;
 
 import game.rise_of_valor.game_engine.GameLoop;
-import game.rise_of_valor.game_engine.GameLoop1;
-import game.rise_of_valor.game_engine.GameLoopT;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;

@@ -2,6 +2,7 @@ package game.rise_of_valor.models;
 
 import javafx.scene.canvas.GraphicsContext;
 
+import java.util.Iterator;
 import java.util.List;
 
 import static game.rise_of_valor.models.Sprite.FLY;
@@ -70,6 +71,8 @@ public class Enemy extends Character {
     public void update(double deltaTime) {
 
         super.update(deltaTime);
+
+
 
     }
 
@@ -160,5 +163,7 @@ public class Enemy extends Character {
         return new double[]{bodyX, bodyY, bodyWidth, bodyHeight};
     }
 
-
+    public int getCurrentCharacterId() {
+        return currentCharacterId;
+    }
 }

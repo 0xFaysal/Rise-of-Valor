@@ -76,7 +76,7 @@ public class Gun {
 //        gc.strokeRect(-20, -gunBoxHeight / 2.0, gunBoxWidth*2, gunBoxHeight*2); // Draw the gun box with the hand position as one side
         gc.restore();
 
-        gc.fillOval(gunPointX-2,gunPointY-2,4,4);
+//        gc.fillOval(gunPointX-2,gunPointY-2,4,4);
 
     }
 
