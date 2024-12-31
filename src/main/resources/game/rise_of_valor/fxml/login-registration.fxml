@@ -12,7 +12,11 @@
          <children>
             <ImageView fitHeight="544.0" fitWidth="668.0" pickOnBounds="true" preserveRatio="true">
                <image>
+<<<<<<< HEAD
                   <Image url="@../assets/images/illustration.png" />
+=======
+                  <Image url="@../assets/image/gameLogoLoginPage.png" />
+>>>>>>> b00ba38 (deleted code re written for the game logo scene, login-registration page image changed.)
                </image>
             </ImageView>
             <Pane fx:id="containerPane" prefHeight="506.0" prefWidth="380.0" styleClass="bgWhite" stylesheets="@../css/styles.css" />
