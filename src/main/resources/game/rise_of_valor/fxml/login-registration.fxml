@@ -12,7 +12,7 @@
          <children>
             <ImageView fitHeight="544.0" fitWidth="668.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/image/illustration.png" />
+                  <Image url="@../assets/image/gameLogoLoginPage.png" />
                </image>
             </ImageView>
             <Pane fx:id="containerPane" prefHeight="506.0" prefWidth="380.0" styleClass="bgWhite" stylesheets="@../css/styles.css" />

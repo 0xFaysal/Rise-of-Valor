@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.media.MediaView?>
+
+<BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.IntroControllerV2" style="-fx-background-color: #000;">
+    <center>
+        <MediaView fx:id="mediaView" fitHeight="544.0" fitWidth="960.0" preserveRatio="true" />
+    </center>
+</BorderPane>
