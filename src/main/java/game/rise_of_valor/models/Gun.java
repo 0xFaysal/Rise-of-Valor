@@ -26,16 +26,54 @@ public class Gun {
     private Image gunSprite;
 
     private double gunPointX, gunPointY;
+    private double gunBoxAngleOffset = 0.23;
 
     private int gunLength;
-    private double gunScale = 2;
+    private double gunScale ;
 
     public Gun(String name, int damage, int attackSpeed) {
-        gunLength = name.equals("gun1") ? 15 : name.equals("gun2") ? 19 : 20;
+        gunLength = switch (name){
+            case "gun1" -> 21;
+            case "gun2" -> 20;
+            case "gun3" -> 25;
+            case "gun4" -> 48;
+            case "gun5" -> 35;
+            case "pistol" -> 20;
+            case "shotgun" -> 28;
+            case "rifle" -> 20;
+            case "sniper" -> 28;
+            default -> 0;
+        };
+
+        gunScale= switch (name){
+            case "gun1" -> 0.22;
+            case "gun2" -> 0.2;
+            case "gun3" -> 0.2;
+            case "gun4" -> 0.29;
+            case "gun5" -> 0.2;
+            case "pistol" -> 0.9;
+            case "shotgun" -> 0.8;
+            case "rifle" -> 0.8;
+            case "sniper" -> 0.8;
+            default -> 0;
+        };
+
+        gunBoxAngleOffset = switch (name){
+            case "gun1" -> 0.23;
+            case "gun2", "pistol", "gun5" -> 0.10;
+            case "gun3" -> 0.12;
+            case "gun4" -> 0.15;
+            case "rifle" -> 0.15;
+            case "sniper" -> 0.10;
+            default -> 0;
+        };
+
         this.name = name;
         this.damage = damage;
         this.shootSpeed = attackSpeed;
         loadGunSprite();
+        gunBoxWidth = (int) (gunSprite.getWidth() * gunScale);
+        gunBoxHeight = (int) (gunSprite.getHeight() * gunScale);
 
     }
     public void update(){
@@ -49,10 +87,9 @@ public class Gun {
         double dy = mouseY - handY;
         gunBoxAngle = Math.atan2(dy, dx);
 
-//        System.out.println("HandPositionX: " + handPositionX + " HandPositionY: " + handPositionY);
 
-        gunPointX = handPositionX + Math.cos(gunBoxAngle-0.15) * gunLength;
-        gunPointY = handPositionY + Math.sin(gunBoxAngle-0.15) * gunLength;
+        gunPointX = handPositionX + Math.cos(gunBoxAngle- gunBoxAngleOffset) * gunLength;
+        gunPointY = handPositionY + Math.sin(gunBoxAngle-gunBoxAngleOffset) * gunLength;
 
 
     }
@@ -73,8 +110,8 @@ public class Gun {
         gc.translate(handPositionX, handPositionY); // Translate to the hand position
         gc.rotate(Math.toDegrees(gunBoxAngle)); // Rotate around the hand position
         // draw the gun sprite
-        gc.drawImage(gunSprite, -20, -gunBoxHeight / 2.0-5, gunBoxWidth*gunScale, gunBoxHeight*gunScale);
-//        gc.strokeRect(-20, -gunBoxHeight / 2.0, gunBoxWidth*2, gunBoxHeight*2); // Draw the gun box with the hand position as one side
+        gc.drawImage(gunSprite, -20, -gunBoxHeight*gunScale / 2.0, gunBoxWidth*gunScale, gunBoxHeight*gunScale);
+//        gc.strokeRect(-20,-gunBoxHeight*gunScale / 2.0 , gunBoxWidth*gunScale, gunBoxHeight*gunScale); // Draw the gun box with the hand position as one side
         gc.restore();
 
         gc.fillOval(gunPointX-2,gunPointY-2,4,4);

@@ -20,7 +20,7 @@ public class Bullet {
         this.y = startY;
 
         // Calculate direction vector and normalize
-        double angle = Math.atan2(targetY - startY, targetX - startX);
+        double angle = Math.atan2(targetY+12 - startY, targetX+12 - startX);
         this.dx = Math.cos(angle);
         this.dy = Math.sin(angle);
     }

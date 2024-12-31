@@ -68,7 +68,7 @@ public class GameWorld {
 
         Random random = new Random();
 
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 0; i++) {
             int x = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapWidth() - space)));
             int y = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapHeight() - space)));
             enemies.add(new Enemy(loadSprite.getEnemySprite(i % 4), Math.abs(x), Math.abs(y)));
