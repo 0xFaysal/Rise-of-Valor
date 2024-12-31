@@ -29,6 +29,7 @@
 
         <dependency>
             <groupId>org.openjfx</groupId>
+<<<<<<< HEAD
             <artifactId>javafx-media</artifactId>
             <version>23.0.1</version>
         </dependency>
@@ -39,6 +40,18 @@
             <version>17.0.2</version>
         </dependency>
       
+=======
+<<<<<<< HEAD
+            <artifactId>javafx-swing</artifactId>
+            <version>17.0.2</version>
+        </dependency>
+=======
+            <artifactId>javafx-media</artifactId>
+            <version>23.0.1</version>
+        </dependency>
+
+>>>>>>> b00ba38 (deleted code re written for the game logo scene, login-registration page image changed.)
+>>>>>>> 614b72f (deleted code re written for the game logo scene, login-registration page image changed.)
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
