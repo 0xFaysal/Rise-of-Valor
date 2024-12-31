@@ -152,8 +152,8 @@ public class Character {
             }
 
             //draw body box
-//            gc.setStroke(Color.RED);
-//            gc.strokeRect(bodyX, bodyY, bodyWidth, bodyHeight);
+            gc.setStroke(Color.RED);
+            gc.strokeRect(bodyX, bodyY, bodyWidth, bodyHeight);
 //            gc.rect(bodyX, bodyY, bodyWidth, bodyHeight);
 
 

@@ -28,6 +28,7 @@ public class Gun {
     private double gunPointX, gunPointY;
 
     private int gunLength;
+    private double gunScale = 2;
 
     public Gun(String name, int damage, int attackSpeed) {
         gunLength = name.equals("gun1") ? 15 : name.equals("gun2") ? 19 : 20;
@@ -72,11 +73,11 @@ public class Gun {
         gc.translate(handPositionX, handPositionY); // Translate to the hand position
         gc.rotate(Math.toDegrees(gunBoxAngle)); // Rotate around the hand position
         // draw the gun sprite
-        gc.drawImage(gunSprite, -20, -gunBoxHeight / 2.0-5, gunBoxWidth*1.5, gunBoxHeight*1.5);
+        gc.drawImage(gunSprite, -20, -gunBoxHeight / 2.0-5, gunBoxWidth*gunScale, gunBoxHeight*gunScale);
 //        gc.strokeRect(-20, -gunBoxHeight / 2.0, gunBoxWidth*2, gunBoxHeight*2); // Draw the gun box with the hand position as one side
         gc.restore();
 
-//        gc.fillOval(gunPointX-2,gunPointY-2,4,4);
+        gc.fillOval(gunPointX-2,gunPointY-2,4,4);
 
     }
 

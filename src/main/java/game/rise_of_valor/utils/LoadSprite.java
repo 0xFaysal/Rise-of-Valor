@@ -51,7 +51,7 @@ public class LoadSprite {
         }
         loadSprites(Sprite.FLY, 5, enemySprite.movement, 4, SPRITE_PATH_TEMPLATE_ENEMY);
         EnemySprite.add(enemySprite);
-        System.out.println(EnemySprite.size());
+
 
 
 
@@ -76,20 +76,20 @@ public class LoadSprite {
 
 
         for (int i = 0; i <= count; i++) {
-            try (InputStream is = Objects.requireNonNull(getClass().getResourceAsStream(
-                    String.format(template, playerCharacterId, action, i)))) {
-                BufferedImage bufferedImage = ImageIO.read(is);
-                spriteList.add(SwingFXUtils.toFXImage(bufferedImage, null));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-//            try {
-//                spriteList.add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(
-//                        String.format(template, playerCharacterId, action, i)))));
-//            } catch (Exception e) {
-//                System.err.println("Error loading sprite "+action+": " + e.getMessage());
+//            try (InputStream is = Objects.requireNonNull(getClass().getResourceAsStream(
+//                    String.format(template, playerCharacterId, action, i)))) {
+//                BufferedImage bufferedImage = ImageIO.read(is);
+//                spriteList.add(SwingFXUtils.toFXImage(bufferedImage, null));
+//            } catch (IOException e) {
+//                e.printStackTrace();
 //            }
+
+            try {
+                spriteList.add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(
+                        String.format(template, playerCharacterId, action, i)))));
+            } catch (Exception e) {
+                System.err.println("Error loading sprite "+action+": " + e.getMessage());
+            }
         }
     }
 }

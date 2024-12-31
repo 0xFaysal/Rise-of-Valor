@@ -2,6 +2,8 @@ package game.rise_of_valor.game_engine;
 
 import game.rise_of_valor.models.*;
 import game.rise_of_valor.models.Character;
+import game.rise_of_valor.models.Enemy;
+import game.rise_of_valor.utils.CustomFont;
 import game.rise_of_valor.utils.LoadSprite;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -43,12 +45,18 @@ public class GameWorld {
 
     private final List<DeathEffect> deathEffects = new ArrayList<>();
 
+    private TopViewManager topViewManager;
+    CustomFont customFont ;
 
     public GameWorld(Canvas canvas, Scene scene) {
+        System.out.println("GameWorld created");
         this.canvas = canvas;
         this.scene = scene;
         this.CANVAS_WIDTH = (int) canvas.getWidth();
         this.CANVAS_HEIGHT = (int) canvas.getHeight();
+        customFont = new CustomFont();
+        topViewManager = new TopViewManager(customFont);
+
 
 
 //        tileManager = new TileManager(CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -204,9 +212,15 @@ public class GameWorld {
             Enemy enemy = enemyIterator.next();
             if (enemy.getLife() <= 0) {
                 deathEffects.add(new DeathEffect(enemy.getBody()[0] + enemy.getBody()[2]/2.0, enemy.worldPositionY + enemy.getBody()[3]/2.0, enemy.getBody()[2], enemy.getBody()[3], enemy.getCurrentCharacterId()));
+
                 enemyIterator.remove();
+                topViewManager.updateKilledEnemy();
             }
         }
+
+        // Update timer
+        topViewManager.update(deltaTime);
+        topViewManager.setRemainEnemy(enemies.size());
 
 //        System.out.println("Enemies: " + enemies.size());
 //        System.out.println("Bullets: " + bullets.size());
@@ -252,6 +266,9 @@ public class GameWorld {
 
         // Restore graphics context
         gc.restore();
+
+        // Draw timer on top of the camera view
+        topViewManager.draw(gc, CANVAS_WIDTH);
     }
 
     private boolean isVisible(Character character) {

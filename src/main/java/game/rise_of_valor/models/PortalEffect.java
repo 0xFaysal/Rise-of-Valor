@@ -38,7 +38,6 @@ public class PortalEffect {
     public void vanish() {
 
         if (timeElapsed1 >= 5.0) {
-            System.out.println("Vanishing");
             isVisible = false;
         }
     }

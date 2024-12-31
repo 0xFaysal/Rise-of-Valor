@@ -2,7 +2,6 @@ package game.rise_of_valor.models;
 
 import javafx.scene.canvas.GraphicsContext;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static game.rise_of_valor.models.Sprite.FLY;
@@ -108,10 +107,10 @@ public class Enemy extends Character {
     }
 
 
-    public void moveTowards(double targetX, double targetY, double targetWidth, double targetHeight, double deltaTime, List<Enemy> enemies) {
 
+
+    public void moveTowards(double targetX, double targetY, double targetWidth, double targetHeight, double deltaTime, List<Enemy> enemies) {
         if (appearanceFinished) {
-//            System.out.println("Enemy is moving");
             double dx = targetX - worldPositionX;
             double dy = targetY - worldPositionY;
 
