@@ -26,7 +26,7 @@ public class Player extends Character {
     public Player(Sprite sprite, int inertiaPositionX, int inertiaPositionY) {
         super(inertiaPositionX, inertiaPositionY);
 
-        gun = new Gun("sniper", 20, 10);
+        gun = new Gun("gun2", 20, 10);
 
 
         speed = 200;
@@ -77,8 +77,8 @@ public class Player extends Character {
         }
 
         // Clamp player position within map boundaries
-        worldPositionX = Math.max(space + 40, Math.min(worldPositionX, MAP1_WIDTH - space - 10 - spriteWidth));
-        worldPositionY = Math.max(space, Math.min(worldPositionY, MAP1_HEIGHT - space - spriteHeight));
+        worldPositionX = Math.max(space-60, Math.min(worldPositionX, MAP1_WIDTH - space - spriteWidth + 60));
+        worldPositionY = Math.max(space, Math.min(worldPositionY, MAP1_HEIGHT - space - spriteHeight - 60));
 
         // Update hand position based on player's position
         handPositionX = worldPositionX + (facingLeft ? 18 : spriteWidth - 20);

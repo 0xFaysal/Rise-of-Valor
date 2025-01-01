@@ -105,7 +105,7 @@ public class Gun {
 
 
         // Draw gun box
-        gc.setFill(Color.YELLOW);
+//        gc.setFill(Color.YELLOW);
         gc.save();
         gc.translate(handPositionX, handPositionY); // Translate to the hand position
         gc.rotate(Math.toDegrees(gunBoxAngle)); // Rotate around the hand position
@@ -114,7 +114,7 @@ public class Gun {
 //        gc.strokeRect(-20,-gunBoxHeight*gunScale / 2.0 , gunBoxWidth*gunScale, gunBoxHeight*gunScale); // Draw the gun box with the hand position as one side
         gc.restore();
 
-        gc.fillOval(gunPointX-2,gunPointY-2,4,4);
+//        gc.fillOval(gunPointX-2,gunPointY-2,4,4);
 
     }
 
