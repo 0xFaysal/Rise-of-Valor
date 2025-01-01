@@ -101,7 +101,7 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="200.0" spacing="5.0">
                      <children>
                         <CheckBox fx:id="IAgree" focusTraversable="false" mnemonicParsing="false" text="I agree  with," />
-                        <Label text="Privacy &amp; Policy" textFill="#7f265b">
+                        <Label text="Privacy &amp; Policy" textFill="#fa2259">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -114,7 +114,7 @@
                         <Insets bottom="15.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <Button fx:id="signUpBtn" focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="260.0" style="-fx-background-color: #7F265B;" text="Sign Up" textFill="WHITE">
+                  <Button fx:id="signUpBtn" focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="260.0" style="-fx-background-color: FA2259;" text="Sign Up" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -127,7 +127,7 @@
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="215.0" spacing="5.0">
                <children>
                   <Label text="Already have an account?" />
-                  <Label onMouseClicked="#goSignIn" text="Sign In" textFill="#7f265b">
+                  <Label onMouseClicked="#goSignIn" text="Sign In" textFill="#fa2259">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
