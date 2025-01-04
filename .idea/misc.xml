@@ -9,6 +9,7 @@
     </option>
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="22" project-jdk-type="JavaSDK">
 =======
   <component name="PWA">
@@ -17,6 +18,9 @@
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_22" default="true" project-jdk-name="22" project-jdk-type="JavaSDK">
 >>>>>>> b00ba38 (deleted code re written for the game logo scene, login-registration page image changed.)
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="22" project-jdk-type="JavaSDK">
+>>>>>>> 63335d2 (conflicts resolved)
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
