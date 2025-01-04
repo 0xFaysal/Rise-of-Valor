@@ -21,7 +21,7 @@
          <children>
             <ImageView fitHeight="63.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/image/icon.png" />
+                  <Image url="@../assets/images/icon.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" prefHeight="30.0" prefWidth="260.0" text="Create New Account">
@@ -35,7 +35,7 @@
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/image/google.png" />
+                              <Image url="@../assets/images/google.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="18.0" prefWidth="120.0" text="Sign Up with Google" />
