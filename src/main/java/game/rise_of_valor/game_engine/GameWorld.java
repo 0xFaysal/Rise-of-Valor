@@ -63,7 +63,7 @@ public class GameWorld {
         mapManager = new MapManager(3);
 
         LoadSprite loadSprite = new LoadSprite();
-        loadSprite.loadPlayer(1);
+        loadSprite.loadPlayer(4);
         player = new Player(loadSprite.getPlayerSprite(), (int) (mapManager.getMapWidth() / 2), (int) (mapManager.getMapHeight() / 2));
 
         Random random = new Random();
