@@ -26,7 +26,7 @@ public class Player extends Character {
     public Player(Sprite sprite, int inertiaPositionX, int inertiaPositionY) {
         super(inertiaPositionX, inertiaPositionY);
 
-        gun = new Gun("gun2", 20, 10);
+        gun = new Gun("gun4", 20, 10);
 
 
         speed = 200;
