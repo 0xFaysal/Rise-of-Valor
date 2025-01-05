@@ -5,51 +5,51 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.RadialGradient;
-import javafx.scene.paint.Stop;
 
 import java.util.List;
-import java.util.Objects;
 
-import static game.rise_of_valor.data.MapData.MAP1_HEIGHT;
-import static game.rise_of_valor.data.MapData.MAP1_WIDTH;
+import static game.rise_of_valor.game_engine.MapManager.*;
 
 public class Player extends Character {
     private boolean isMoving = false;
 
 
-    private static final String IDLE = "idle";
-    int playerCharacterId = 2;
+
+    private double handPositionX;
+    private double handPositionY;
+
+    private Gun gun;
 
 
 
 
-
-
-    public Player(int inertiaPositionX, int inertiaPositionY) {
+    public Player(Sprite sprite, int inertiaPositionX, int inertiaPositionY) {
         super(inertiaPositionX, inertiaPositionY);
 
+        gun = new Gun("gun2", 20, 10);
 
 
         speed = 200;
         scaleFactor = 10;
-        spriteWidth = 600/scaleFactor;
-        spriteHeight = 800/scaleFactor;
-        spriteAnimetionFector = 250;
+        spriteWidth = 600 / scaleFactor;
+        spriteHeight = 800 / scaleFactor;
+        spriteAnimationVector = 250;
 
-
-        SPRITE_PATH_TEMPLATE = "/game/rise_of_valor/assets/sprites/player%d/%s_%d.png";
 
         this.movementSpriteCount = 7;
-        loadSprites(WALK, movementSpriteCount, movement, playerCharacterId);
+        movement = sprite.movement;
+
 
         this.idleSpriteCount = 5;
-        loadSprites(IDLE, idleSpriteCount, idle, playerCharacterId);
+        idle = sprite.idle;
+
+        handPositionX = worldPositionX + (facingLeft ? 0 : spriteWidth - 20);
+        handPositionY = worldPositionY + (spriteHeight / 2.0) + 10;
+        gun.setHandPosition(handPositionX, handPositionY);
+        gun.setGunPosition(handPositionX, handPositionY);
 
 
     }
-
 
 
     public void update(Scene scene, double deltaTime, List<KeyCode> keys) {
@@ -77,29 +77,38 @@ public class Player extends Character {
         }
 
         // Clamp player position within map boundaries
-        worldPositionX = Math.max(0, Math.min(worldPositionX, MAP1_WIDTH - spriteWidth));
-        worldPositionY = Math.max(0, Math.min(worldPositionY, MAP1_HEIGHT - spriteHeight));
+        worldPositionX = Math.max(space-60, Math.min(worldPositionX, MAP1_WIDTH - space - spriteWidth + 60));
+        worldPositionY = Math.max(space, Math.min(worldPositionY, MAP1_HEIGHT - space - spriteHeight - 60));
+
+        // Update hand position based on player's position
+        handPositionX = worldPositionX + (facingLeft ? 18 : spriteWidth - 20);
+        handPositionY = worldPositionY + (spriteHeight / 2.0) + 20;
+        gun.setHandPosition(handPositionX, handPositionY);
+
+        // Update gun box position based on player's position
+        gun.setGunPosition(handPositionX, handPositionY);
 
         // Update spriteCount based on movement state
         spriteCount = isMoving ? movementSpriteCount : idleSpriteCount;
 
+        // Update gun box angle
+        gun.updateGunBoxAngle();
+
         // Update animation
         super.update(deltaTime);
     }
+
+
 
     @Override
     public void draw(GraphicsContext gc) {
         List<Image> sprites = isMoving ? movement : idle;
         if (currentSprite < sprites.size()) {
             Image sprite = sprites.get(currentSprite);
-//            double width = sprite.getWidth();
-//            double height = sprite.getHeight();
-//            double scaledSize = tileSize * tileScale;
+
 
             int spriteX = 700;
             int spriteY = 1030;
-
-
 
 
             // Calculate shadow width using a sine wave function for smooth animation
@@ -115,30 +124,40 @@ public class Player extends Character {
             gc.setFill(shadowGradient);
             gc.fillOval(shadowX, shadowY, shadowWidth, 15);
 
-            //draw box around character
-            gc.setStroke(Color.RED);
+            // Draw box around character
+//            gc.setStroke(Color.RED);
 //            gc.strokeRect(worldPositionX, worldPositionY, spriteWidth, spriteHeight);
 
 
             if (facingLeft) {
                 gc.save();
                 gc.scale(-1, 1);
-                gc.drawImage(sprite, spriteX, spriteY, spriteWidth*scaleFactor, spriteHeight*scaleFactor, -worldPositionX - spriteWidth, worldPositionY, spriteWidth, spriteHeight);
+                gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, -worldPositionX - spriteWidth, worldPositionY, spriteWidth, spriteHeight);
                 gc.restore();
             } else {
-                gc.drawImage(sprite,spriteX,spriteY,spriteWidth*scaleFactor,spriteHeight*scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
+                gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
             }
 
+            gun.draw(gc);
+
+            // Draw hand
+            gc.setFill(Color.BLACK);
+            gc.fillOval(handPositionX-5, handPositionY-5, 10, 10);
+            // draw a circle at the hand position the radius of the circle is 20
+//            gc.strokeOval(handPositionX-40, handPositionY-40, 2*40, 2*40);
 
         } else {
             System.out.println("No sprites loaded or invalid sprite index.");
         }
+
+
     }
 
-    public int getPlayerWidth() {
-        return spriteWidth;
+    public void setGun(Gun gun){
+        this.gun = gun;
     }
-    public int getPlayerHeight() {
-        return spriteHeight;
+
+    public Gun getGun(){
+        return gun;
     }
 }
