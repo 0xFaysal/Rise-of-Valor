@@ -2,7 +2,6 @@ package game.rise_of_valor.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
@@ -44,7 +43,7 @@ public class registrationController {
             containerPane.getChildren().clear();
             FXMLLoader loginPaneLoader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/login-view.fxml"));
             Pane loginPane = loginPaneLoader.load();
-            loginController loginCtrl = loginPaneLoader.getController();
+            LoginController loginCtrl = loginPaneLoader.getController();
             loginCtrl.setContainerPane(containerPane);
             containerPane.getChildren().add(loginPane);
         }catch (IOException e) {

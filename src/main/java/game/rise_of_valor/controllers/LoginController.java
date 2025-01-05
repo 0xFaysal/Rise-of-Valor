@@ -2,13 +2,11 @@ package game.rise_of_valor.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
-public class loginController {
+public class LoginController {
 
     private Pane containerPane;
 

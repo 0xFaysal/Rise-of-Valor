@@ -29,10 +29,7 @@ public class LoadingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(5), mainPane);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.play();
+
 
         Timeline timeline = new Timeline(
 
@@ -43,15 +40,16 @@ public class LoadingController implements Initializable {
                 timeline.play();
 
 
+
+
         // Add a listener to the progress property
         progressbar.progressProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.doubleValue() == 1.0) {
-                // Load the new FXML file
-                Stage stage = (Stage) mainPane.getScene().getWindow();
+
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/login-registration.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load());
-                    stage.setScene(scene);
+                    mainPane.getChildren().clear();
+                    mainPane.getChildren().add(fxmlLoader.load());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

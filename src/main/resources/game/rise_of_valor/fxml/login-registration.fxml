@@ -2,22 +2,22 @@
 
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 
-<BorderPane styleClass="bgWhite" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.login_registrationController">
-   <center>
-      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="960.0" BorderPane.alignment="CENTER">
+
+<StackPane styleClass="bg-black" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.login_registrationController">
+   <children>
+      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="960.0">
          <children>
             <ImageView fitHeight="544.0" fitWidth="668.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/image/gameLogoLoginPage.png" />
-
                </image>
             </ImageView>
-            <Pane fx:id="containerPane" prefHeight="506.0" prefWidth="380.0" styleClass="bgWhite" stylesheets="@../css/styles.css" />
+            <Pane fx:id="containerPane" prefHeight="544.0" prefWidth="417.0" styleClass="bgWhite" stylesheets="@../css/styles.css" />
          </children>
       </HBox>
-   </center>
-</BorderPane>
+   </children>
+</StackPane>
