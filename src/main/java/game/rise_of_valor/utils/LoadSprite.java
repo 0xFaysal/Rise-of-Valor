@@ -15,11 +15,8 @@ import javafx.embed.swing.SwingFXUtils;
 public class LoadSprite {
 
     int playerCharacterId = 2;
-
-    private String SPRITE_PATH_TEMPLATE_PLAYER = "/game/rise_of_valor/assets/sprites/player%d/%s_%d.png";
-    private String SPRITE_PATH_TEMPLATE_ENEMY = "/game/rise_of_valor/assets/sprites/enemy%d/%s_%d.png";
-
-    Sprite PlayerSprite = new Sprite();
+    private final Sprite PlayerSprite = new Sprite();
+    private static List<Image> PlayerIdle = new ArrayList<>();
     ArrayList<Sprite> EnemySprite = new ArrayList<>();
 
 
@@ -27,6 +24,7 @@ public class LoadSprite {
         System.out.println("Loading sprites");
         //load enemy sprites
         Sprite enemySprite;
+        String SPRITE_PATH_TEMPLATE_ENEMY = "/game/rise_of_valor/assets/sprites/enemy%d/%s_%d.png";
         for (int i = 1; i <= 3; i++) {
             enemySprite = new Sprite();
             try (InputStream is = Objects.requireNonNull(getClass().getResourceAsStream("/game/rise_of_valor/assets/effects/portal.png"))) {
@@ -61,11 +59,17 @@ public class LoadSprite {
     public void loadPlayer(int playerCharacterId) {
         System.out.println("Loading player sprites");
         this.playerCharacterId = playerCharacterId;
+        String SPRITE_PATH_TEMPLATE_PLAYER = "/game/rise_of_valor/assets/sprites/player%d/%s_%d.png";
         loadSprites(Sprite.WALK, 7, PlayerSprite.movement, playerCharacterId, SPRITE_PATH_TEMPLATE_PLAYER);
         loadSprites(Sprite.IDLE, 5, PlayerSprite.idle, playerCharacterId, SPRITE_PATH_TEMPLATE_PLAYER);
+        PlayerIdle = PlayerSprite.idle;
     }
     public Sprite getPlayerSprite() {
         return PlayerSprite;
+    }
+
+    public static List<Image> getPlayerIdle() {
+        return PlayerIdle;
     }
 
     public Sprite getEnemySprite(int enemyId) {

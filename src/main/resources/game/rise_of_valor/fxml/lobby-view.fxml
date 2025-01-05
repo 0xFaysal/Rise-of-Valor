@@ -2,12 +2,9 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="950.0" style="-fx-background-color: #000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.LobbyViewController">
-    <center>
-        <StackPane fx:id="stackPane" BorderPane.alignment="CENTER">
-            <Canvas fx:id="canvas" height="544.0" width="960.0" />
-        </StackPane>
-    </center>
-</BorderPane>
+<StackPane fx:id="rootPane" style="-fx-background-color: #000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.LobbyViewController">
+   <children>
+      <Canvas fx:id="canvas" height="544.0" width="960.0" />
+   </children>
+</StackPane>
