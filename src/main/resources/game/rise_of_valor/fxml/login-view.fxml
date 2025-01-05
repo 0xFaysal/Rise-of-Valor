@@ -109,7 +109,7 @@
                         <Insets bottom="15.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <Button fx:id="SignInBtn" focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="260.0" style="-fx-background-color: FA2259;" text="Sign In" textFill="WHITE">
+                  <Button focusTraversable="false" mnemonicParsing="false" onAction="#SignInBtnClick" prefHeight="30.0" prefWidth="260.0" style="-fx-background-color: FA2259;" text="Sign In" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

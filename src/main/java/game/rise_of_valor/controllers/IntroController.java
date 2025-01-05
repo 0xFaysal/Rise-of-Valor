@@ -30,7 +30,7 @@ public class IntroController implements Initializable {
 
     private void playMedia() {
         // Load the video
-        String videoPath = getClass().getResource("/game/rise_of_valor/assets/image/InceptionCoderLogo.mp4").toExternalForm();
+        String videoPath = getClass().getResource("/game/rise_of_valor/assets/Videos/InceptionCoderLogo.mp4").toExternalForm();
         Media media = new Media(videoPath);
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
