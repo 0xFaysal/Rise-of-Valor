@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="506.0" prefWidth="380.0" styleClass="bgWhite" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.loginController">
+<Pane prefHeight="506.0" prefWidth="380.0" styleClass="bgWhite" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.LoginController">
    <children>
       <VBox layoutX="60.0" layoutY="40.0" prefHeight="452.0" prefWidth="260.0" spacing="10.0" styleClass="bgTransparent" stylesheets="@../css/styles.css">
          <children>

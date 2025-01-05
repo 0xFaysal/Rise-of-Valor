@@ -19,7 +19,7 @@ public class login_registrationController implements Initializable {
         try {
             FXMLLoader loginPaneLoader = new FXMLLoader(Main.class.getResource("fxml/login-view.fxml"));
             Pane loginPane = loginPaneLoader.load();
-            loginController loginCtrl = loginPaneLoader.getController();
+            LoginController loginCtrl = loginPaneLoader.getController();
             loginCtrl.setContainerPane(containerPane);
             containerPane.getChildren().add(loginPane);
         } catch (Exception e) {
