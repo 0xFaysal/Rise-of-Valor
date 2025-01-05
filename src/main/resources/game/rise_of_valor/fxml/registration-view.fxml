@@ -17,51 +17,26 @@
 
 <Pane prefHeight="506.0" prefWidth="380.0" styleClass="bgWhite" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.registrationController">
    <children>
-      <VBox layoutX="61.0" layoutY="42.0" prefHeight="390.0" prefWidth="260.0" spacing="5.0" styleClass="bgTransparent" stylesheets="@../css/styles.css">
+      <VBox layoutX="61.0" layoutY="42.0" prefHeight="430.0" prefWidth="260.0" spacing="5.0" styleClass="bgTransparent" stylesheets="@../css/styles.css">
          <children>
-            <ImageView fitHeight="63.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/image/icon.png" />
-               </image>
-            </ImageView>
+            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="260.0">
+               <children>
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/image/Registration_Icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
             <Label alignment="CENTER" prefHeight="30.0" prefWidth="260.0" text="Create New Account">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
-            </Label>
-            <Button fx:id="googleSignUpBtn" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" prefHeight="28.0" prefWidth="260.0" stylesheets="@../css/styles.css" textAlignment="CENTER">
-               <graphic>
-                  <HBox alignment="CENTER" prefHeight="20.0" prefWidth="220.0" spacing="10.0">
-                     <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/image/google.png" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="18.0" prefWidth="120.0" text="Sign Up with Google" />
-                     </children>
-                  </HBox>
-               </graphic>
-               <styleClass>
-                  <String fx:value="bgWhite" />
-                  <String fx:value="border" />
-               </styleClass>
                <VBox.margin>
-                  <Insets top="5.0" />
+                  <Insets bottom="5.0" />
                </VBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label alignment="CENTER" prefHeight="18.0" prefWidth="260.0" text="------------- or Sign Up with Email ------------- " textFill="#8c8787">
-               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="10.0" />
-               </font>
             </Label>
-            <VBox prefHeight="209.0" prefWidth="260.0">
+            <VBox prefHeight="296.0" prefWidth="260.0">
                <children>
                   <Label text="Email">
                      <VBox.margin>
@@ -77,7 +52,10 @@
                         <Insets bottom="8.0" />
                      </VBox.margin>
                   </TextField>
-                  <Label text="Username" />
+                  <Label text="Username">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="2.5" />
+                     </VBox.margin></Label>
                   <TextField fx:id="username" focusTraversable="false" promptText="Username" stylesheets="@../css/styles.css">
                      <styleClass>
                         <String fx:value="bgWhite" />
@@ -93,6 +71,20 @@
                      </VBox.margin>
                   </Label>
                   <PasswordField fx:id="password" promptText="Password" stylesheets="@../css/styles.css">
+                     <styleClass>
+                        <String fx:value="bgWhite" />
+                        <String fx:value="border" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="8.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <Label text="Confirm Password">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="2.5" />
+                     </VBox.margin>
+                  </Label>
+                  <PasswordField fx:id="password1" promptText="Password" stylesheets="@../css/styles.css">
                      <styleClass>
                         <String fx:value="bgWhite" />
                         <String fx:value="border" />
