@@ -34,7 +34,7 @@ public class Enemy extends Character {
 
         speed = 50; // Speed of the player in pixels per second
         diagonalSpeed = speed * 0.7071; // Speed of the player in pixels per second when moving diagonally
-        spriteAnimationVector = 200;// Sprite animation speed factor
+        spriteAnimationFactor = 200;// Sprite animation speed factor
 
         this.currentCharacterId = sprite.currentCharacterId;
 

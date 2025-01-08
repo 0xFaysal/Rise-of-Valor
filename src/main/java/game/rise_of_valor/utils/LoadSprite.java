@@ -16,7 +16,6 @@ public class LoadSprite {
 
     int playerCharacterId = 2;
     private final Sprite PlayerSprite = new Sprite();
-    private static List<Image> PlayerIdle = new ArrayList<>();
     ArrayList<Sprite> EnemySprite = new ArrayList<>();
 
 
@@ -62,15 +61,11 @@ public class LoadSprite {
         String SPRITE_PATH_TEMPLATE_PLAYER = "/game/rise_of_valor/assets/sprites/player%d/%s_%d.png";
         loadSprites(Sprite.WALK, 7, PlayerSprite.movement, playerCharacterId, SPRITE_PATH_TEMPLATE_PLAYER);
         loadSprites(Sprite.IDLE, 5, PlayerSprite.idle, playerCharacterId, SPRITE_PATH_TEMPLATE_PLAYER);
-        PlayerIdle = PlayerSprite.idle;
     }
     public Sprite getPlayerSprite() {
         return PlayerSprite;
     }
 
-    public static List<Image> getPlayerIdle() {
-        return PlayerIdle;
-    }
 
     public Sprite getEnemySprite(int enemyId) {
         return EnemySprite.get(enemyId);
