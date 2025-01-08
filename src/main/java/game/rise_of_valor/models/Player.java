@@ -33,7 +33,7 @@ public class Player extends Character {
         scaleFactor = 10;
         spriteWidth = 600 / scaleFactor;
         spriteHeight = 800 / scaleFactor;
-        spriteAnimationVector = 250;
+        spriteAnimationFactor = 250;
 
 
         this.movementSpriteCount = 7;

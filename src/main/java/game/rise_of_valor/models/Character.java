@@ -45,6 +45,7 @@ public class Character {
     int currentSprite = 0;
     double animationTime = 0;
     double baseFrameDuration = 1; // Base duration of each frame in seconds
+    int spriteAnimationFactor = 32;
 
     int speed = 100;
     double diagonalSpeed;
@@ -54,7 +55,6 @@ public class Character {
     protected final RadialGradient shadowGradient;
 
     //sprite animation factor
-    int spriteAnimationVector = 32;
 
     private int life;
     private final List<DamageNumber> damageNumbers = new ArrayList<>();
@@ -86,7 +86,7 @@ public class Character {
 
     public void update(double deltaTime) {
         // Calculate frame duration based on speed
-        double frameDuration = baseFrameDuration / (spriteAnimationVector / 32.0);
+        double frameDuration = baseFrameDuration / (spriteAnimationFactor / 32.0);
 
         // Update animation time
         animationTime += deltaTime;
