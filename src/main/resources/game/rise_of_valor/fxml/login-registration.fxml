@@ -15,6 +15,7 @@
                <image>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <Image url="@../assets/image/gameLogoLoginPage.png" />
 =======
 =======
@@ -33,6 +34,10 @@
                   <Image url="@../assets/images/gameLogoLoginPage.png" />
 >>>>>>> d98e297 (mage confilect resolve)
 >>>>>>> cd896e2 (mage confilect resolve)
+=======
+
+                  <Image url="@../assets/images/gameLogoLoginPage.png" />
+>>>>>>> faf7674 (git confilect resolve .)
                </image>
             </ImageView>
             <Pane fx:id="containerPane" prefHeight="544.0" prefWidth="417.0" styleClass="bgWhite" stylesheets="@../css/styles.css" />
