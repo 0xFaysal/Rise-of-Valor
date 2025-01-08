@@ -63,12 +63,9 @@ public class GameWorld {
 //        tileManager = new TileManager(CANVAS_WIDTH, CANVAS_HEIGHT);
         mapManager = new MapManager(3);
 
-<<<<<<< HEAD
-        LoadSprite loadSprite = new LoadSprite();
-        loadSprite.loadPlayer(4);
-=======
+
         LoadSprite loadSprite = dataManager.getLoadSprite();
->>>>>>> dab3ea2 (loaging fxml controller problem solved fist the fxml show then the file will load, and also the lobby character animation problem solved , the aminiton continously running problem solved.)
+
         player = new Player(loadSprite.getPlayerSprite(), (int) (mapManager.getMapWidth() / 2), (int) (mapManager.getMapHeight() / 2));
 
         Random random = new Random();

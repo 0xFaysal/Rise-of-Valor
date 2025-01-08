@@ -13,18 +13,8 @@
          <children>
             <ImageView fitHeight="544.0" fitWidth="668.0" pickOnBounds="true" preserveRatio="true">
                <image>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                  <Image url="@../assets/images/illustration.png" />
-=======
-                  <Image url="@../assets/image/gameLogoLoginPage.png" />
-<<<<<<< HEAD
->>>>>>> b00ba38 (deleted code re written for the game logo scene, login-registration page image changed.)
-=======
->>>>>>> 5d5c16c (scene resize problem solved and some transition removed.)
-=======
+
                   <Image url="@../assets/images/gameLogoLoginPage.png" />
->>>>>>> d98e297 (mage confilect resolve)
                </image>
             </ImageView>
             <Pane fx:id="containerPane" prefHeight="544.0" prefWidth="417.0" styleClass="bgWhite" stylesheets="@../css/styles.css" />
