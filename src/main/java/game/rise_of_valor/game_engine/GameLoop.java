@@ -46,7 +46,7 @@ public class GameLoop {
                 render(gc, interpolation);
 
                 // Print FPS
-                System.out.println(1 / deltaTime);
+//                System.out.println(1 / deltaTime);
 
                 lastTime = now;
 

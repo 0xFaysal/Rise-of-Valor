@@ -27,7 +27,11 @@ public class Character {
     int spriteX = 700;
     int spriteY = 1030;
 
+
+
     protected double bodyX, bodyY;
+    int bodyOffsetX = 8;
+    int bodyOffsetY = 10;
     protected double bodyWidth = 30;
     protected double bodyHeight = 35;
 

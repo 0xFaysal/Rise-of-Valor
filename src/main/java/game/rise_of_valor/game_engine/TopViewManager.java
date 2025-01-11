@@ -15,13 +15,17 @@ public class TopViewManager {
     private int remainEnemy;
     private int killedEnemy;
     private Image gearIcon;
+    private Image healthBar;
+
+    double playerLife ;
 
     public TopViewManager(CustomFont customFont) {
         this.customFont = customFont;
-        this.timer = new Timer(300, customFont.getDesporm());
+        this.timer = new Timer(60, customFont.getDesporm());
         this.remainEnemy = 0;
         this.killedEnemy = 0;
         this.gearIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/settings.png"));
+        this.healthBar = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/healthbar.png"));
     }
 
     public void setRemainEnemy(int remainEnemy) {
@@ -37,7 +41,7 @@ public class TopViewManager {
         timer.update(deltaTime);
     }
 
-    public void draw(GraphicsContext gc, double canvasWidth) {
+    public void draw(GraphicsContext gc, double canvasWidth,double canvasHeight) {
         timer.draw(gc, canvasWidth);
         gc.setFill(Color.color(0.0, 0.0, 0.0, 0.6));
         gc.fillRect(15, 15, 85, 30);
@@ -64,5 +68,17 @@ public class TopViewManager {
         gc.setFill(Color.YELLOW);
         gc.fillText("Esc", canvasWidth-25, 20);
 
+       //health bar
+        gc.setFill(Color.RED);
+        gc.fillRect(25, 65, (healthBar.getWidth()*0.6-21)*(playerLife/100),12);
+        gc.drawImage(healthBar, 15,60, healthBar.getWidth()*0.6, healthBar.getHeight()*0.6);
+
+
+
     }
+
+    public void setPlayerLife(double playerLife) {
+        this.playerLife = playerLife;
+    }
+
 }
