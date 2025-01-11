@@ -20,6 +20,8 @@ public class Player extends Character {
 
     private Gun gun;
 
+    private double playerLife = 100;
+
 
 
 
@@ -47,6 +49,11 @@ public class Player extends Character {
         handPositionY = worldPositionY + (spriteHeight / 2.0) + 10;
         gun.setHandPosition(handPositionX, handPositionY);
         gun.setGunPosition(handPositionX, handPositionY);
+
+        //body box
+        bodyWidth = 35;
+        bodyHeight = 56;
+        bodyOffsetY = 12;
 
 
     }
@@ -93,6 +100,12 @@ public class Player extends Character {
 
         // Update gun box angle
         gun.updateGunBoxAngle();
+
+        bodyOffsetX = facingLeft ? 13 : 11;
+
+        //update body box
+        bodyX = worldPositionX + bodyOffsetX;
+        bodyY = worldPositionY + bodyOffsetY;
 
         // Update animation
         super.update(deltaTime);
@@ -143,6 +156,13 @@ public class Player extends Character {
             // Draw hand
             gc.setFill(Color.BLACK);
             gc.fillOval(handPositionX-5, handPositionY-5, 10, 10);
+
+            //body box
+            gc.setStroke(Color.RED);
+            gc.strokeRect(bodyX,bodyY, bodyWidth, bodyHeight);
+
+
+
             // draw a circle at the hand position the radius of the circle is 20
 //            gc.strokeOval(handPositionX-40, handPositionY-40, 2*40, 2*40);
 
@@ -159,5 +179,9 @@ public class Player extends Character {
 
     public Gun getGun(){
         return gun;
+    }
+
+    public double getPlayerLife(){
+        return playerLife;
     }
 }

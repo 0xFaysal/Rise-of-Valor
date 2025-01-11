@@ -11,8 +11,7 @@ public class Enemy extends Character {
 
 
     private double previousPositionX;
-    int bodyOffsetX = 8;
-    int bodyOffsetY = 10;
+
 
     private int currentCharacterId = 0;
 

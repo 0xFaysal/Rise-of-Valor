@@ -70,7 +70,7 @@ public class GameWorld {
 
         Random random = new Random();
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 0; i++) {
             int x = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapWidth() - space)));
             int y = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapHeight() - space)));
             enemies.add(new Enemy(loadSprite.getEnemySprite(i % 4), Math.abs(x), Math.abs(y)));
@@ -223,6 +223,7 @@ public class GameWorld {
         // Update timer
         topViewManager.update(deltaTime);
         topViewManager.setRemainEnemy(enemies.size());
+        topViewManager.setPlayerLife(player.getLife());
 
 //        System.out.println("Enemies: " + enemies.size());
 //        System.out.println("Bullets: " + bullets.size());
@@ -270,7 +271,7 @@ public class GameWorld {
         gc.restore();
 
         // Draw timer on top of the camera view
-        topViewManager.draw(gc, CANVAS_WIDTH);
+        topViewManager.draw(gc, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
 
     private boolean isVisible(Character character) {

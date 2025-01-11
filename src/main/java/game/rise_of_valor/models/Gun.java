@@ -108,7 +108,16 @@ public class Gun {
 //        gc.setFill(Color.YELLOW);
         gc.save();
         gc.translate(handPositionX, handPositionY); // Translate to the hand position
+
         gc.rotate(Math.toDegrees(gunBoxAngle)); // Rotate around the hand position
+
+        // Flip the gun sprite if the gunBoxAngle is greater than 90 degrees
+        boolean isFlipped = gunBoxAngle > Math.PI / 2 || gunBoxAngle < -Math.PI / 2;
+        if (isFlipped) {
+            gc.scale(1, -1);
+//
+        }
+
         // draw the gun sprite
         gc.drawImage(gunSprite, -20, -gunBoxHeight*gunScale / 2.0, gunBoxWidth*gunScale, gunBoxHeight*gunScale);
 //        gc.strokeRect(-20,-gunBoxHeight*gunScale / 2.0 , gunBoxWidth*gunScale, gunBoxHeight*gunScale); // Draw the gun box with the hand position as one side

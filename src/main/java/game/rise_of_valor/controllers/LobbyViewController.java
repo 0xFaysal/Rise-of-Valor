@@ -187,7 +187,7 @@ public class LobbyViewController implements Initializable {
             gc.fillOval(shadowXOffset, 345, shadowWidth, 20);
 
 
-            System.out.println(currentSprite+player.getUrl());
+//            System.out.println(currentSprite+player.getUrl());
             gc.drawImage(player, 300, 0,player.getWidth()*0.2,player.getHeight()*0.2);
         }
     }
