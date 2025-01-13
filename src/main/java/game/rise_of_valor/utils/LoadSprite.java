@@ -7,9 +7,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
 import javafx.embed.swing.SwingFXUtils;
 
 public class LoadSprite {
@@ -68,26 +67,46 @@ public class LoadSprite {
 
 
     public Sprite getEnemySprite(int enemyId) {
+        System.out.println(enemyId);
         return EnemySprite.get(enemyId);
     }
 
-    public void loadSprites(String action, int count, List<Image> spriteList, int playerCharacterId, String template) {
-
-
-        for (int i = 0; i <= count; i++) {
-//            try (InputStream is = Objects.requireNonNull(getClass().getResourceAsStream(
-//                    String.format(template, playerCharacterId, action, i)))) {
-//                BufferedImage bufferedImage = ImageIO.read(is);
-//                spriteList.add(SwingFXUtils.toFXImage(bufferedImage, null));
-//            } catch (IOException e) {
-//                e.printStackTrace();
+//    public void loadSprites(String action, int count, List<Image> spriteList, int playerCharacterId, String template) {
+//
+//
+//        for (int i = 0; i <= count; i++) {
+////            try (InputStream is = Objects.requireNonNull(getClass().getResourceAsStream(
+////                    String.format(template, playerCharacterId, action, i)))) {
+////                BufferedImage bufferedImage = ImageIO.read(is);
+////                spriteList.add(SwingFXUtils.toFXImage(bufferedImage, null));
+////            } catch (IOException e) {
+////                e.printStackTrace();
+////            }
+//
+//            try {
+//                spriteList.add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(
+//                        String.format(template, playerCharacterId, action, i)))));
+//            } catch (Exception e) {
+//                System.err.println("Error loading sprite "+action+": " + e.getMessage());
 //            }
+//        }
+//    }
 
-            try {
-                spriteList.add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(
-                        String.format(template, playerCharacterId, action, i)))));
-            } catch (Exception e) {
-                System.err.println("Error loading sprite "+action+": " + e.getMessage());
+    private final Map<String, Image> spriteCache = new HashMap<>();
+
+    public void loadSprites(String action, int count, List<Image> spriteList, int playerCharacterId, String template) {
+        for (int i = 0; i <= count; i++) {
+            String spritePath = String.format(template, playerCharacterId, action, i);
+            Image image = spriteCache.computeIfAbsent(spritePath, path -> {
+                try {
+                    return new Image(Objects.requireNonNull(getClass().getResourceAsStream(path)));
+                } catch (Exception e) {
+                    System.err.println("Error loading sprite " + action + ": " + e.getMessage());
+                    return null;
+                }
+            });
+            if (image != null) {
+                spriteList.add(image);
             }
         }
     }

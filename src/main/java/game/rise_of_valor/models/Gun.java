@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 
 public class Gun {
     private String name;
+
+    private int power;
     private int damage;
     private int shootSpeed; // gun fire rate
 
@@ -32,6 +34,18 @@ public class Gun {
     private double gunScale ;
 
     public Gun(String name, int damage, int attackSpeed) {
+        power = switch (name){
+            case "gun1" -> 1;
+            case "gun2" -> 2;
+            case "gun3" -> 3;
+            case "gun4" -> 4;
+            case "gun5" -> 5;
+            case "pistol" -> 1;
+            case "shotgun" -> 2;
+            case "rifle" -> 3;
+            case "sniper" -> 4;
+            default -> 0;
+        };
         gunLength = switch (name){
             case "gun1" -> 21;
             case "gun2" -> 20;
@@ -86,7 +100,6 @@ public class Gun {
         double dx = mouseX - handX;
         double dy = mouseY - handY;
         gunBoxAngle = Math.atan2(dy, dx);
-
 
         gunPointX = handPositionX + Math.cos(gunBoxAngle- gunBoxAngleOffset) * gunLength;
         gunPointY = handPositionY + Math.sin(gunBoxAngle-gunBoxAngleOffset) * gunLength;
@@ -159,5 +172,9 @@ public class Gun {
 
     public double getShootSpeed() {
         return shootSpeed;
+    }
+
+    public int getPower() {
+        return power;
     }
 }

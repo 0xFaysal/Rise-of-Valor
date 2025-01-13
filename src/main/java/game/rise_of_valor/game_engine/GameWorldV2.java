@@ -18,9 +18,12 @@ import java.util.*;
 import static game.rise_of_valor.controllers.LoadingController.dataManager;
 import static game.rise_of_valor.game_engine.MapManager.space;
 
+//import static game.rise_of_valor.data.MapData.mapManager.getMapHeight();
+//import static game.rise_of_valor.data.MapData.mapManager.getMapWidth();
 
-public class GameWorld {
+public class GameWorldV2 {
     public final int CANVAS_WIDTH, CANVAS_HEIGHT;
+
     private double cameraX, cameraY; // Camera position
     private double targetCameraX, targetCameraY; // Target camera position
     private double previousPlayerX, previousPlayerY; // To track player position changes
@@ -30,12 +33,14 @@ public class GameWorld {
     private final List<KeyCode> keys = new ArrayList<>();
 
     Player player;
-    ArrayList<Enemy> enemies = new ArrayList<>();
+    ArrayList<BaseEnemy> enemies = new ArrayList<>();
     ArrayList<Bullet> bullets = new ArrayList<>();
+    private final List<EnemyBullet> enemyBullets = new ArrayList<>();
+
     //    TileManager tileManager;
     MapManager mapManager;
-
-    private final Timeline firingTimeline; // For firing bullets continuously
+    private long lastShotTime = 0;
+    private Timeline firingTimeline;
 
     private double mouseX;
     private double mouseY;
@@ -43,22 +48,21 @@ public class GameWorld {
 
     private final List<DeathEffect> deathEffects = new ArrayList<>();
 
-    private final TopViewManager topViewManager;
+    private TopViewManager topViewManager;
+    CustomFont customFont ;
 
-    EnemyAddingManager enemyAddingManager;
-    CustomFont customFont;
-
-    public GameWorld(Canvas canvas, Scene scene) {
-
+    public GameWorldV2(Canvas canvas, Scene scene) {
+        System.out.println("GameWorld created");
         this.canvas = canvas;
         this.scene = scene;
         this.CANVAS_WIDTH = (int) canvas.getWidth();
         this.CANVAS_HEIGHT = (int) canvas.getHeight();
-
-
         customFont = new CustomFont();
         topViewManager = new TopViewManager(customFont);
 
+
+
+//        tileManager = new TileManager(CANVAS_WIDTH, CANVAS_HEIGHT);
         mapManager = new MapManager(3);
 
 
@@ -66,18 +70,19 @@ public class GameWorld {
 
         player = new Player(loadSprite.getPlayerSprite(), (int) (mapManager.getMapWidth() / 2), (int) (mapManager.getMapHeight() / 2));
 
-        // Add enemies to the game world
-        enemyAddingManager = new EnemyAddingManager(enemies, player, mapManager, loadSprite);
+        Random random = new Random();
 
-//        Random random = new Random();
+        for (int i = 0; i < 50; i++) {
+            int x = random.nextInt((int) mapManager.getMapWidth());
+            int y = random.nextInt((int) mapManager.getMapHeight());
+            int enemyId = i % 3; // Cycle through IDs 1 to 4
 
-        // Add enemies to the game world
-//        for (int i = 0; i < 80; i++) {
-//            int x = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapWidth() - space)));
-//            int y = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapHeight() - space)));
-//            enemies.add(new Enemy(loadSprite.getEnemySprite(i % 4), Math.abs(x), Math.abs(y)));
-//        }
-
+            switch (enemyId) {
+                case 0, 3 -> enemies.add(new ChaserEnemy(loadSprite.getEnemySprite(enemyId), x, y));
+                case 1 -> enemies.add(new TripleShooterEnemy(loadSprite.getEnemySprite(enemyId), x, y));
+                case 2 -> enemies.add(new ShooterEnemy(loadSprite.getEnemySprite(enemyId), x, y));
+            }
+        }
 
         // Initialize camera position based on player's starting position
         targetCameraX = player.worldPositionX - CANVAS_WIDTH / 2.0;
@@ -86,12 +91,11 @@ public class GameWorld {
         // Clamp camera position to map boundaries
         cameraX = Math.max(0, Math.min(targetCameraX, mapManager.getMapWidth() - CANVAS_WIDTH));
         cameraY = Math.max(0, Math.min(targetCameraY, mapManager.getMapHeight() - CANVAS_HEIGHT));
-
         // Track initial player position
         previousPlayerX = player.worldPositionX;
         previousPlayerY = player.worldPositionY;
 
-        // Add key press listener to add keys to the list for player movement
+        // Add key press listener
         scene.setOnKeyPressed(e -> {
             KeyCode key = e.getCode();
             if (!keys.contains(key)) {
@@ -99,7 +103,7 @@ public class GameWorld {
             }
         });
 
-        // Add key release listener to remove keys
+        // Add key release listener
         scene.setOnKeyReleased(e -> {
             KeyCode key = e.getCode();
             keys.remove(key); // Remove key when released
@@ -112,7 +116,6 @@ public class GameWorld {
             player.getGun().updateMousePosition(mouseX, mouseY);
         });
 
-        // Add mouse click listener to fire bullets
         canvas.setOnMouseClicked(e -> {
             mouseX = e.getX();
             mouseY = e.getY();
@@ -121,13 +124,11 @@ public class GameWorld {
         });
 
 
-        // Create a timeline for firing bullets continuously
         firingTimeline = new Timeline(new KeyFrame(Duration.seconds(1.0 / player.getGun().getShootSpeed()), e -> {
             bullets.add(new Bullet(player.getGun().getGunPointX(), player.getGun().getGunPointY(), mouseX + cameraX, mouseY + cameraY));
         }));
         firingTimeline.setCycleCount(Timeline.INDEFINITE);
 
-        // Add mouse press listener to start firing
         canvas.setOnMousePressed(e -> {
             mouseX = e.getX();
             mouseY = e.getY();
@@ -135,10 +136,9 @@ public class GameWorld {
             firingTimeline.play();
         });
 
-        // Add mouse release listener to stop firing
         canvas.setOnMouseReleased(e -> firingTimeline.stop());
 
-        // Add mouse drag listener for continuous firing
+
         canvas.setOnMouseDragged(e -> {
             mouseX = e.getX();
             mouseY = e.getY();
@@ -148,21 +148,23 @@ public class GameWorld {
     }
 
     public void update(double deltaTime) {
-
         // Update player position
         player.update(scene, deltaTime, keys);
 
-        // Update enemy positions
-        for (Enemy enemy : enemies) {
-            enemy.moveTowards(player.worldPositionX, player.worldPositionY, deltaTime, enemies);
-            enemy.update(deltaTime);
+        // Update enemies
+        for (BaseEnemy enemy : enemies) {
+            enemy.move(deltaTime, player, enemies);
+            enemy.update(deltaTime, player, enemyBullets);
         }
 
+        // Update enemy bullets
+        for (EnemyBullet bullet : enemyBullets) {
+            bullet.update(deltaTime);
+        }
 
         // Remove enemies with life less than or equal to 0
         enemies.removeIf(enemy -> enemy.getLife() <= 0);
 
-        // Update camera position based on player position
         if (player.worldPositionX != previousPlayerX || player.worldPositionY != previousPlayerY) {
             previousPlayerX = player.worldPositionX;
             previousPlayerY = player.worldPositionY;
@@ -175,15 +177,16 @@ public class GameWorld {
 
         }
 
-
-        // Update gun position based on camera position
+//        player.updateCameraPosition(targetCameraX, targetCameraY);
         player.getGun().updateCameraPosition(targetCameraX, targetCameraY);
-
+//        player.updateGunBoxAngle();
 
         // Smoothly interpolate the camera position towards the target position
         cameraX += (targetCameraX - cameraX) * 0.1;
         cameraY += (targetCameraY - cameraY) * 0.1;
 
+//        cameraX = targetCameraX;
+//        cameraY = targetCameraY;
 
         // Update bullets
         for (Bullet bullet : bullets) {
@@ -191,12 +194,26 @@ public class GameWorld {
         }
 
         // Remove bullets that are out of bounds or inactive
-        bullets.removeIf(bullet -> bullet.isOutOfBounds((int) mapManager.getMapWidth(), (int) mapManager.getMapHeight()) || !bullet.isActive());
+        bullets.removeIf(bullet -> bullet.isOutOfBounds((int)mapManager.getMapWidth(), (int)mapManager.getMapHeight()) || !bullet.isActive());
 
+        // Remove out-of-bounds or inactive bullets
+        enemyBullets.removeIf(bullet -> bullet.isOutOfBounds((int) mapManager.getMapWidth(), (int) mapManager.getMapHeight()) || !bullet.isActive());
+
+        // Check for collisions between enemy bullets and the player
+        for (EnemyBullet bullet : enemyBullets) {
+            if (bullet.intersects(player.getBody())) {
+                player.takeDamage(bullet.getDamage());
+                bullet.deactivate();
+            }
+        }
+
+//        // Remove bullets that are out of bounds
+//        bullets.removeIf(bullet -> bullet.getX() < 0 || bullet.getX() > mapManager.getMapWidth() ||
+//                bullet.getY() < 0 || bullet.getY() > mapManager.getMapHeight());
 
         // Check for collisions between bullets and enemies
         for (Bullet bullet : bullets) {
-            for (Enemy enemy : enemies) {
+            for (BaseEnemy enemy : enemies) {
                 if (bullet.intersects(enemy.getBody())) {
                     enemy.takeDamage(player.getGun().getDamage());
                     bullet.setActive(false);
@@ -204,7 +221,7 @@ public class GameWorld {
             }
         }
 
-        // Update death effects and remove expired ones
+        // Update death effects
         Iterator<DeathEffect> iterator = deathEffects.iterator();
         while (iterator.hasNext()) {
             DeathEffect effect = iterator.next();
@@ -215,42 +232,40 @@ public class GameWorld {
         }
 
         // Remove enemies with life less than or equal to 0 and add death effects
-        Iterator<Enemy> enemyIterator = enemies.iterator();
+        Iterator<BaseEnemy> enemyIterator = enemies.iterator();
         while (enemyIterator.hasNext()) {
-            Enemy enemy = enemyIterator.next();
+            BaseEnemy enemy = enemyIterator.next();
             if (enemy.getLife() <= 0) {
-                deathEffects.add(new DeathEffect(enemy.getBody()[0] + enemy.getBody()[2] / 2.0, enemy.worldPositionY + enemy.getBody()[3] / 2.0, enemy.getBody()[2], enemy.getBody()[3], enemy.getCurrentCharacterId()));
+                deathEffects.add(new DeathEffect(enemy.getBody()[0] + enemy.getBody()[2]/2.0, enemy.worldPositionY + enemy.getBody()[3]/2.0, enemy.getBody()[2], enemy.getBody()[3], enemy.getCurrentCharacterId()));
+
                 enemyIterator.remove();
                 topViewManager.updateKilledEnemy();
             }
         }
 
-
         // Update timer
-        topViewManager.update(deltaTime); // Update timer
-        topViewManager.setRemainEnemy(enemies.size()); // Update remaining enemies
-        topViewManager.setPlayerLife(player.getLife()); // Update player life
+        topViewManager.update(deltaTime);
+        topViewManager.setRemainEnemy(enemies.size());
+        topViewManager.setPlayerLife(player.getLife());
 
-        //Add enemies to the game world
-        enemyAddingManager.update(deltaTime, topViewManager.getKillingRate());
-
+//        System.out.println("Enemies: " + enemies.size());
+//        System.out.println("Bullets: " + bullets.size());
 
     }
 
     public void render(GraphicsContext gc) {
-
         // Translate the graphics context for the camera
         gc.save();
         gc.translate(-cameraX, -cameraY);
 
-        // Draw map
+        // Render only the visible part of the tiles
+//        tileManager.draw(gc, cameraX, cameraY, CANVAS_WIDTH, CANVAS_HEIGHT);
         mapManager.drawMap(gc);
 
         // Draw death effects
         for (DeathEffect effect : deathEffects) {
             effect.draw(gc);
         }
-
 
         // Create a list to hold both the player and enemies
         List<Character> characters = new ArrayList<>();
@@ -274,6 +289,7 @@ public class GameWorld {
         }
 
 
+
         // Restore graphics context
         gc.restore();
 
@@ -281,39 +297,10 @@ public class GameWorld {
         topViewManager.draw(gc, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
 
-
-    /**
-     * Check if a character is visible on the screen
-     *
-     * @param character The character to check
-     * @return True if the character is visible, false otherwise
-     */
     private boolean isVisible(Character character) {
         return character.worldPositionX + character.getPlayerWidth() > cameraX &&
                 character.worldPositionX < cameraX + CANVAS_WIDTH &&
                 character.worldPositionY + character.getPlayerHeight() > cameraY &&
                 character.worldPositionY < cameraY + CANVAS_HEIGHT;
-    }
-
-
-    public void resetGameWorld() {
-        player = new Player(dataManager.getLoadSprite().getPlayerSprite(), (int) (mapManager.getMapWidth() / 2), (int) (mapManager.getMapHeight() / 2));
-        enemies.clear();
-        Random random = new Random();
-        for (int i = 0; i < 80; i++) {
-            int x = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapWidth() - space)));
-            int y = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapHeight() - space)));
-            enemies.add(new Enemy(dataManager.getLoadSprite().getEnemySprite(i % 4), Math.abs(x), Math.abs(y)));
-        }
-        targetCameraX = player.worldPositionX - CANVAS_WIDTH / 2.0;
-        targetCameraY = player.worldPositionY - CANVAS_HEIGHT / 2.0;
-        cameraX = Math.max(0, Math.min(targetCameraX, mapManager.getMapWidth() - CANVAS_WIDTH));
-        cameraY = Math.max(0, Math.min(targetCameraY, mapManager.getMapHeight() - CANVAS_HEIGHT));
-        previousPlayerX = player.worldPositionX;
-        previousPlayerY = player.worldPositionY;
-        keys.clear();
-        bullets.clear();
-        deathEffects.clear();
-        topViewManager.reset();
     }
 }

@@ -15,6 +15,13 @@ public class PortalEffect {
     private double timeElapsed1;
 
 
+
+    /**
+     * Constructor for the PortalEffect class
+     * @param x x-coordinate of the portal effect
+     * @param y y-coordinate of the portal effect
+     * @param portalImage Image of the portal effect
+     */
     public PortalEffect(double x, double y, Image portalImage) {
         this.x = x;
         this.y = y;
