@@ -21,6 +21,7 @@ public class Player extends Character {
     private Gun gun;
 
     private double playerLife = 100;
+    private int playerLevel = 1;
 
 
 
@@ -163,9 +164,6 @@ public class Player extends Character {
 
 
 
-            // draw a circle at the hand position the radius of the circle is 20
-//            gc.strokeOval(handPositionX-40, handPositionY-40, 2*40, 2*40);
-
         } else {
             System.out.println("No sprites loaded or invalid sprite index.");
         }
@@ -183,5 +181,9 @@ public class Player extends Character {
 
     public double getPlayerLife(){
         return playerLife;
+    }
+
+    public int getLevel() {
+        return playerLevel;
     }
 }

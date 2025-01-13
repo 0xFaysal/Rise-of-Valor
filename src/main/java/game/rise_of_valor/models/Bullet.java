@@ -43,9 +43,6 @@ public class Bullet {
     }
 
 
-//    public boolean isHit(Enemy enemy) {
-//        return x > enemy.getX() && x < enemy.getX() + enemy.getWidth() && y > enemy.getY() && y < enemy.getY() + enemy.getHeight();
-//    }
 
     public double getX() {
         return x;
@@ -63,6 +60,12 @@ public class Bullet {
     }
 
 
+
+    /**
+     * Check if the bullet intersects with the enemy's body
+     * @param body The enemy's body as an array of doubles [x, y, width, height]
+     * @return true if the bullet intersects with the enemy's body, false otherwise
+     */
     public boolean intersects(double[] body) {
         // Bullet collision detection with the enemy's body
         double bulletLeft = x - bulletSize;
@@ -80,8 +83,4 @@ public class Bullet {
     }
 
 
-
-//    public boolean intersects(double[] body){
-//        return this.x > body[0] && this.x < body[0]+body[2] && this.y > body[1] && this.y < body[1] + body[3];
-//    }
 }

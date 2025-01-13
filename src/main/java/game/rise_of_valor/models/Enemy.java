@@ -10,15 +10,17 @@ import static game.rise_of_valor.models.Sprite.WALK;
 public class Enemy extends Character {
 
 
-    private double previousPositionX;
+    private double previousPositionX; // Previous position of the character on the x-axis for checking the facing direction
+
+    protected double diagonalSpeed; // Speed of the character in pixels per second when moving diagonally
 
 
-    private int currentCharacterId = 0;
+    private int currentCharacterId = 0; // Current character ID
 
-    private PortalEffect portalEffect;
-    private double appearanceHeight;
-    private double appearanceOpacity;
-    private boolean appearanceFinished;
+    private PortalEffect portalEffect; // Portal effect for the enemy appearance
+    private double appearanceHeight; // Height of the enemy appearance effect for the portal
+    private double appearanceOpacity; // Opacity of the enemy appearance effect for the portal
+    private boolean appearanceFinished; // Flag to indicate if the enemy appearance effect has finished
 
 
     public Enemy(Sprite sprite, int worldPositionX, int worldPositionY) {
@@ -28,7 +30,6 @@ public class Enemy extends Character {
         idle = sprite.idle;
 
 
-        scaleFactor = 15;
 
 
         speed = 50; // Speed of the player in pixels per second
@@ -37,8 +38,6 @@ public class Enemy extends Character {
 
         this.currentCharacterId = sprite.currentCharacterId;
 
-
-        //
 
         this.appearanceHeight = 600;
         this.appearanceOpacity = 0;
@@ -53,24 +52,22 @@ public class Enemy extends Character {
 
         if (this.currentCharacterId == 4) {
             speed = 60;
-            model = FLY;
+            moveMode = FLY;
             spriteX -= 200;
             spriteWidth = 900 / scaleFactor;
             spriteHeight = 800 / scaleFactor;
             movementSpriteCount = 5;
-//            bodyOffsetY = 10;
             bodyOffsetX = 20;
             bodyHeight = 30;
         } else {
             speed = 25;
-            model = WALK;
+            moveMode = WALK;
             movementSpriteCount = 7;
             idleSpriteCount = 5;
             bodyWidth = 28;
             if (sprite.currentCharacterId == 2) {
                 speed = 15;
                 spriteWidth = 650 / scaleFactor;
-
             }
             if (sprite.currentCharacterId == 3) {
                 speed = 40;
@@ -84,7 +81,30 @@ public class Enemy extends Character {
     }
 
     public void update(double deltaTime) {
+        super.update(deltaTime);
+
+        spriteCount = isMoving ? movementSpriteCount - 1 : (idleSpriteCount > 0 ? idleSpriteCount - 1 : movementSpriteCount - 1);
+
+        // Ensure currentSprite is within valid range
+        if (currentSprite < 0 || currentSprite >= spriteCount) {
+            currentSprite = 0;
+        }
+
+        bodyX = worldPositionX + bodyOffsetX;
+        bodyY = worldPositionY + bodyOffsetY;
+        if (facingLeft) {
+            switch (currentCharacterId) {
+                case 1, 3 -> bodyX = worldPositionX + bodyOffsetX - 3;
+                case 2 -> bodyX = worldPositionX + bodyOffsetX;
+                case 4 -> bodyX = worldPositionX + bodyOffsetX - 10;
+            }
+        }
+
+
+
+        // Update the portal effect
         if (portalEffect.isVisible()) {
+
             portalEffect.update(deltaTime);
             if (portalEffect.isExpired()) {
                 portalEffect.update(deltaTime);
@@ -97,18 +117,16 @@ public class Enemy extends Character {
                     appearanceOpacity = 1;
                     appearanceFinished = true;
                     portalEffect.vanish();
-//                    portalEffect = null;
                 }
             }
         }
-            super.update(deltaTime);
 
     }
 
 
 
 
-    public void moveTowards(double targetX, double targetY, double targetWidth, double targetHeight, double deltaTime, List<Enemy> enemies) {
+    public void moveTowards(double targetX, double targetY, double deltaTime, List<Enemy> enemies) {
         if (appearanceFinished) {
             double dx = targetX - worldPositionX;
             double dy = targetY - worldPositionY;
@@ -167,23 +185,6 @@ public class Enemy extends Character {
                 currentSprite = 0; // Assuming the first sprite in the idle list is the idle sprite
                 isMoving = false;
             }
-
-            spriteCount = isMoving ? movementSpriteCount - 1 : (idleSpriteCount > 0 ? idleSpriteCount - 1 : movementSpriteCount - 1);
-
-            // Ensure currentSprite is within valid range
-            if (currentSprite < 0 || currentSprite >= spriteCount) {
-                currentSprite = 0;
-            }
-
-            bodyX = worldPositionX + bodyOffsetX;
-            bodyY = worldPositionY + bodyOffsetY;
-            if (facingLeft) {
-                switch (currentCharacterId) {
-                    case 1, 3 -> bodyX = worldPositionX + bodyOffsetX - 3;
-                    case 2 -> bodyX = worldPositionX + bodyOffsetX;
-                    case 4 -> bodyX = worldPositionX + bodyOffsetX - 10;
-                }
-            }
         }
     }
 
@@ -204,9 +205,10 @@ public class Enemy extends Character {
         }
     }
 
-    public double[] getBody() {
-        return new double[]{bodyX, bodyY, bodyWidth, bodyHeight};
-    }
+
+//    public double[] getBody() {
+//        return new double[]{bodyX, bodyY, bodyWidth, bodyHeight};
+//    }
 
     public int getCurrentCharacterId() {
         return currentCharacterId;

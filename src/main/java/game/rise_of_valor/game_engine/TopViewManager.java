@@ -81,4 +81,14 @@ public class TopViewManager {
         this.playerLife = playerLife;
     }
 
+
+    public void reset() {
+        this.remainEnemy = 0;
+        this.killedEnemy = 0;
+        this.timer.restartTimer(60);
+    }
+
+    public double getKillingRate() {
+        return (double) killedEnemy / (killedEnemy + remainEnemy);
+    }
 }

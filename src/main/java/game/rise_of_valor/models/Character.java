@@ -16,49 +16,49 @@ import static javafx.scene.text.FontWeight.BOLD;
 public class Character {
 
     //world position of character
-    public double worldPositionX;
-    public double worldPositionY;
+    public double worldPositionX;// world position of character in game world
+    public double worldPositionY;// world position of character in game world
 
 
     //sprite size of character
-    int spriteWidth;
-    int spriteHeight;
-    int scaleFactor;
-    int spriteX = 700;
-    int spriteY = 1030;
+    protected int spriteWidth; // spriteWidth is character width that is cropped from the sprite sheet
+    protected int spriteHeight; // spriteHeight is character height that is cropped from the sprite sheet
+    protected int scaleFactor; // Scale factor for the sprite to make it bigger or smaller
+    protected int spriteX = 700; // spriteX is the x position of the character in the sprite sheet
+    protected int spriteY = 1030; // spriteY is the y position of the character in the sprite sheet
 
 
+    //body box of character
+    protected double bodyX, bodyY; // Body position of the character
+    protected int bodyOffsetX = 8; // Offset of the body box from the world position
+    protected int bodyOffsetY = 10; // Offset of the body box from the world position
+    protected double bodyWidth = 30; // Width of the body box
+    protected double bodyHeight = 35;// Height of the body box
 
-    protected double bodyX, bodyY;
-    int bodyOffsetX = 8;
-    int bodyOffsetY = 10;
-    protected double bodyWidth = 30;
-    protected double bodyHeight = 35;
 
-
-
-    protected String model;
+    protected String moveMode; // Character movement mode (e.g., walk or fly) to determine the sprite animation
     protected boolean isMoving = false;
 
-    List<Image> movement = new ArrayList<>();
-    int movementSpriteCount = 0;
-    List<Image> idle = new ArrayList<>();
-    int idleSpriteCount = 0;
 
-    int spriteCount = 0;
-    int currentSprite = 0;
-    double animationTime = 0;
+    //character sprite animation
+    protected List<Image> movement = new ArrayList<>(); // List of movement sprites
+    protected int movementSpriteCount = 0; // Total sprite number of currently loaded sprite
+    protected List<Image> idle = new ArrayList<>(); // List of idle sprites
+    protected int idleSpriteCount = 0; // Total sprite number of currently loaded sprite
+    protected int spriteCount = 0; // Total sprite number of currently loaded sprite
+    protected int currentSprite = 0; // Current sprite index
+    double animationTime = 0; // Animation time in seconds
     double baseFrameDuration = 1; // Base duration of each frame in seconds
-    int spriteAnimationFactor = 32;
+    int spriteAnimationFactor = 32; // Sprite animation factor
 
-    int speed = 100;
-    double diagonalSpeed;
-    boolean facingLeft = false;
 
-    //shadow gradient
-    protected final RadialGradient shadowGradient;
+    protected int speed = 100; // Speed of the character in pixels per second default 100
 
-    //sprite animation factor
+    protected boolean facingLeft = false; // Character facing direction
+
+
+    protected final RadialGradient shadowGradient; // Shadow gradient for the character
+
 
     private int life;
     private final List<DamageNumber> damageNumbers = new ArrayList<>();
@@ -69,12 +69,11 @@ public class Character {
         this.worldPositionX = worldPositionX;
         this.worldPositionY = worldPositionY;
 
-        scaleFactor = 15;
+        scaleFactor = 15; // default scale factor
         spriteWidth = 600 / scaleFactor;// sprite width default 600
-        spriteHeight = 800 / scaleFactor;
+        spriteHeight = 800 / scaleFactor; // sprite height default 800
 
-        life =100;
-
+        life = 100; // default life of character
 
 
         shadowGradient = new RadialGradient(
@@ -115,17 +114,14 @@ public class Character {
     }
 
     public void draw(GraphicsContext gc) {
-        List<Image> sprites=model.equals(FLY) ? movement : (isMoving ? movement : idle);
+        List<Image> sprites = moveMode.equals(FLY) ? movement : (isMoving ? movement : idle);
 
 
         if (currentSprite < sprites.size()) {
             Image sprite = sprites.get(currentSprite);
 
 
-
-
-            if (!model.equals(FLY)) {
-
+            if (!moveMode.equals(FLY)) { // Only draw shadow for walking characters
 
                 // Calculate shadow position based on player's position
                 double shadowX = worldPositionX + 5;
@@ -136,11 +132,7 @@ public class Character {
                 gc.fillOval(shadowX, shadowY, 30, 15);
             }
 
-            //draw box around character
-//            gc.setStroke(Color.RED);
-//            gc.strokeRect(worldPositionX, worldPositionY, spriteWidth, spriteHeight);
-
-
+            // Draw the sprite
             if (facingLeft) {
                 gc.save();
                 gc.scale(-1, 1);
@@ -154,18 +146,10 @@ public class Character {
             for (DamageNumber damageNumber : damageNumbers) {
                 damageNumber.draw(gc);
             }
-
-            //draw body box
-//            gc.setStroke(Color.RED);
-//            gc.strokeRect(bodyX, bodyY, bodyWidth, bodyHeight);
-//            gc.rect(bodyX, bodyY, bodyWidth, bodyHeight);
-
-
         } else {
             System.out.println("No sprites loaded or invalid sprite index.");
         }
     }
-
 
 
     public void setFacingLeft(boolean facingLeft) {
@@ -175,12 +159,13 @@ public class Character {
     public int getPlayerWidth() {
         return spriteWidth;
     }
+
     public int getPlayerHeight() {
         return spriteHeight;
     }
 
-    public void takeDamage(int damage){
-        life-= damage;
+    public void takeDamage(int damage) {
+        life -= damage;
 
         // Add a new damage number
         double offsetX = random.nextDouble() * 20 - 10; // Random offset between -10 and 10
@@ -189,8 +174,21 @@ public class Character {
 
     }
 
-    public int getLife(){
+    public int getLife() {
         return life;
+    }
+
+
+    /**
+     * getBody method returns the body of the character
+     * @return double[] array containing:
+     * bodyX = x-coordinate,
+     * bodyY = y-coordinate,
+     * bodyWidth = width of the body,
+     * bodyHeight = height of the body.
+     */
+    public double[] getBody() {
+        return new double[]{bodyX, bodyY, bodyWidth, bodyHeight};
     }
 
 

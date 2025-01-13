@@ -7,6 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import static game.rise_of_valor.game_engine.DataManager.getBackgroundTimer;
+
 public class Timer {
     private double time; // time in seconds
 
@@ -17,7 +19,7 @@ public class Timer {
     public Timer(double duration, Font font) {
         this.time = duration;
         customFont = Font.font(font.getFamily(), FontWeight.BOLD,30);
-        background = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/timer-bg1.png"));
+        background = getBackgroundTimer();
     }
 
     public void update(double deltaTime) {
@@ -41,5 +43,9 @@ public class Timer {
 
     public boolean isTimeUp() {
         return time <= 0;
+    }
+
+    public void restartTimer(double duration) {
+        time = duration;
     }
 }
