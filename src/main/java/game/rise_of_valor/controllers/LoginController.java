@@ -40,6 +40,9 @@ public class LoginController {
             FXMLLoader registrationPaneLoader = new FXMLLoader(Main.class.getResource("/game/rise_of_valor/fxml/registration-view.fxml"));
             Pane registrationPane = registrationPaneLoader.load();
 
+            registrationController registerCtrl = registrationPaneLoader.getController();
+            registerCtrl.setContainerPane(containerPane);
+
             // Reference the parent HBox
             HBox parentHBox = (HBox) containerPane.getParent();
 
