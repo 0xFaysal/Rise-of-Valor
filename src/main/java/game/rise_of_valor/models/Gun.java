@@ -31,10 +31,12 @@ public class Gun {
     private double gunBoxAngleOffset = 0.23;
 
     private int gunLength;
-    private double gunScale ;
+    private double gunScale;
+
+    boolean isFlipped = false;
 
     public Gun(String name, int damage, int attackSpeed) {
-        power = switch (name){
+        power = switch (name) {
             case "gun1" -> 1;
             case "gun2" -> 2;
             case "gun3" -> 3;
@@ -46,7 +48,7 @@ public class Gun {
             case "sniper" -> 4;
             default -> 0;
         };
-        gunLength = switch (name){
+        gunLength = switch (name) {
             case "gun1" -> 21;
             case "gun2" -> 20;
             case "gun3" -> 25;
@@ -59,7 +61,7 @@ public class Gun {
             default -> 0;
         };
 
-        gunScale= switch (name){
+        gunScale = switch (name) {
             case "gun1" -> 0.22;
             case "gun2" -> 0.2;
             case "gun3" -> 0.2;
@@ -72,7 +74,7 @@ public class Gun {
             default -> 0;
         };
 
-        gunBoxAngleOffset = switch (name){
+        gunBoxAngleOffset = switch (name) {
             case "gun1" -> 0.23;
             case "gun2", "pistol", "gun5" -> 0.10;
             case "gun3" -> 0.12;
@@ -90,7 +92,11 @@ public class Gun {
         gunBoxHeight = (int) (gunSprite.getHeight() * gunScale);
 
     }
-    public void update(){
+
+    public void update() {
+
+        isFlipped = gunBoxAngle > Math.PI / 2 || gunBoxAngle < -Math.PI / 2;
+
         updateGunBoxAngle();
     }
 
@@ -101,8 +107,12 @@ public class Gun {
         double dy = mouseY - handY;
         gunBoxAngle = Math.atan2(dy, dx);
 
-        gunPointX = handPositionX + Math.cos(gunBoxAngle- gunBoxAngleOffset) * gunLength;
-        gunPointY = handPositionY + Math.sin(gunBoxAngle-gunBoxAngleOffset) * gunLength;
+        if (isFlipped) {
+            gunBoxAngleOffset = -gunBoxAngleOffset;
+        }
+
+        gunPointX = handPositionX + Math.cos(gunBoxAngle - gunBoxAngleOffset) * gunLength;
+        gunPointY = handPositionY + Math.sin(gunBoxAngle - gunBoxAngleOffset) * gunLength;
 
 
     }
@@ -111,7 +121,6 @@ public class Gun {
     public void loadGunSprite() {
         gunSprite = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/guns/" + name + ".png"));
     }
-
 
 
     public void draw(GraphicsContext gc) {
@@ -125,33 +134,33 @@ public class Gun {
         gc.rotate(Math.toDegrees(gunBoxAngle)); // Rotate around the hand position
 
         // Flip the gun sprite if the gunBoxAngle is greater than 90 degrees
-        boolean isFlipped = gunBoxAngle > Math.PI / 2 || gunBoxAngle < -Math.PI / 2;
         if (isFlipped) {
             gc.scale(1, -1);
 //
         }
 
         // draw the gun sprite
-        gc.drawImage(gunSprite, -20, -gunBoxHeight*gunScale / 2.0, gunBoxWidth*gunScale, gunBoxHeight*gunScale);
+        gc.drawImage(gunSprite, -20, -gunBoxHeight * gunScale / 2.0, gunBoxWidth * gunScale, gunBoxHeight * gunScale);
 //        gc.strokeRect(-20,-gunBoxHeight*gunScale / 2.0 , gunBoxWidth*gunScale, gunBoxHeight*gunScale); // Draw the gun box with the hand position as one side
         gc.restore();
 
-//        gc.fillOval(gunPointX-2,gunPointY-2,4,4);
+        gc.fillOval(gunPointX - 2, gunPointY - 2, 4, 4);
 
     }
 
-    public void setGunPosition(double x, double y){
+    public void setGunPosition(double x, double y) {
         gunBoxX = x;
         gunBoxY = y;
     }
-    public void setHandPosition(double x, double y){
+
+    public void setHandPosition(double x, double y) {
         handPositionX = x;
         handPositionY = y;
     }
 
     public void updateMousePosition(double mouseX, double mouseY) {
-        this.mouseX =  mouseX;
-        this.mouseY =  mouseY;
+        this.mouseX = mouseX;
+        this.mouseY = mouseY;
     }
 
     public void updateCameraPosition(double cameraX, double cameraY) {
@@ -159,13 +168,14 @@ public class Gun {
         this.cameraY = cameraY;
     }
 
-    public int getDamage(){
+    public int getDamage() {
         return damage;
     }
 
     public double getGunPointX() {
         return gunPointX;
     }
+
     public double getGunPointY() {
         return gunPointY;
     }

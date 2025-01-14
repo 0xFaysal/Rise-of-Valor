@@ -159,8 +159,8 @@ public class Player extends Character {
             gc.fillOval(handPositionX-5, handPositionY-5, 10, 10);
 
             //body box
-            gc.setStroke(Color.RED);
-            gc.strokeRect(bodyX,bodyY, bodyWidth, bodyHeight);
+//            gc.setStroke(Color.RED);
+//            gc.strokeRect(bodyX,bodyY, bodyWidth, bodyHeight);
 
 
 
