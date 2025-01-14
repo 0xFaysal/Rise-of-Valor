@@ -1,13 +1,17 @@
 package game.rise_of_valor.controllers;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -25,7 +29,6 @@ public class IntroController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-<<<<<<< HEAD
         playMedia();
     }
 
@@ -71,38 +74,7 @@ public class IntroController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-=======
-
-        // First Fade Transition for Team Logo
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(5), imageView);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-
-        PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
-
-        // Second Fade Transition for Team Logo
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), imageView);
-        fadeOut.setFromValue(1);
-        fadeOut.setToValue(0);
-
-        SequentialTransition sequentialTransition = new SequentialTransition(fadeIn, pause, fadeOut);
-        sequentialTransition.setCycleCount(1);
-        sequentialTransition.setOnFinished(event -> {
-            //set loading fxml in stage
-            Stage stage = (Stage) mainPane.getScene().getWindow();
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/loading.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
-                stage.setScene(scene);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        sequentialTransition.play();
-
-
->>>>>>> 614b72f (deleted code re written for the game logo scene, login-registration page image changed.)
-    }
+}
 
 
 }

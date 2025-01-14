@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .bgWhite {
     -fx-background-color: #FFF;
 }
@@ -17,7 +19,6 @@
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-
 }
 
 .duoSelection-bg {
@@ -50,6 +51,43 @@
 
 .bg-black {
     -fx-background-color: #000;
+}
+
+/* Base button styling */
+.btn {
+    -fx-background-color: #FDD016;
+    -fx-text-fill: #01191D;
+    -fx-border-color: linear-gradient(to right, #FDD016, #01191D);
+    -fx-cursor: hand;
+    -fx-font-family: "Press Start 2P", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Gamey font */
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-padding: 0px 10px;
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-border-insets: 0, -4, -8, -12, -16, -20;
+    -fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
+    -fx-text-transform: uppercase;
+
+}
+
+.btn:hover {
+    -fx-background-color: #FDD016;
+    -fx-border-color: #FDD016,
+                    rgba(253, 208, 22, 0.75),
+                    rgba(253, 208, 22, 0.5),
+                    rgba(253, 208, 22, 0.25);
+    -fx-border-insets: 0, -4, -8, -12;
+    -fx-border-width: 2px, 2px, 2px, 2px;
+    -fx-text-fill: #01191D;
+}
+
+.btn-border {
+    -fx-border-color: #FFF;
+    -fx-border-width: 1px;
+    -fx-border-radius: 50px; /* Rounded corners */
+    -fx-background-radius: 50px; /* Rounded corners */
 }
 
 @font-face {

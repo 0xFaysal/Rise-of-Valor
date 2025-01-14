@@ -1,6 +1,7 @@
 package game.rise_of_valor.controllers;
 
 import game.rise_of_valor.Main;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -8,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class LoginController {
 
@@ -58,6 +60,19 @@ public class LoginController {
             containerPane.getChildren().clear(); // Clear previous content
             containerPane.getChildren().add(registrationPane);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void SignInBtnClick(ActionEvent event) {
+        // go to lobby
+        try {
+            Stage stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/lobby-view.fxml"));
+            Pane lobbyView = loader.load();
+            stage.getScene().setRoot(lobbyView);
         } catch (Exception e) {
             e.printStackTrace();
         }
