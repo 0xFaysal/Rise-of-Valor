@@ -12,7 +12,7 @@
    <children>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="850.0" spacing="80.0">
          <children>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="450.0" prefWidth="300.0" stylesheets="@../css/styles.css">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#duoModeClicked" prefHeight="450.0" prefWidth="300.0" stylesheets="@../css/styles.css">
                <graphic>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
                      <children>
@@ -35,7 +35,7 @@
                   <String fx:value="mode-btn-border-effect" />
                </styleClass>
             </Button>
-            <Button layoutX="476.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="450.0" prefWidth="300.0" stylesheets="@../css/styles.css">
+            <Button layoutX="476.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#quadModeClicked" prefHeight="450.0" prefWidth="300.0" stylesheets="@../css/styles.css">
                <graphic>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
                      <children>
