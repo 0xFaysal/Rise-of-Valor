@@ -1,51 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="960.0" styleClass="bg-black" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.ModeSelectionController">
-   <center>
-      <HBox fx:id="selectionContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" spacing="70.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="duoSelectionBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="450.0" prefWidth="300.0" stylesheets="@../css/styles.css">
-               <graphic>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0" styleClass="bg-radius" stylesheets="@../css/styles.css">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="71.0" prefWidth="305.0" stylesheets="@../css/styles.css" text="DUO MODE" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Rig Solid Bold Halftone" size="48.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-               </graphic>
-               <styleClass>
-                  <String fx:value="duoSelection-bg" />
-                  <String fx:value="bg-radius" />
-               </styleClass>
-            </Button>
-            <Button fx:id="quadSelectionBtn" layoutX="260.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="450.0" prefWidth="300.0" stylesheets="@../css/styles.css">
-               <graphic>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="71.0" prefWidth="305.0" stylesheets="@../css/styles.css" text="Quad MODE" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Rig Solid Bold Halftone" size="48.0" />
-                           </font>
-                        </Label>
-                     </children></VBox>
-               </graphic>
-               <styleClass>
-                  <String fx:value="quadSelection-bg" />
-                  <String fx:value="bg-radius" />
-               </styleClass>
-            </Button>
-         </children>
-      </HBox>
-   </center>
-</BorderPane>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="$CONTROLLER_NAME$"
+            prefHeight="400.0" prefWidth="600.0" >
+
+</AnchorPane>
