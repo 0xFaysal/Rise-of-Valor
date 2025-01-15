@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playpen+Sans:wght@100..800&display=swap');
+
 .bgWhite {
     -fx-background-color: #FFF;
 }
@@ -19,7 +19,34 @@
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
+}
 
+/*.duoSelection-bg {*/
+/*    -fx-background-image: url("../assets/image/DuoMode.jpeg");*/
+/*    -fx-background-size: cover;*/
+/*    -fx-background-repeat: no-repeat;*/
+/*    -fx-background-position: center;*/
+/*    -fx-background-radius: 24; !* Ensure this matches the button's shape *!*/
+/*    -fx-border-radius: 24; !* Add border-radius to match *!*/
+/*}*/
+
+/*.quadSelection-bg {*/
+/*    -fx-background-image: url("../assets/image/QuadMode.jpeg");*/
+/*    -fx-background-size: cover;*/
+/*    -fx-background-repeat: no-repeat;*/
+/*    -fx-background-position: center;*/
+/*    -fx-background-radius: 24; !* Ensure this matches the button's shape *!*/
+/*    -fx-border-radius: 24; !* Add border-radius to match *!*/
+/*}*/
+
+.bg-radius {
+    -fx-background-radius: 24; /* Ensure this matches the button's shape */
+    -fx-border-radius: 24; /* Add border-radius to match */
+}
+
+.duoSelection-bg, .quadSelection-bg {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
 }
 
 .bg-black {
@@ -136,18 +163,3 @@
     -fx-background-color: #000;
 }
 
-@font-face {
-    font-family: 'RigBoldHalftone';
-    src: url('../assets/fonts/Rig-BoldHalftone.ttf');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-
-
-.btn-border-effect:hover .text-effect{
-    -fx-font-size: 48;
-    -fx-font-family: "Rig Bold Halftone";
-    /*-fx-font-family: "Press Start 2P", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; !* Gamey font *!*/
-}

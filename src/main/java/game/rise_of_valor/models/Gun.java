@@ -107,27 +107,15 @@ public class Gun {
         double dy = mouseY - handY;
         gunBoxAngle = Math.atan2(dy, dx);
 
-//        if (!isFlipped) {
-//            gunBoxAngleOffset = switch (name) {
-//                case "gun1" -> 0.23;
-//                case "gun2", "pistol", "gun5" -> 0.10;
-//                case "gun3" -> 0.12;
-//                case "gun4" -> 0.20;
-//                case "rifle" -> 0.15;
-//                case "sniper" -> 0.10;
-//                default -> 0;
-//            };
-//        }
-//        System.out.println(gunBoxAngleOffset);
+        if (isFlipped) {
+            gunBoxAngleOffset = -gunBoxAngleOffset;
+        }
 
         gunPointX = handPositionX + Math.cos(gunBoxAngle - gunBoxAngleOffset) * gunLength;
         gunPointY = handPositionY + Math.sin(gunBoxAngle - gunBoxAngleOffset) * gunLength;
         isFlipped = gunBoxAngle > Math.PI / 2 || gunBoxAngle < -Math.PI / 2;
 
 
-
-
-//        gunBoxAngleOffset = gunBoxAngleOffset * (isFlipped ? -1 : 1);
 
     }
 
@@ -147,7 +135,6 @@ public class Gun {
 
         gc.rotate(Math.toDegrees(gunBoxAngle)); // Rotate around the hand position
 
-        System.out.println(isFlipped);
         // Flip the gun sprite if the gunBoxAngle is greater than 90 degrees
         if (isFlipped) {
             gc.scale(1, -1);
@@ -159,7 +146,7 @@ public class Gun {
 //        gc.strokeRect(-20,-gunBoxHeight*gunScale / 2.0 , gunBoxWidth*gunScale, gunBoxHeight*gunScale); // Draw the gun box with the hand position as one side
         gc.restore();
 
-//        gc.fillOval(gunPointX - 2, gunPointY - 2, 4, 4);
+        gc.fillOval(gunPointX - 2, gunPointY - 2, 4, 4);
 
     }
 
