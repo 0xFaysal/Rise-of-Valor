@@ -21,7 +21,7 @@ public class TopViewManager {
 
     public TopViewManager(CustomFont customFont) {
         this.customFont = customFont;
-        this.timer = new Timer(60, customFont.getDesporm());
+        this.timer = new Timer(300, customFont.getDesporm());
         this.remainEnemy = 0;
         this.killedEnemy = 0;
         this.gearIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/settings.png"));

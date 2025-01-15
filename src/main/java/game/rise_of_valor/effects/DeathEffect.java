@@ -1,4 +1,4 @@
-package game.rise_of_valor.models;
+package game.rise_of_valor.effects;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

@@ -45,6 +45,28 @@
 
 }
 
+.select-btn{
+    -fx-background-color: 	#437a37;
+    -fx-text-fill: #143429;
+    /*-fx-border-color: linear-gradient(to right, #FDD016, #01191D);*/
+    -fx-cursor: hand;
+    -fx-font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Gamey font */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 0px 5px;
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 10px; /* Rounded corners */
+    /*-fx-border-insets: 0, -4, -8, -12, -16, -20;*/
+    /*-fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;*/
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
+    -fx-text-transform: uppercase;
+}
+
+.select-btn:selected {
+    -fx-background-color: #16f5fd;
+    -fx-text-fill: #01191D;
+}
+
 .btn:hover {
     -fx-background-color: #FDD016;
     -fx-border-color: #FDD016,
@@ -122,14 +144,7 @@
     font-display: swap;
 }
 
-.custom-font {
-    -fx-font-family: 'RigBoldHalftone';
-    -fx-font-size: 16px; /* Adjust the size as needed */
-}
-.custom-font-2 {
-    -fx-font-family: 'Playpen';
 
-}
 
 .btn-border-effect:hover .text-effect{
     -fx-font-size: 48;

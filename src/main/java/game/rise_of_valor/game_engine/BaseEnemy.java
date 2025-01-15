@@ -1,6 +1,7 @@
 package game.rise_of_valor.game_engine;
 
 
+import game.rise_of_valor.effects.PortalEffect;
 import game.rise_of_valor.models.*;
 import game.rise_of_valor.models.Character;
 import javafx.scene.canvas.GraphicsContext;
