@@ -3,9 +3,12 @@ package game.rise_of_valor.game_engine;
 import game.rise_of_valor.Main;
 import game.rise_of_valor.models.Enemy;
 import game.rise_of_valor.models.Player;
+import game.rise_of_valor.models.Sprite;
 import game.rise_of_valor.utils.LoadSprite;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 import static game.rise_of_valor.game_engine.MapManager.space;
@@ -19,6 +22,9 @@ public class EnemyAddingManager {
     private double elapsedTime;
     private double spawnInterval;
     private final Random random;
+
+    private final EnemyPool enemyPool = new EnemyPool();
+
 
 
     public EnemyAddingManager(ArrayList<Enemy> enemies, Player player, MapManager mapManager, LoadSprite loadSprite) {
@@ -54,30 +60,62 @@ public class EnemyAddingManager {
         }
 
         if (elapsedTime >= spawnInterval) {
-            addEnemy();
+            addEnemies(random.nextInt(8));
             elapsedTime = 0;
         }
     }
 
-    private void addEnemy() {
-    System.out.println("Adding enemy");
+//    private void addEnemy() {
+//    System.out.println("Adding enemy");
+//
+//       for(int i=0;i<random.nextInt(8);i++) {// Define the range within which enemies should be added around the player
+//            int range = 200; // Adjust this value as needed
+//
+//            // Generate random positions within the specified range around the player
+//            int x = (int) (player.worldPositionX + random.nextInt(range * 2) - range);
+//            int y = (int) (player.worldPositionY + random.nextInt(range * 2) - range);
+//
+//            // Ensure the generated positions are within the map boundaries
+//            x = Math.max((int) mapManager.getSpace(), Math.min(x, (int) (mapManager.getMapWidth() - space)));
+//            y = Math.max((int) mapManager.getSpace(), Math.min(y, (int) (mapManager.getMapHeight() - space)));
+//
+//            // Choose enemy type based on player level
+//            int enemyType = random.nextInt((int) player.getLevel() + 4) % 4;
+//
+//            Enemy enemy = new Enemy(this.loadSprite.getEnemySprite(enemyType), x, y);
+//            enemies.add(enemy);
+//        }
+//}
 
-       for(int i=0;i<random.nextInt(8);i++) {// Define the range within which enemies should be added around the player
+    private void addEnemies(int count) {
+        for (int i = 0; i < count; i++) {
             int range = 200; // Adjust this value as needed
-
-            // Generate random positions within the specified range around the player
             int x = (int) (player.worldPositionX + random.nextInt(range * 2) - range);
             int y = (int) (player.worldPositionY + random.nextInt(range * 2) - range);
-
-            // Ensure the generated positions are within the map boundaries
             x = Math.max((int) mapManager.getSpace(), Math.min(x, (int) (mapManager.getMapWidth() - space)));
             y = Math.max((int) mapManager.getSpace(), Math.min(y, (int) (mapManager.getMapHeight() - space)));
-
-            // Choose enemy type based on player level
             int enemyType = random.nextInt((int) player.getLevel() + 4) % 4;
-
-            Enemy enemy = new Enemy(this.loadSprite.getEnemySprite(enemyType), x, y);
+            Enemy enemy = enemyPool.getEnemy(this.loadSprite.getEnemySprite(enemyType), x, y);
             enemies.add(enemy);
         }
-}
+    }
+
+
+    public class EnemyPool {
+        private final Queue<Enemy> pool = new LinkedList<>();
+
+        public Enemy getEnemy(Sprite sprite, int x, int y) {
+            if (pool.isEmpty()) {
+                return new Enemy(sprite, x, y);
+            } else {
+                Enemy enemy = pool.poll();
+                enemy.reset(sprite, x, y);
+                return enemy;
+            }
+        }
+
+        public void releaseEnemy(Enemy enemy) {
+            pool.offer(enemy);
+        }
+    }
 }

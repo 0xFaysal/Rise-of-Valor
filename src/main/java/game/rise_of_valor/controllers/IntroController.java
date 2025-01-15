@@ -1,13 +1,17 @@
 package game.rise_of_valor.controllers;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -70,7 +74,7 @@ public class IntroController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+}
 
 
 }

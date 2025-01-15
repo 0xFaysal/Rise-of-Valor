@@ -1,5 +1,6 @@
 package game.rise_of_valor.models;
 
+import game.rise_of_valor.effects.PortalEffect;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.List;
@@ -212,5 +213,47 @@ public class Enemy extends Character {
 
     public int getCurrentCharacterId() {
         return currentCharacterId;
+    }
+
+    public void reset(Sprite sprite, int x, int y) {
+        this.worldPositionX = x;
+        this.worldPositionY = y;
+        this.previousPositionX = x;
+        this.movement = sprite.movement;
+        this.idle = sprite.idle;
+        this.currentCharacterId = sprite.currentCharacterId;
+        this.appearanceHeight = 600;
+        this.appearanceOpacity = 0;
+        this.appearanceFinished = false;
+        this.portalEffect = new PortalEffect(x + spriteWidth / 2.0, y + spriteHeight - 10, sprite.portal);
+
+        if (this.currentCharacterId == 4) {
+            this.speed = 60;
+            this.moveMode = FLY;
+            this.spriteX -= 200;
+            this.spriteWidth = 900 / scaleFactor;
+            this.spriteHeight = 800 / scaleFactor;
+            this.movementSpriteCount = 5;
+            this.bodyOffsetX = 20;
+            this.bodyHeight = 30;
+        } else {
+            this.speed = 25;
+            this.moveMode = WALK;
+            this.movementSpriteCount = 7;
+            this.idleSpriteCount = 5;
+            this.bodyWidth = 28;
+            if (sprite.currentCharacterId == 2) {
+                this.speed = 15;
+                this.spriteWidth = 650 / scaleFactor;
+            }
+            if (sprite.currentCharacterId == 3) {
+                this.speed = 40;
+                this.bodyOffsetY = 9;
+                this.bodyOffsetX = 8;
+            }
+        }
+        this.spriteCount = this.movementSpriteCount - 1;
+        this.isMoving = false;
+        this.currentSprite = 0;
     }
 }

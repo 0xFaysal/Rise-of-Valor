@@ -1,5 +1,6 @@
 package game.rise_of_valor.game_engine;
 
+import game.rise_of_valor.effects.DeathEffect;
 import game.rise_of_valor.models.*;
 import game.rise_of_valor.models.Character;
 import game.rise_of_valor.models.Enemy;
@@ -21,9 +22,9 @@ import static game.rise_of_valor.game_engine.MapManager.space;
 
 public class GameWorld {
     public final int CANVAS_WIDTH, CANVAS_HEIGHT;
-    private double cameraX, cameraY; // Camera position
+    private double cameraX, cameraY; // Camera position based on the player height.
     private double targetCameraX, targetCameraY; // Target camera position
-    private double previousPlayerX, previousPlayerY; // To track player position changes
+    private double previousPlayerX, previousPlayerY; // To track player position changes and
 
     Canvas canvas;
     Scene scene;

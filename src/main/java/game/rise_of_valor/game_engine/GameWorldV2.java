@@ -1,8 +1,8 @@
 package game.rise_of_valor.game_engine;
 
+import game.rise_of_valor.effects.DeathEffect;
 import game.rise_of_valor.models.*;
 import game.rise_of_valor.models.Character;
-import game.rise_of_valor.models.Enemy;
 import game.rise_of_valor.utils.CustomFont;
 import game.rise_of_valor.utils.LoadSprite;
 import javafx.animation.KeyFrame;
@@ -16,7 +16,6 @@ import javafx.util.Duration;
 import java.util.*;
 
 import static game.rise_of_valor.controllers.LoadingController.dataManager;
-import static game.rise_of_valor.game_engine.MapManager.space;
 
 //import static game.rise_of_valor.data.MapData.mapManager.getMapHeight();
 //import static game.rise_of_valor.data.MapData.mapManager.getMapWidth();
