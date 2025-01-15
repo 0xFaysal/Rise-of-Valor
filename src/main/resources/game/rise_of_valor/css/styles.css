@@ -114,10 +114,13 @@
     font-family: "Rubik Distressed", serif;
     font-weight: 400;
     font-style: normal;
+    -fx-font-size: 50px;
+
 }
 
 .rampart-one-regular {
     font-family: "Rampart One", serif;
     font-weight: 400;
     font-style: normal;
+    -fx-font-size: 50px;
 }
