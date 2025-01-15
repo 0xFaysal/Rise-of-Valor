@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&family=Rubik+Distressed&display=swap');
 
 .bgWhite {
     -fx-background-color: #FFF;
+}
+
+.bg-black {
+    -fx-background-color: #000;
 }
 
 .bgTransparent {
@@ -21,24 +26,6 @@
     -fx-background-position: center;
 }
 
-/*.duoSelection-bg {*/
-/*    -fx-background-image: url("../assets/image/DuoMode.jpeg");*/
-/*    -fx-background-size: cover;*/
-/*    -fx-background-repeat: no-repeat;*/
-/*    -fx-background-position: center;*/
-/*    -fx-background-radius: 24; !* Ensure this matches the button's shape *!*/
-/*    -fx-border-radius: 24; !* Add border-radius to match *!*/
-/*}*/
-
-/*.quadSelection-bg {*/
-/*    -fx-background-image: url("../assets/image/QuadMode.jpeg");*/
-/*    -fx-background-size: cover;*/
-/*    -fx-background-repeat: no-repeat;*/
-/*    -fx-background-position: center;*/
-/*    -fx-background-radius: 24; !* Ensure this matches the button's shape *!*/
-/*    -fx-border-radius: 24; !* Add border-radius to match *!*/
-/*}*/
-
 .bg-radius {
     -fx-background-radius: 24; /* Ensure this matches the button's shape */
     -fx-border-radius: 24; /* Add border-radius to match */
@@ -47,10 +34,6 @@
 .duoSelection-bg, .quadSelection-bg {
     -fx-padding: 0;
     -fx-background-insets: 0;
-}
-
-.bg-black {
-    -fx-background-color: #000;
 }
 
 /* Base button styling */
@@ -132,6 +115,35 @@
     -fx-border-width: 2px, 2px, 2px, 2px;
 }
 
+/*Mode selection buttons styles*/
+.mode-btn-border {
+    -fx-border-color: #6f6d6d;
+    -fx-border-width: 2px;
+    -fx-border-radius: 50px; /* Rounded corners */
+    -fx-background-radius: 50px; /* Rounded corners */
+}
+
+.mode-btn-border-effect{
+    -fx-cursor: hand;
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-border-insets: 0, -4, -8, -12, -16, -20;
+    -fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
+    -fx-text-transform: uppercase;
+}
+
+.mode-btn-border-effect:hover{
+    -fx-background-color: #FDD016;
+    -fx-border-color: #FDD016,
+    rgba(253, 208, 22, 0.75),
+    rgba(253, 208, 22, 0.5),
+    rgba(253, 208, 22, 0.25);
+    -fx-border-insets: 0, -4, -8, -12;
+    -fx-border-width: 2px, 2px, 2px, 2px;
+}
+
+
 .duoSelection-bg {
     -fx-background-image: url("../assets/image/DuoMode.jpeg");
     -fx-background-size: cover;
@@ -139,6 +151,12 @@
     -fx-background-position: center;
     -fx-background-radius: 24; /* Ensure this matches the button's shape */
     -fx-border-radius: 24; /* Add border-radius to match */
+    -fx-transition: transform 0.5s ease-in-out; /* Smooth transition */
+}
+
+.duoSelection-bg:hover {
+    -fx-scale-x: 1.03; /* Zoom in horizontally */
+    -fx-scale-y: 1.03; /* Zoom in vertically */
 }
 
 .quadSelection-bg {
@@ -148,7 +166,13 @@
     -fx-background-position: center;
     -fx-background-radius: 24; /* Ensure this matches the button's shape */
     -fx-border-radius: 24; /* Add border-radius to match */
+    -fx-transition: transform 0.5s ease-in-out; /* Smooth transition */
 }
+.quadSelection-bg:hover {
+    -fx-scale-x: 1.03; /* Zoom in horizontally */
+    -fx-scale-y: 1.03; /* Zoom in vertically */
+}
+
 .bg-radius {
     -fx-background-radius: 24; /* Ensure this matches the button's shape */
     -fx-border-radius: 24; /* Add border-radius to match */
@@ -159,7 +183,19 @@
     -fx-background-insets: 0;
 }
 
-.bg-black {
-    -fx-background-color: #000;
+
+
+.rubik-distressed-regular {
+    font-family: "Rubik Distressed", serif;
+    font-weight: 400;
+    font-style: normal;
+    -fx-font-size: 50px;
 }
 
+.rampart-one-regular {
+    -fxfont-family: "Rampart One", serif;
+    font-weight: 400;
+    font-style: normal;
+    -fx-font-size: 50px;
+
+}

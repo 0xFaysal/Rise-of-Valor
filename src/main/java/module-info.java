@@ -4,7 +4,6 @@ module game.rise_of_valor {
     requires javafx.media;
     requires java.desktop;
     requires javafx.swing;
-    requires javafx.media;
 
 
 
