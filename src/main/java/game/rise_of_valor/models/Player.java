@@ -33,9 +33,9 @@ public class Player extends Character {
 
 
         speed = 200;
-        scaleFactor = 10;
-        spriteWidth = 600 / scaleFactor;
-        spriteHeight = 800 / scaleFactor;
+        scaleFactor = 10*0.5;
+        spriteWidth = (sprite.movement.get(0).getWidth()/scaleFactor);
+        spriteHeight = (sprite.movement.get(0).getHeight()/scaleFactor);
         spriteAnimationFactor = 250;
 
 
@@ -49,7 +49,7 @@ public class Player extends Character {
         handPositionX = worldPositionX + (facingLeft ? 0 : spriteWidth - 20);
         handPositionY = worldPositionY + (spriteHeight / 2.0) + 10;
         gun.setHandPosition(handPositionX, handPositionY);
-        gun.setGunPosition(handPositionX, handPositionY);
+
 
         //body box
         bodyWidth = 35;
@@ -82,6 +82,7 @@ public class Player extends Character {
                 setFacingLeft(false);
                 isMoving = true;
             }
+//            System.out.println("worldPositionX: " + worldPositionX + " worldPositionY: " + worldPositionY);
         }
 
         // Clamp player position within map boundaries
@@ -93,8 +94,7 @@ public class Player extends Character {
         handPositionY = worldPositionY + (spriteHeight / 2.0) + 20;
         gun.setHandPosition(handPositionX, handPositionY);
 
-        // Update gun box position based on player's position
-        gun.setGunPosition(handPositionX, handPositionY);
+
 
         // Update spriteCount based on movement state
         spriteCount = isMoving ? movementSpriteCount : idleSpriteCount;
@@ -121,8 +121,6 @@ public class Player extends Character {
             Image sprite = sprites.get(currentSprite);
 
 
-            int spriteX = 700;
-            int spriteY = 1030;
 
 
             // Calculate shadow width using a sine wave function for smooth animation
@@ -146,10 +144,10 @@ public class Player extends Character {
             if (facingLeft) {
                 gc.save();
                 gc.scale(-1, 1);
-                gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, -worldPositionX - spriteWidth, worldPositionY, spriteWidth, spriteHeight);
+                gc.drawImage(sprite, 0, 0, spriteWidth * scaleFactor, spriteHeight * scaleFactor, -worldPositionX - spriteWidth, worldPositionY, spriteWidth, spriteHeight);
                 gc.restore();
             } else {
-                gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
+                gc.drawImage(sprite, 0, 0, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
             }
 
             gun.draw(gc);

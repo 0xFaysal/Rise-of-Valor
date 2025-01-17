@@ -33,6 +33,8 @@ public class GameWorld {
     Player player;
     ArrayList<Enemy> enemies = new ArrayList<>();
     ArrayList<Bullet> bullets = new ArrayList<>();
+    ArrayList<EnemyBullet> enemyBullets = new ArrayList<>();
+
     //    TileManager tileManager;
     MapManager mapManager;
 
@@ -153,10 +155,15 @@ public class GameWorld {
         // Update player position
         player.update(scene, deltaTime, keys);
 
-        // Update enemy positions
+        // Update enemy positions and handle attacks
         for (Enemy enemy : enemies) {
-            enemy.moveTowards(player.worldPositionX, player.worldPositionY, deltaTime, enemies);
+            if (enemy.getCurrentCharacterId() == 2 || enemy.getCurrentCharacterId() == 3) {
+                enemy.moveRandomly(deltaTime, mapManager, enemies);
+            } else {
+                enemy.moveTowards(player.worldPositionX, player.worldPositionY, deltaTime, enemies);
+            }
             enemy.update(deltaTime);
+            enemy.attack(deltaTime,player, enemyBullets);
         }
 
 
@@ -191,9 +198,14 @@ public class GameWorld {
             bullet.update(deltaTime);
         }
 
+        // Update enemy bullets
+        for (EnemyBullet bullet : enemyBullets) {
+            bullet.update(deltaTime);
+        }
+
         // Remove bullets that are out of bounds or inactive
         bullets.removeIf(bullet -> bullet.isOutOfBounds((int) mapManager.getMapWidth(), (int) mapManager.getMapHeight()) || !bullet.isActive());
-
+        enemyBullets.removeIf(bullet -> bullet.isOutOfBounds((int) mapManager.getMapWidth(), (int) mapManager.getMapHeight()) || !bullet.isActive());
 
         // Check for collisions between bullets and enemies
         for (Bullet bullet : bullets) {
@@ -202,6 +214,14 @@ public class GameWorld {
                     enemy.takeDamage(player.getGun().getDamage());
                     bullet.setActive(false);
                 }
+            }
+        }
+
+        // Check for collisions between enemy bullets and player
+        for (EnemyBullet bullet : enemyBullets) {
+            if (bullet.intersects(player.getBody())) {
+                player.takeDamage(10); // Example damage value
+                bullet.setActive(false);
             }
         }
 
@@ -274,6 +294,10 @@ public class GameWorld {
             bullet.draw(gc);
         }
 
+        // Draw enemy bullets
+        for (EnemyBullet bullet : enemyBullets) {
+            bullet.draw(gc);
+        }
 
         // Restore graphics context
         gc.restore();
