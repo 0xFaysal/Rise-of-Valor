@@ -15,57 +15,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="506.0" prefWidth="380.0" styleClass="bgWhite" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.loginController">
+<Pane prefHeight="506.0" prefWidth="380.0" styleClass="bgWhite" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.LoginController">
    <children>
-      <VBox layoutX="60.0" layoutY="40.0" prefHeight="452.0" prefWidth="260.0" spacing="10.0" styleClass="bgTransparent" stylesheets="@../css/styles.css">
+      <VBox layoutX="60.0" layoutY="40.0" prefHeight="452.0" prefWidth="260.0" styleClass="bgTransparent" stylesheets="@../css/styles.css">
          <children>
-            <ImageView fitHeight="63.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/image/icon.png" />
-               </image>
-            </ImageView>
+            <VBox alignment="CENTER" prefHeight="62.0" prefWidth="260.0">
+               <children>
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/image/pixelLock.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </VBox>
             <VBox prefHeight="56.0" prefWidth="276.0" spacing="5.0">
                <children>
-                  <Label prefHeight="30.0" prefWidth="260.0" text="Sign in to your Account">
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="260.0" text="Sign in to your Account">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="20.0" prefWidth="260.0" text="Enter your credentials to start playing!" />
+                  <Label alignment="CENTER" prefHeight="20.0" prefWidth="260.0" text="Enter your credentials to start playing!" />
                </children>
             </VBox>
-            <Button fx:id="GoogleSignInBtn" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" prefHeight="28.0" prefWidth="260.0" stylesheets="@../css/styles.css" textAlignment="CENTER">
-               <graphic>
-                  <HBox alignment="CENTER" prefHeight="20.0" prefWidth="220.0" spacing="10.0">
-                     <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/image/google.png" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="18.0" prefWidth="120.0" text="Continue with Google" />
-                     </children>
-                  </HBox>
-               </graphic>
-               <styleClass>
-                  <String fx:value="bgWhite" />
-                  <String fx:value="border" />
-               </styleClass>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label alignment="CENTER" prefHeight="18.0" prefWidth="260.0" text="------------- or Sign in with Email ------------- " textFill="#8c8787">
-               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label text="Email">
@@ -95,8 +73,8 @@
                   </PasswordField>
                   <HBox alignment="CENTER" prefHeight="20.0" prefWidth="200.0" spacing="64.0">
                      <children>
-                        <CheckBox fx:id="rememberMe" focusTraversable="false" mnemonicParsing="false" text="Remember me" textFill="#7f265b" />
-                        <Label text="Forgot Password?" textFill="#7f265b">
+                        <CheckBox fx:id="rememberMe" focusTraversable="false" mnemonicParsing="false" text="Remember me" textFill="#fa2259" />
+                        <Label text="Forgot Password?" textFill="#fa2259">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -109,7 +87,7 @@
                         <Insets bottom="15.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <Button fx:id="SignInBtn" focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="260.0" style="-fx-background-color: #7F265B;" text="Sign In" textFill="WHITE">
+                  <Button focusTraversable="false" mnemonicParsing="false" onAction="#SignInBtnClick" prefHeight="30.0" prefWidth="260.0" style="-fx-background-color: FA2259;" text="Sign In" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -118,11 +96,14 @@
                      </cursor>
                   </Button>
                </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
             </VBox>
             <HBox alignment="CENTER" prefHeight="27.0" prefWidth="260.0" spacing="5.0">
                <children>
                   <Label text="Not Registered Yet?" />
-                  <Label onMouseClicked="#goRegister" text="Create an Account" textFill="#7f265b">
+                  <Label onMouseClicked="#goRegister" text="Create an Account" textFill="#fa2259">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

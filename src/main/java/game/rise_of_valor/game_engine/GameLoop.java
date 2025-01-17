@@ -1,21 +1,17 @@
 package game.rise_of_valor.game_engine;
 
-
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.util.PrimitiveIterator;
+
 public class GameLoop {
 
-
-
     private GraphicsContext gc;
-
     private GameWorld gameWorld;
-
-
-
+//    private GameWorldV2 gameWorld;
     // Constants for fixed time step game loop
     private static final int TARGET_FPS = 60; // Target frames per second
     private static final double TIME_PER_FRAME = 1.0 / TARGET_FPS; // Target frame time in seconds
@@ -25,7 +21,8 @@ public class GameLoop {
     public GameLoop(Canvas canvas, Scene scene) {
         this.gc = canvas.getGraphicsContext2D();
         gameWorld = new GameWorld(canvas, scene);
-
+//        gameWorld = new GameWorldV2(canvas, scene);
+        System.out.println("Game loop created");
 
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
@@ -37,7 +34,6 @@ public class GameLoop {
 
                 // Calculate delta time in seconds
                 double deltaTime = (now - lastTime) / 1e9;
-                lastTime = now;
 
                 // Accumulate time
                 accumulator += deltaTime;
@@ -51,6 +47,12 @@ public class GameLoop {
                 // Render with interpolation for smoothness
                 double interpolation = accumulator / TIME_PER_FRAME;
                 render(gc, interpolation);
+
+                // Print FPS
+//                System.out.println(1 / deltaTime);
+
+                lastTime = now;
+
             }
         };
 

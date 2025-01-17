@@ -1,23 +1,30 @@
 package game.rise_of_valor.game_engine;
 
+import game.rise_of_valor.effects.DeathEffect;
+import game.rise_of_valor.models.*;
+import game.rise_of_valor.models.Character;
 import game.rise_of_valor.models.Enemy;
-import game.rise_of_valor.models.Player;
+import game.rise_of_valor.utils.CustomFont;
+import game.rise_of_valor.utils.LoadSprite;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import static game.rise_of_valor.data.MapData.MAP1_HEIGHT;
-import static game.rise_of_valor.data.MapData.MAP1_WIDTH;
+import static game.rise_of_valor.controllers.LoadingController.dataManager;
+import static game.rise_of_valor.game_engine.MapManager.space;
+
 
 public class GameWorld {
     public final int CANVAS_WIDTH, CANVAS_HEIGHT;
-
-    private double cameraX, cameraY; // Camera position
-    private double previousPlayerX, previousPlayerY; // To track player position changes
+    private double cameraX, cameraY; // Camera position based on the player height.
+    private double targetCameraX, targetCameraY; // Target camera position
+    private double previousPlayerX, previousPlayerY; // To track player position changes and
 
     Canvas canvas;
     Scene scene;
@@ -25,31 +32,67 @@ public class GameWorld {
 
     Player player;
     ArrayList<Enemy> enemies = new ArrayList<>();
-    TileManager tileManager;
+    ArrayList<Bullet> bullets = new ArrayList<>();
+    //    TileManager tileManager;
+    MapManager mapManager;
+
+    private final Timeline firingTimeline; // For firing bullets continuously
+
+    private double mouseX;
+    private double mouseY;
+
+
+    private final List<DeathEffect> deathEffects = new ArrayList<>();
+
+    private final TopViewManager topViewManager;
+
+    EnemyAddingManager enemyAddingManager;
+    CustomFont customFont;
 
     public GameWorld(Canvas canvas, Scene scene) {
+
         this.canvas = canvas;
         this.scene = scene;
         this.CANVAS_WIDTH = (int) canvas.getWidth();
         this.CANVAS_HEIGHT = (int) canvas.getHeight();
-        player = new Player(100, 100);
-        tileManager = new TileManager(CANVAS_WIDTH, CANVAS_HEIGHT);
-        enemies.add(new Enemy(1,200, 200));
-        enemies.add(new Enemy(2,700, 300));
-        enemies.add(new Enemy(3,1300, 300));
-        enemies.add(new Enemy(4,400, 800));
 
+
+        customFont = new CustomFont();
+        topViewManager = new TopViewManager(customFont);
+
+        mapManager = new MapManager(3);
+
+
+        LoadSprite loadSprite = dataManager.getLoadSprite();
+
+        player = new Player(loadSprite.getPlayerSprite(), (int) (mapManager.getMapWidth() / 2), (int) (mapManager.getMapHeight() / 2));
+
+        // Add enemies to the game world
+        enemyAddingManager = new EnemyAddingManager(enemies, player, mapManager, loadSprite);
+
+//        Random random = new Random();
+
+        // Add enemies to the game world
+//        for (int i = 0; i < 80; i++) {
+//            int x = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapWidth() - space)));
+//            int y = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapHeight() - space)));
+//            enemies.add(new Enemy(loadSprite.getEnemySprite(i % 4), Math.abs(x), Math.abs(y)));
+//        }
 
 
         // Initialize camera position based on player's starting position
-        cameraX = Math.max(0, Math.min(player.worldPositionX - CANVAS_WIDTH / 2.0, MAP1_WIDTH - CANVAS_WIDTH));
-        cameraY = Math.max(0, Math.min(player.worldPositionY - CANVAS_HEIGHT / 2.0, MAP1_HEIGHT - CANVAS_HEIGHT));
+        targetCameraX = player.worldPositionX - CANVAS_WIDTH / 2.0;
+        targetCameraY = player.worldPositionY - CANVAS_HEIGHT / 2.0;
+
+        // Clamp camera position to map boundaries
+        cameraX = Math.max(0, Math.min(targetCameraX, mapManager.getMapWidth() - CANVAS_WIDTH));
+        cameraY = Math.max(0, Math.min(targetCameraY, mapManager.getMapHeight() - CANVAS_HEIGHT));
 
         // Track initial player position
         previousPlayerX = player.worldPositionX;
         previousPlayerY = player.worldPositionY;
 
-        // Add key press listener
+        // Add key press listener to add keys to the list for player movement
         scene.setOnKeyPressed(e -> {
             KeyCode key = e.getCode();
             if (!keys.contains(key)) {
@@ -57,68 +100,221 @@ public class GameWorld {
             }
         });
 
-        // Add key release listener
+        // Add key release listener to remove keys
         scene.setOnKeyReleased(e -> {
             KeyCode key = e.getCode();
             keys.remove(key); // Remove key when released
         });
+
+        // Add mouse move listener
+        canvas.setOnMouseMoved(e -> {
+            mouseX = e.getX();
+            mouseY = e.getY();
+            player.getGun().updateMousePosition(mouseX, mouseY);
+        });
+
+        // Add mouse click listener to fire bullets
+        canvas.setOnMouseClicked(e -> {
+            mouseX = e.getX();
+            mouseY = e.getY();
+            player.getGun().updateMousePosition(mouseX, mouseY);
+            bullets.add(new Bullet(player.getGun().getGunPointX(), player.getGun().getGunPointY(), mouseX + cameraX, mouseY + cameraY));
+        });
+
+
+        // Create a timeline for firing bullets continuously
+        firingTimeline = new Timeline(new KeyFrame(Duration.seconds(1.0 / player.getGun().getShootSpeed()), e -> {
+            bullets.add(new Bullet(player.getGun().getGunPointX(), player.getGun().getGunPointY(), mouseX + cameraX, mouseY + cameraY));
+        }));
+        firingTimeline.setCycleCount(Timeline.INDEFINITE);
+
+        // Add mouse press listener to start firing
+        canvas.setOnMousePressed(e -> {
+            mouseX = e.getX();
+            mouseY = e.getY();
+            player.getGun().updateMousePosition(mouseX, mouseY);
+            firingTimeline.play();
+        });
+
+        // Add mouse release listener to stop firing
+        canvas.setOnMouseReleased(e -> firingTimeline.stop());
+
+        // Add mouse drag listener for continuous firing
+        canvas.setOnMouseDragged(e -> {
+            mouseX = e.getX();
+            mouseY = e.getY();
+            player.getGun().updateMousePosition(mouseX, mouseY);
+        });
+
     }
 
     public void update(double deltaTime) {
+
         // Update player position
         player.update(scene, deltaTime, keys);
 
-        // Update enemy position
-//        enemy.moveTowards(player.worldPositionX, player.worldPositionY,player.getPlayerWidth(),player.getPlayerHeight(), deltaTime);
-//        enemy2.moveTowards(player.worldPositionX, player.worldPositionY,player.getPlayerWidth(),player.getPlayerHeight(), deltaTime);
-//        enemy3.moveTowards(player.worldPositionX, player.worldPositionY,player.getPlayerWidth(),player.getPlayerHeight(), deltaTime);
-//
-//        enemy2.update(deltaTime);
-//        enemy3.update(deltaTime);
-//        enemy.update(deltaTime);
+        // Update enemy positions
         for (Enemy enemy : enemies) {
-            enemy.moveTowards(player.worldPositionX, player.worldPositionY, player.getPlayerWidth(), player.getPlayerHeight(), deltaTime, enemies);
+            enemy.moveTowards(player.worldPositionX, player.worldPositionY, deltaTime, enemies);
             enemy.update(deltaTime);
         }
 
-        // Update camera position only if the player moved
+
+        // Remove enemies with life less than or equal to 0
+        enemies.removeIf(enemy -> enemy.getLife() <= 0);
+
+        // Update camera position based on player position
         if (player.worldPositionX != previousPlayerX || player.worldPositionY != previousPlayerY) {
             previousPlayerX = player.worldPositionX;
             previousPlayerY = player.worldPositionY;
 
-            // Center the camera on the player
-            cameraX = player.worldPositionX - CANVAS_WIDTH / 2.0;
-            cameraY = player.worldPositionY - CANVAS_HEIGHT / 2.0;
+            targetCameraX = player.worldPositionX - CANVAS_WIDTH / 2.0;
+            targetCameraY = player.worldPositionY - CANVAS_HEIGHT / 2.0;
 
-            // Clamp camera position within map boundaries
-            cameraX = Math.max(0, Math.min(cameraX, MAP1_WIDTH - CANVAS_WIDTH));
-            cameraY = Math.max(0, Math.min(cameraY, MAP1_HEIGHT - CANVAS_HEIGHT));
+            targetCameraX = Math.max(0, Math.min(targetCameraX, mapManager.getMapWidth() - CANVAS_WIDTH));
+            targetCameraY = Math.max(0, Math.min(targetCameraY, mapManager.getMapHeight() - CANVAS_HEIGHT));
+
         }
+
+
+        // Update gun position based on camera position
+        player.getGun().updateCameraPosition(targetCameraX, targetCameraY);
+
+
+        // Smoothly interpolate the camera position towards the target position
+        cameraX += (targetCameraX - cameraX) * 0.1;
+        cameraY += (targetCameraY - cameraY) * 0.1;
+
+
+        // Update bullets
+        for (Bullet bullet : bullets) {
+            bullet.update(deltaTime);
+        }
+
+        // Remove bullets that are out of bounds or inactive
+        bullets.removeIf(bullet -> bullet.isOutOfBounds((int) mapManager.getMapWidth(), (int) mapManager.getMapHeight()) || !bullet.isActive());
+
+
+        // Check for collisions between bullets and enemies
+        for (Bullet bullet : bullets) {
+            for (Enemy enemy : enemies) {
+                if (bullet.intersects(enemy.getBody())) {
+                    enemy.takeDamage(player.getGun().getDamage());
+                    bullet.setActive(false);
+                }
+            }
+        }
+
+        // Update death effects and remove expired ones
+        Iterator<DeathEffect> iterator = deathEffects.iterator();
+        while (iterator.hasNext()) {
+            DeathEffect effect = iterator.next();
+            effect.update(deltaTime);
+            if (effect.isExpired()) {
+                iterator.remove();
+            }
+        }
+
+        // Remove enemies with life less than or equal to 0 and add death effects
+        Iterator<Enemy> enemyIterator = enemies.iterator();
+        while (enemyIterator.hasNext()) {
+            Enemy enemy = enemyIterator.next();
+            if (enemy.getLife() <= 0) {
+                deathEffects.add(new DeathEffect(enemy.getBody()[0] + enemy.getBody()[2] / 2.0, enemy.worldPositionY + enemy.getBody()[3] / 2.0, enemy.getBody()[2], enemy.getBody()[3], enemy.getCurrentCharacterId()));
+                enemyIterator.remove();
+                topViewManager.updateKilledEnemy();
+            }
+        }
+
+
+        // Update timer
+        topViewManager.update(deltaTime); // Update timer
+        topViewManager.setRemainEnemy(enemies.size()); // Update remaining enemies
+        topViewManager.setPlayerLife(player.getLife()); // Update player life
+
+        //Add enemies to the game world
+        enemyAddingManager.update(deltaTime, topViewManager.getKillingRate());
+
+
     }
 
     public void render(GraphicsContext gc) {
+
         // Translate the graphics context for the camera
         gc.save();
         gc.translate(-cameraX, -cameraY);
 
-        // Render only the visible part of the tiles
-        tileManager.draw(gc, cameraX, cameraY, CANVAS_WIDTH, CANVAS_HEIGHT);
+        // Draw map
+        mapManager.drawMap(gc);
 
-        // Determine the drawing order based on the y-position
-        for (Enemy enemy : enemies) {
-            if (player.worldPositionY+player.getPlayerHeight() > enemy.worldPositionY+enemy.getPlayerHeight()) {
+        // Draw death effects
+        for (DeathEffect effect : deathEffects) {
+            effect.draw(gc);
+        }
 
-                // Draw the enemy first, then the player
-                enemy.draw(gc);
-                player.draw(gc);
-            } else {
-                // Draw the player first, then the enemy
-                player.draw(gc);
-                enemy.draw(gc);
+
+        // Create a list to hold both the player and enemies
+        List<Character> characters = new ArrayList<>();
+        characters.add(player);
+        characters.addAll(enemies);
+
+        // Sort the characters by their y-position
+        characters.sort(Comparator.comparingDouble(c -> c.worldPositionY + c.getPlayerHeight()));
+
+
+        // Draw only visible characters
+        for (Character character : characters) {
+            if (isVisible(character)) {
+                character.draw(gc);
             }
         }
 
+        // Draw bullets
+        for (Bullet bullet : bullets) {
+            bullet.draw(gc);
+        }
+
+
         // Restore graphics context
         gc.restore();
+
+        // Draw timer on top of the camera view
+        topViewManager.draw(gc, CANVAS_WIDTH, CANVAS_HEIGHT);
+    }
+
+
+    /**
+     * Check if a character is visible on the screen
+     *
+     * @param character The character to check
+     * @return True if the character is visible, false otherwise
+     */
+    private boolean isVisible(Character character) {
+        return character.worldPositionX + character.getPlayerWidth() > cameraX &&
+                character.worldPositionX < cameraX + CANVAS_WIDTH &&
+                character.worldPositionY + character.getPlayerHeight() > cameraY &&
+                character.worldPositionY < cameraY + CANVAS_HEIGHT;
+    }
+
+
+    public void resetGameWorld() {
+        player = new Player(dataManager.getLoadSprite().getPlayerSprite(), (int) (mapManager.getMapWidth() / 2), (int) (mapManager.getMapHeight() / 2));
+        enemies.clear();
+        Random random = new Random();
+        for (int i = 0; i < 80; i++) {
+            int x = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapWidth() - space)));
+            int y = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapHeight() - space)));
+            enemies.add(new Enemy(dataManager.getLoadSprite().getEnemySprite(i % 4), Math.abs(x), Math.abs(y)));
+        }
+        targetCameraX = player.worldPositionX - CANVAS_WIDTH / 2.0;
+        targetCameraY = player.worldPositionY - CANVAS_HEIGHT / 2.0;
+        cameraX = Math.max(0, Math.min(targetCameraX, mapManager.getMapWidth() - CANVAS_WIDTH));
+        cameraY = Math.max(0, Math.min(targetCameraY, mapManager.getMapHeight() - CANVAS_HEIGHT));
+        previousPlayerX = player.worldPositionX;
+        previousPlayerY = player.worldPositionY;
+        keys.clear();
+        bullets.clear();
+        deathEffects.clear();
+        topViewManager.reset();
     }
 }

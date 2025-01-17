@@ -1,117 +1,259 @@
 package game.rise_of_valor.models;
 
+import game.rise_of_valor.effects.PortalEffect;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.List;
 
+import static game.rise_of_valor.models.Sprite.FLY;
+import static game.rise_of_valor.models.Sprite.WALK;
+
 public class Enemy extends Character {
 
 
+    private double previousPositionX; // Previous position of the character on the x-axis for checking the facing direction
 
-    private double previousPositionX;
+    protected double diagonalSpeed; // Speed of the character in pixels per second when moving diagonally
 
-    public Enemy(int characterId,int worldPositionX, int worldPositionY) {
+
+    private int currentCharacterId = 0; // Current character ID
+
+    private PortalEffect portalEffect; // Portal effect for the enemy appearance
+    private double appearanceHeight; // Height of the enemy appearance effect for the portal
+    private double appearanceOpacity; // Opacity of the enemy appearance effect for the portal
+    private boolean appearanceFinished; // Flag to indicate if the enemy appearance effect has finished
+
+
+    public Enemy(Sprite sprite, int worldPositionX, int worldPositionY) {
         super(worldPositionX, worldPositionY);
 
-        SPRITE_PATH_TEMPLATE = "/game/rise_of_valor/assets/sprites/enemy%d/%s_%d.png";
-        scaleFactor = 15;
+        movement = sprite.movement;
+        idle = sprite.idle;
+
+
+
 
         speed = 50; // Speed of the player in pixels per second
         diagonalSpeed = speed * 0.7071; // Speed of the player in pixels per second when moving diagonally
-        spriteAnimetionFector = 200;// Sprite animation speed factor
+        spriteAnimationFactor = 200;// Sprite animation speed factor
 
-        if (characterId==4){
-            movementSpriteCount=5;
-            loadSprites(FLY, movementSpriteCount, movement, characterId);
-        } else if (characterId== 2) {
-            movementSpriteCount=7;
-            loadSprites(WALK, movementSpriteCount, movement, characterId);
-            spriteWidth = 650 / scaleFactor;
+        this.currentCharacterId = sprite.currentCharacterId;
+
+
+        this.appearanceHeight = 600;
+        this.appearanceOpacity = 0;
+        this.appearanceFinished = false;
+
+        // Ensure portalImage is not null
+        if (sprite.portal == null) {
+            throw new IllegalArgumentException("Portal image cannot be null");
+        }
+
+        this.portalEffect = new PortalEffect(worldPositionX + spriteWidth / 2.0, worldPositionY + spriteHeight - 10, sprite.portal);
+
+        if (this.currentCharacterId == 4) {
+            speed = 60;
+            moveMode = FLY;
+            spriteX -= 200;
+            spriteWidth = 900 / scaleFactor;
+            spriteHeight = 800 / scaleFactor;
+            movementSpriteCount = 5;
+            bodyOffsetX = 20;
+            bodyHeight = 30;
         } else {
-            movementSpriteCount=7;
-            loadSprites(WALK, movementSpriteCount, movement, characterId);
+            speed = 25;
+            moveMode = WALK;
+            movementSpriteCount = 7;
+            idleSpriteCount = 5;
+            bodyWidth = 28;
+            if (sprite.currentCharacterId == 2) {
+                speed = 15;
+                spriteWidth = 650 / scaleFactor;
+            }
+            if (sprite.currentCharacterId == 3) {
+                speed = 40;
+                bodyOffsetY = 9;
+                bodyOffsetX = 8;
+            }
         }
 
 
-        spriteCount=movementSpriteCount-1; // set the sprite count to the last sprite
+        spriteCount = movementSpriteCount - 1; // set the sprite count to the last sprite
     }
 
     public void update(double deltaTime) {
-
         super.update(deltaTime);
+
+        spriteCount = isMoving ? movementSpriteCount - 1 : (idleSpriteCount > 0 ? idleSpriteCount - 1 : movementSpriteCount - 1);
+
+        // Ensure currentSprite is within valid range
+        if (currentSprite < 0 || currentSprite >= spriteCount) {
+            currentSprite = 0;
+        }
+
+        bodyX = worldPositionX + bodyOffsetX;
+        bodyY = worldPositionY + bodyOffsetY;
+        if (facingLeft) {
+            switch (currentCharacterId) {
+                case 1, 3 -> bodyX = worldPositionX + bodyOffsetX - 3;
+                case 2 -> bodyX = worldPositionX + bodyOffsetX;
+                case 4 -> bodyX = worldPositionX + bodyOffsetX - 10;
+            }
+        }
+
+
+
+        // Update the portal effect
+        if (portalEffect.isVisible()) {
+
+            portalEffect.update(deltaTime);
+            if (portalEffect.isExpired()) {
+                portalEffect.update(deltaTime);
+                appearanceOpacity += deltaTime * 0.5;
+                appearanceHeight -= deltaTime * 500;
+
+                if (appearanceHeight <= 0) {
+
+                    appearanceHeight = 0;
+                    appearanceOpacity = 1;
+                    appearanceFinished = true;
+                    portalEffect.vanish();
+                }
+            }
+        }
 
     }
 
-    public void moveTowards(double targetX, double targetY,double targetWidth,double targetHeight, double deltaTime, List<Enemy> enemies) {
-
-        double dx = 0;
-        double dy = 0;
-        // Calculate the difference in position
-        if(targetX<worldPositionX){
-            dx = (targetX + targetWidth/2) - worldPositionX;
-            dy = (targetY+targetHeight/2) - worldPositionY;
-        }else {
-            dx = (targetX) - worldPositionX;
-            dy = (targetY) - worldPositionY;
-        }
-
-        // Calculate the distance to the target
-        double distance = Math.sqrt(dx * dx + dy * dy);
-
-        // Move only if the distance is significant
-        if (distance > 1) { // Avoid floating-point precision issues
-            // Normalize the direction vector
-            double normalizedDx = dx / distance;
-            double normalizedDy = dy / distance;
-
-            // Calculate movement based on speed and deltaTime
-            double moveX = normalizedDx * speed * deltaTime;
-            double moveY = normalizedDy * speed * deltaTime;
 
 
 
-            // Check distance with other enemies
-            for (Enemy enemy : enemies) {
-                if (enemy != this) {
-                    double distanceToEnemy = Math.sqrt(Math.pow(enemy.worldPositionX - worldPositionX, 2) + Math.pow(enemy.worldPositionY - worldPositionY, 2));
-                    if (distanceToEnemy < 25) {
-                        double avoidDx = worldPositionX - enemy.worldPositionX;
-                        double avoidDy = worldPositionY - enemy.worldPositionY;
-                        double avoidDistance = Math.sqrt(avoidDx * avoidDx + avoidDy * avoidDy);
-                        if (avoidDistance > 0) {
-                            avoidDx /= avoidDistance;
-                            avoidDy /= avoidDistance;
-                            moveX += avoidDx * speed * deltaTime;
-                            moveY += avoidDy * speed * deltaTime;
+    public void moveTowards(double targetX, double targetY, double deltaTime, List<Enemy> enemies) {
+        if (appearanceFinished) {
+            double dx = targetX - worldPositionX;
+            double dy = targetY - worldPositionY;
+
+            // Calculate the distance to the target
+            double distance = Math.hypot(dx, dy);
+
+            // Move only if the distance is significant
+            if (distance > 1) { // Avoid floating-point precision issues
+                // Normalize the direction vector
+                double invDistance = 1.0 / distance;
+                double normalizedDx = dx * invDistance;
+                double normalizedDy = dy * invDistance;
+
+                // Calculate movement based on speed and deltaTime
+                double moveX = normalizedDx * speed * deltaTime;
+                double moveY = normalizedDy * speed * deltaTime;
+
+                isMoving = true;
+
+                // Check distance with other enemies
+                for (Enemy enemy : enemies) {
+                    if (enemy != this) {
+                        double enemyDx = enemy.worldPositionX - worldPositionX;
+                        double enemyDy = enemy.worldPositionY - worldPositionY;
+                        double distanceToEnemy = Math.sqrt(enemyDx * enemyDx + enemyDy * enemyDy);
+
+                        if (distanceToEnemy < 35) {
+                            double invDis = 1.0 / distanceToEnemy;
+                            double dampingFactor = 1 - (distanceToEnemy / 35);
+                            if (dampingFactor > 0) {
+                                double avoidDx = enemyDx * invDis;
+                                double avoidDy = enemyDy * invDis;
+                                moveX -= avoidDx * speed * deltaTime * dampingFactor;
+                                moveY -= avoidDy * speed * deltaTime * dampingFactor;
+                            }
                         }
                     }
                 }
+
+                // Update position
+                worldPositionX += moveX;
+                worldPositionY += moveY;
+
+                // Update facing direction
+                setFacingLeft(worldPositionX < previousPositionX);
+
+                // Update the previous position
+                previousPositionX = worldPositionX;
+            } else {
+                isMoving = false;
             }
 
-            // Update position
-            worldPositionX += moveX;
-            worldPositionY += moveY;
-
-            // Update facing direction
-            setFacingLeft(worldPositionX < previousPositionX);
-
-            // Update the previous position
-            previousPositionX = worldPositionX;
-
-
+            // Set to idle sprite if the enemy is near the player or not moving
+            if (distance <= 1 || !isMoving) {
+                currentSprite = 0; // Assuming the first sprite in the idle list is the idle sprite
+                isMoving = false;
+            }
         }
     }
 
 
     public void draw(GraphicsContext gc) {
-        super.draw(gc);
-//        System.out.println("Enemy draw");
+        if (portalEffect.isVisible()) {
+            portalEffect.draw(gc);
+            if (portalEffect.isExpired() && appearanceFinished) {
+                super.draw(gc);
+            } else {
+                gc.setGlobalAlpha(appearanceOpacity);
+                gc.drawImage(movement.get(currentSprite), spriteX, spriteY - appearanceHeight, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
+                gc.setGlobalAlpha(1);
+            }
+
+        } else if (appearanceFinished) {
+            super.draw(gc);
+        }
     }
 
-    public int getPlayerWidth() {
-        return spriteWidth;
+
+//    public double[] getBody() {
+//        return new double[]{bodyX, bodyY, bodyWidth, bodyHeight};
+//    }
+
+    public int getCurrentCharacterId() {
+        return currentCharacterId;
     }
-    public int getPlayerHeight() {
-        return spriteHeight;
+
+    public void reset(Sprite sprite, int x, int y) {
+        this.worldPositionX = x;
+        this.worldPositionY = y;
+        this.previousPositionX = x;
+        this.movement = sprite.movement;
+        this.idle = sprite.idle;
+        this.currentCharacterId = sprite.currentCharacterId;
+        this.appearanceHeight = 600;
+        this.appearanceOpacity = 0;
+        this.appearanceFinished = false;
+        this.portalEffect = new PortalEffect(x + spriteWidth / 2.0, y + spriteHeight - 10, sprite.portal);
+
+        if (this.currentCharacterId == 4) {
+            this.speed = 60;
+            this.moveMode = FLY;
+            this.spriteX -= 200;
+            this.spriteWidth = 900 / scaleFactor;
+            this.spriteHeight = 800 / scaleFactor;
+            this.movementSpriteCount = 5;
+            this.bodyOffsetX = 20;
+            this.bodyHeight = 30;
+        } else {
+            this.speed = 25;
+            this.moveMode = WALK;
+            this.movementSpriteCount = 7;
+            this.idleSpriteCount = 5;
+            this.bodyWidth = 28;
+            if (sprite.currentCharacterId == 2) {
+                this.speed = 15;
+                this.spriteWidth = 650 / scaleFactor;
+            }
+            if (sprite.currentCharacterId == 3) {
+                this.speed = 40;
+                this.bodyOffsetY = 9;
+                this.bodyOffsetX = 8;
+            }
+        }
+        this.spriteCount = this.movementSpriteCount - 1;
+        this.isMoving = false;
+        this.currentSprite = 0;
     }
 }

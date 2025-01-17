@@ -1,17 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playpen+Sans:wght@100..800&display=swap');
 .bgWhite {
     -fx-background-color: #FFF;
 }
+
 .bgTransparent {
     -fx-background-color: transparent;
 }
-.border{
+
+.border {
     -fx-border-color: #E8E8E8;
     -fx-border-width: 1;
     -fx-border-radius: 5;
 }
 
 .banner-bg {
-    -fx-background-image: url("../assets/image/gameLogo.jpeg");
+    -fx-background-image: url("../assets/image/RiseOfValor.jpeg");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -20,4 +24,130 @@
 
 .bg-black {
     -fx-background-color: #000;
+}
+
+/* Base button styling */
+.btn {
+    -fx-background-color: #FDD016;
+    -fx-text-fill: #01191D;
+    -fx-border-color: linear-gradient(to right, #FDD016, #01191D);
+    -fx-cursor: hand;
+    -fx-font-family: "Press Start 2P", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Gamey font */
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-padding: 0px 10px;
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-border-insets: 0, -4, -8, -12, -16, -20;
+    -fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
+    -fx-text-transform: uppercase;
+
+}
+
+.select-btn{
+    -fx-background-color: 	#437a37;
+    -fx-text-fill: #143429;
+    /*-fx-border-color: linear-gradient(to right, #FDD016, #01191D);*/
+    -fx-cursor: hand;
+    -fx-font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Gamey font */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 0px 5px;
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 10px; /* Rounded corners */
+    /*-fx-border-insets: 0, -4, -8, -12, -16, -20;*/
+    /*-fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;*/
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
+    -fx-text-transform: uppercase;
+}
+
+.select-btn:selected {
+    -fx-background-color: #16f5fd;
+    -fx-text-fill: #01191D;
+}
+
+.btn:hover {
+    -fx-background-color: #FDD016;
+    -fx-border-color: #FDD016,
+                    rgba(253, 208, 22, 0.75),
+                    rgba(253, 208, 22, 0.5),
+                    rgba(253, 208, 22, 0.25);
+    -fx-border-insets: 0, -4, -8, -12;
+    -fx-border-width: 2px, 2px, 2px, 2px;
+    -fx-text-fill: #01191D;
+}
+
+.btn-border {
+    -fx-border-color: #FFF;
+    -fx-border-width: 1px;
+    -fx-border-radius: 50px; /* Rounded corners */
+    -fx-background-radius: 50px; /* Rounded corners */
+}
+
+.btn-border-effect{
+    -fx-cursor: hand;
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-border-insets: 0, -4, -8, -12, -16, -20;
+    -fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
+    -fx-text-transform: uppercase;
+}
+
+.btn-border-effect:hover{
+    -fx-background-color: #FDD016;
+    -fx-border-color: #FDD016,
+    rgba(253, 208, 22, 0.75),
+    rgba(253, 208, 22, 0.5),
+    rgba(253, 208, 22, 0.25);
+    -fx-border-insets: 0, -4, -8, -12;
+    -fx-border-width: 2px, 2px, 2px, 2px;
+}
+
+.duoSelection-bg {
+    -fx-background-image: url("../assets/image/DuoMode.jpeg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-radius: 24; /* Ensure this matches the button's shape */
+    -fx-border-radius: 24; /* Add border-radius to match */
+}
+
+.quadSelection-bg {
+    -fx-background-image: url("../assets/image/QuadMode.jpeg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-radius: 24; /* Ensure this matches the button's shape */
+    -fx-border-radius: 24; /* Add border-radius to match */
+}
+.bg-radius {
+    -fx-background-radius: 24; /* Ensure this matches the button's shape */
+    -fx-border-radius: 24; /* Add border-radius to match */
+}
+
+.duoSelection-bg, .quadSelection-bg {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.bg-black {
+    -fx-background-color: #000;
+}
+
+@font-face {
+    font-family: 'RigBoldHalftone';
+    src: url('../assets/fonts/Rig-BoldHalftone.ttf');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+.btn-border-effect:hover .text-effect{
+    -fx-font-size: 48;
+    -fx-font-family: "Rig Bold Halftone";
+    /*-fx-font-family: "Press Start 2P", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; !* Gamey font *!*/
 }
