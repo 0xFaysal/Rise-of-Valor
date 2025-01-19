@@ -52,7 +52,6 @@
     -fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
     -fx-text-transform: uppercase;
-
 }
 
 .select-btn{
@@ -183,8 +182,6 @@
     -fx-background-insets: 0;
 }
 
-
-
 .rubik-distressed-regular {
     font-family: "Rubik Distressed", serif;
     font-weight: 400;
@@ -197,5 +194,11 @@
     font-weight: 400;
     font-style: normal;
     -fx-font-size: 50px;
+}
 
+.shop-bg {
+    -fx-background-image: url("../assets/image/shopBG.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }

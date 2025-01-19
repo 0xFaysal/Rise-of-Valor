@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="960.0" styleClass="bg-black" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.shopController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="960.0" styleClass="shop-bg" stylesheets="@../css/styles.css">
+         <children>
+            <ScrollPane layoutX="168.0" layoutY="173.0" prefHeight="315.0" prefWidth="628.0" style="-fx-background-color: transparent;" styleClass="bgTransparent" stylesheets="@../css/styles.css" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
