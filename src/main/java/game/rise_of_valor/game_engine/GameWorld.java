@@ -279,7 +279,7 @@ public class GameWorld {
         characters.addAll(enemies);
 
         // Sort the characters by their y-position
-        characters.sort(Comparator.comparingDouble(c -> c.worldPositionY + c.getPlayerHeight()));
+        characters.sort(Comparator.comparingDouble(c -> c.worldPositionY + c.getCharacterHeight()));
 
 
         // Draw only visible characters
@@ -314,9 +314,9 @@ public class GameWorld {
      * @return True if the character is visible, false otherwise
      */
     private boolean isVisible(Character character) {
-        return character.worldPositionX + character.getPlayerWidth() > cameraX &&
+        return character.worldPositionX + character.getCharacterWidth() > cameraX &&
                 character.worldPositionX < cameraX + CANVAS_WIDTH &&
-                character.worldPositionY + character.getPlayerHeight() > cameraY &&
+                character.worldPositionY + character.getCharacterHeight() > cameraY &&
                 character.worldPositionY < cameraY + CANVAS_HEIGHT;
     }
 

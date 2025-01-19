@@ -1,5 +1,6 @@
 package game.rise_of_valor.controllers;
 
+import game.rise_of_valor.utils.CustomFont;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -14,6 +15,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -56,6 +58,13 @@ public class LobbyTopController  implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+       Font PressStart2P = Font.loadFont(getClass().getResourceAsStream("/game/rise_of_valor/assets/fonts/PressStart2P.ttf"), 24);
+
+        playBtn.setFont(PressStart2P);
+        playBtn.setFont(javafx.scene.text.Font.font(PressStart2P.getFamily(), 14));
+
+
+
         contextMenu = new ContextMenu();
 
         contextMenu.getStyleClass().add("context-menu"); // Add this line
@@ -68,7 +77,7 @@ public class LobbyTopController  implements Initializable{
         action1.setOnAction(event -> {
             menuButton.setText(action1.getText());
             menuButton.setGraphic(null); // Remove the icon
-            menuButton.setStyle("-fx-background-color: #228c22; -fx-text-fill: #000; -fx-font-size: 14px; -fx-font-family:'Book Antiqua'; -fx-text-alignment: center; " );
+            menuButton.setStyle("-fx-background-color: #16f5fd; -fx-text-fill: #000; -fx-font-size: 14px; -fx-font-family:'Book Antiqua'; -fx-text-alignment: center; " );
         });
         action2.setOnAction(event -> {
             menuButton.setText(action2.getText());

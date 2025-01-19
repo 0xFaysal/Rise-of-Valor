@@ -2,6 +2,9 @@ package game.rise_of_valor.models;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.RadialGradient;
+import javafx.scene.paint.Stop;
 
 public class EnemyBullet {
     private double x;
@@ -11,12 +14,24 @@ public class EnemyBullet {
     private boolean active = true;
     private final int bulletSize = 6; // Bullet radius
     private final double speed = 190; // Speed of the bullet
-    private final Color color; // Color of the bullet
+    private final RadialGradient radialGradient ;// Color of the bullet
 
-    public EnemyBullet(double startX, double startY, double targetX, double targetY, Color color) {
+    public EnemyBullet(double startX, double startY, double targetX, double targetY, String color) {
         this.x = startX;
         this.y = startY;
-        this.color = color;
+        if (color.equals("red")) {
+            this.radialGradient = new RadialGradient(
+                    0, 0.1, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE,
+                    new Stop(0, Color.ORANGE),
+                    new Stop(1, Color.FIREBRICK)
+            );
+        } else {
+            this.radialGradient = new RadialGradient(
+                    0, 0.1, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE,
+                    new Stop(0, Color.ORANGERED),
+                    new Stop(1, Color.ORANGE)
+            );
+        }
 
         // Calculate direction vector and normalize
         double angle = Math.atan2(targetY - startY, targetX - startX);
@@ -37,7 +52,7 @@ public class EnemyBullet {
 
     public void draw(GraphicsContext gc) {
         // Draw bullet as a small circle
-        gc.setFill(color);
+        gc.setFill(radialGradient);
         gc.fillOval(x - bulletSize, y - bulletSize, 2 * bulletSize, 2 * bulletSize);
     }
 

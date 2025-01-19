@@ -3,7 +3,6 @@ package game.rise_of_valor.models;
 import game.rise_of_valor.effects.PortalEffect;
 import game.rise_of_valor.game_engine.MapManager;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 import java.util.List;
 import java.util.Random;
@@ -148,15 +147,30 @@ public class Enemy extends Character {
                         player.takeDamage(1); // Example damage value
                     }
                 }
-                if (currentCharacterId == 2 || currentCharacterId == 3) {
 
-                    if (distanceToPlayer <= 600) { // Firing range for characterId 2 and 3
-                        enemyBullets.add(new EnemyBullet(worldPositionX, worldPositionY, player.worldPositionX, player.worldPositionY, Color.color(1, 0.1, 0.5)));
+                if (distanceToPlayer <= 600) { // Firing range for characterId 2 and 3
+                    if (currentCharacterId == 2)
+                        enemyBullets.add(new EnemyBullet(worldPositionX + getCharacterWidth()/2, worldPositionY +getCharacterHeight()/2, player.worldPositionX + player.getCharacterWidth()/2, player.worldPositionY +player.getCharacterHeight()/2 , "orange"));
+//                    else if (currentCharacterId == 3) enemyBullets.add(new EnemyBullet(worldPositionX, worldPositionY, player.worldPositionX, player.worldPositionY, "red"));
+                    else if (currentCharacterId == 3) {
+                        fireTripleBullets(worldPositionX + getCharacterWidth()/2, worldPositionY + getCharacterHeight()/2, player.worldPositionX + player.getCharacterWidth()/2, player.worldPositionY + player.getCharacterHeight()/2 , enemyBullets);
                     }
 
+
+                    timeSinceLastFire = 0;
                 }
-                timeSinceLastFire = 0;
             }
+        }
+    }
+
+    private void fireTripleBullets(double worldPositionX, double worldPositionY, double targetX, double targetY, List<EnemyBullet> enemyBullets) {
+        double baseAngle = Math.atan2(targetY - worldPositionY, targetX - worldPositionX);
+        double[] angles = {baseAngle - Math.toRadians(25), baseAngle, baseAngle + Math.toRadians(25)};
+
+        for (double angle : angles) {
+            double dx = Math.cos(angle);
+            double dy = Math.sin(angle);
+            enemyBullets.add(new EnemyBullet(worldPositionX, worldPositionY, targetX + dx * 100, targetY + dy * 100, "red"));
         }
     }
 
