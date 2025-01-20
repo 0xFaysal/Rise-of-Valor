@@ -18,6 +18,7 @@
     -fx-border-radius: 5;
 }
 
+/*loading page styles*/
 .banner-bg {
     -fx-background-image: url("../assets/image/gameLogo.png");
     -fx-background-size: cover;
@@ -25,23 +26,9 @@
     -fx-background-position: center;
 }
 
-/*.duoSelection-bg {*/
-/*    -fx-background-image: url("../assets/image/DuoMode.jpeg");*/
-/*    -fx-background-size: cover;*/
-/*    -fx-background-repeat: no-repeat;*/
-/*    -fx-background-position: center;*/
-/*    -fx-background-radius: 24; !* Ensure this matches the button's shape *!*/
-/*    -fx-border-radius: 24; !* Add border-radius to match *!*/
-/*}*/
-
-/*.quadSelection-bg {*/
-/*    -fx-background-image: url("../assets/image/QuadMode.jpeg");*/
-/*    -fx-background-size: cover;*/
-/*    -fx-background-repeat: no-repeat;*/
-/*    -fx-background-position: center;*/
-/*    -fx-background-radius: 24; !* Ensure this matches the button's shape *!*/
-/*    -fx-border-radius: 24; !* Add border-radius to match *!*/
-/*}*/
+.custom-progress-bar .bar {
+    -fx-background-color: #fa3e3f; /* Change this to your desired color */
+}
 
 .bg-radius {
     -fx-background-radius: 24; /* Ensure this matches the button's shape */
@@ -276,6 +263,13 @@
 
 .shop-bg {
     -fx-background-image: url("../assets/image/shopBG.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.shopItems-bg {
+    -fx-background-image: url("../assets/images/shopItemBg.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
