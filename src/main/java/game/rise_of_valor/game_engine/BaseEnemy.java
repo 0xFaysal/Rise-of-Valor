@@ -58,7 +58,7 @@ public abstract class BaseEnemy extends Character {
                 super.draw(gc);
             } else {
                 gc.setGlobalAlpha(appearanceOpacity);
-                gc.drawImage(movement.get(currentSprite), spriteX, spriteY - appearanceHeight, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
+//                gc.drawImage(movement.get(currentSprite), spriteX, spriteY - appearanceHeight, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
                 gc.setGlobalAlpha(1);
             }
 

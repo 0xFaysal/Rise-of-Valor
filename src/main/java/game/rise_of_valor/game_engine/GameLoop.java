@@ -20,11 +20,12 @@ public class GameLoop {
 
     public GameLoop(Canvas canvas, Scene scene) {
         this.gc = canvas.getGraphicsContext2D();
+        gc.setImageSmoothing(false);
         gameWorld = new GameWorld(canvas, scene);
 //        gameWorld = new GameWorldV2(canvas, scene);
         System.out.println("Game loop created");
 
-        AnimationTimer gameLoop = new AnimationTimer() {
+        AnimationTimer gameLoop1 = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (lastTime == 0) {
@@ -45,6 +46,37 @@ public class GameLoop {
                 }
 
                 // Render with interpolation for smoothness
+//                double interpolation = accumulator / TIME_PER_FRAME;
+//                render(gc, interpolation);
+
+                // Print FPS
+//                System.out.println(1 / deltaTime);
+
+                lastTime = now;
+
+            }
+        };
+        AnimationTimer gameLoop2 = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if (lastTime == 0) {
+                    lastTime = now;
+                    return;
+                }
+
+                // Calculate delta time in seconds
+                double deltaTime = (now - lastTime) / 1e9;
+
+                // Accumulate time
+                accumulator += deltaTime;
+
+                // Update at fixed intervals
+                while (accumulator >= TIME_PER_FRAME) {
+//                    update(TIME_PER_FRAME);
+                    accumulator -= TIME_PER_FRAME;
+                }
+
+                // Render with interpolation for smoothness
                 double interpolation = accumulator / TIME_PER_FRAME;
                 render(gc, interpolation);
 
@@ -56,7 +88,8 @@ public class GameLoop {
             }
         };
 
-        gameLoop.start();
+        gameLoop1.start();
+        gameLoop2.start();
     }
 
     private void update(double deltaTime) {

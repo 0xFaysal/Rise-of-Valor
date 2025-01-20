@@ -9,8 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -22,7 +23,6 @@ import java.util.ResourceBundle;
 
 public class LobbyTopController  implements Initializable{
 
-    int n=1;
 
     @FXML
     private Button playBtn;
@@ -31,12 +31,10 @@ public class LobbyTopController  implements Initializable{
     private AnchorPane rootPane;
 
     @FXML
-    void counter(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        System.out.println("Counter"+n++);
-        LobbyViewController lobbyViewController = (LobbyViewController) stage.getScene().getUserData();
-        lobbyViewController.print();
-    }
+    private MenuButton menuButton;
+
+    private ContextMenu contextMenu;
+
 
     public void playNowBtnClick(ActionEvent actionEvent) {
         try {
@@ -58,7 +56,32 @@ public class LobbyTopController  implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        contextMenu = new ContextMenu();
 
+        contextMenu.getStyleClass().add("context-menu"); // Add this line
+
+        MenuItem action1 = new MenuItem("MULTIPLAYER");
+        SeparatorMenuItem separator = new SeparatorMenuItem();
+        MenuItem action2 = new MenuItem("CLASSIC");
+        contextMenu.getItems().addAll(action1, separator, action2);
+
+        action1.setOnAction(event -> {
+            menuButton.setText(action1.getText());
+            menuButton.setGraphic(null); // Remove the icon
+            menuButton.setStyle("-fx-background-color: #228c22; -fx-text-fill: #000; -fx-font-size: 14px; -fx-font-family:'Book Antiqua'; -fx-text-alignment: center; " );
+        });
+        action2.setOnAction(event -> {
+            menuButton.setText(action2.getText());
+            menuButton.setGraphic(null); // Remove the icon
+            menuButton.setStyle("-fx-background-color: #228c22; -fx-text-fill: #000; -fx-font-size: 14px; -fx-font-family:'Book Antiqua'; -fx-text-alignment: center; " );
+        });
+
+        menuButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            contextMenu.show(menuButton, 1051, 430);
+            contextMenu.heightProperty().addListener((observable, oldValue, newValue) -> {
+                contextMenu.setY(menuButton.getLayoutY() - newValue.doubleValue());
+            });
+        });
 
     }
 }

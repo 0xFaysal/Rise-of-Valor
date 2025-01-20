@@ -21,11 +21,12 @@ public class Character {
 
 
     //sprite size of character
-    protected int spriteWidth; // spriteWidth is character width that is cropped from the sprite sheet
-    protected int spriteHeight; // spriteHeight is character height that is cropped from the sprite sheet
-    protected int scaleFactor; // Scale factor for the sprite to make it bigger or smaller
-    protected int spriteX = 700; // spriteX is the x position of the character in the sprite sheet
-    protected int spriteY = 1030; // spriteY is the y position of the character in the sprite sheet
+    protected double spriteWidth; // spriteWidth is character width that is cropped from the sprite sheet
+    protected double spriteHeight; // spriteHeight is character height that is cropped from the sprite sheet
+    protected double scaleFactor; // Scale factor for the sprite to make it bigger or smaller
+
+//    protected int spriteX = 700; // spriteX is the x position of the character in the sprite sheet
+//    protected int spriteY = 1030; // spriteY is the y position of the character in the sprite sheet
 
 
     //body box of character
@@ -69,9 +70,11 @@ public class Character {
         this.worldPositionX = worldPositionX;
         this.worldPositionY = worldPositionY;
 
-        scaleFactor = 15; // default scale factor
-        spriteWidth = 600 / scaleFactor;// sprite width default 600
-        spriteHeight = 800 / scaleFactor; // sprite height default 800
+        scaleFactor = 15 * 0.5; // default scale factor
+        if (!movement.isEmpty()) {
+            spriteWidth = ( movement.getFirst().getWidth()/scaleFactor);
+            spriteHeight =( movement.getFirst().getHeight()/scaleFactor);
+        }
 
         life = 100; // default life of character
 
@@ -119,6 +122,9 @@ public class Character {
 
         if (currentSprite < sprites.size()) {
             Image sprite = sprites.get(currentSprite);
+//            int spriteWidth = (int) sprite.getWidth();
+//            int spriteHeight = (int) sprite.getHeight();
+
 
 
             if (!moveMode.equals(FLY)) { // Only draw shadow for walking characters
@@ -136,11 +142,14 @@ public class Character {
             if (facingLeft) {
                 gc.save();
                 gc.scale(-1, 1);
-                gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, -worldPositionX - spriteWidth, worldPositionY, spriteWidth, spriteHeight);
+                gc.drawImage(sprite, 0, 0, spriteWidth * scaleFactor, spriteHeight * scaleFactor, -worldPositionX - spriteWidth, worldPositionY, spriteWidth, spriteHeight);
                 gc.restore();
             } else {
-                gc.drawImage(sprite, spriteX, spriteY, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
+                gc.drawImage(sprite, 0, 0, spriteWidth * scaleFactor, spriteHeight * scaleFactor, worldPositionX, worldPositionY, spriteWidth, spriteHeight);
             }
+            // Draw body box
+//            gc.setStroke(Color.RED);
+//            gc.strokeRect(bodyX, bodyY, bodyWidth, bodyHeight);
 
             // Draw damage numbers
             for (DamageNumber damageNumber : damageNumbers) {
@@ -156,11 +165,11 @@ public class Character {
         this.facingLeft = facingLeft;
     }
 
-    public int getPlayerWidth() {
+    public double getPlayerWidth() {
         return spriteWidth;
     }
 
-    public int getPlayerHeight() {
+    public double getPlayerHeight() {
         return spriteHeight;
     }
 
@@ -181,6 +190,7 @@ public class Character {
 
     /**
      * getBody method returns the body of the character
+     *
      * @return double[] array containing:
      * bodyX = x-coordinate,
      * bodyY = y-coordinate,

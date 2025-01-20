@@ -7,6 +7,7 @@ module game.rise_of_valor {
 
 
 
+
     opens game.rise_of_valor.controllers to javafx.fxml;
     exports game.rise_of_valor;
     exports game.rise_of_valor.game_engine;

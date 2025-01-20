@@ -5,14 +5,13 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class Gun {
-    private String name;
+    private final String name;
 
-    private int power;
-    private int damage;
-    private int shootSpeed; // gun fire rate
+    private final int power;
+    private final int damage;
+    private final int shootSpeed; // gun fire rate
 
-    private double gunBoxX;
-    private double gunBoxY;
+
     private int gunBoxWidth = 30;
     private int gunBoxHeight = 10;
     private double gunBoxAngle = 0;
@@ -28,7 +27,8 @@ public class Gun {
     private Image gunSprite;
 
     private double gunPointX, gunPointY;
-    private double gunBoxAngleOffset = 0.23;
+    private double gunBoxAngleOffset = 0;
+//    private double gunBoxAngleOffset = 0.23;
 
     private int gunLength;
     private double gunScale;
@@ -107,13 +107,18 @@ public class Gun {
         double dy = mouseY - handY;
         gunBoxAngle = Math.atan2(dy, dx);
 
+//        System.out.println(gunBoxAngleOffset);
+
+        isFlipped = gunBoxAngle > Math.PI / 2 || gunBoxAngle < -Math.PI / 2;
+//        System.out.println(isFlipped);
         if (isFlipped) {
-            gunBoxAngleOffset = -gunBoxAngleOffset;
+            gunBoxAngleOffset = -Math.abs(gunBoxAngleOffset);
+        }else{
+            gunBoxAngleOffset = Math.abs(gunBoxAngleOffset);
         }
 
         gunPointX = handPositionX + Math.cos(gunBoxAngle - gunBoxAngleOffset) * gunLength;
         gunPointY = handPositionY + Math.sin(gunBoxAngle - gunBoxAngleOffset) * gunLength;
-        isFlipped = gunBoxAngle > Math.PI / 2 || gunBoxAngle < -Math.PI / 2;
 
 
 
@@ -150,10 +155,7 @@ public class Gun {
 
     }
 
-    public void setGunPosition(double x, double y) {
-        gunBoxX = x;
-        gunBoxY = y;
-    }
+
 
     public void setHandPosition(double x, double y) {
         handPositionX = x;

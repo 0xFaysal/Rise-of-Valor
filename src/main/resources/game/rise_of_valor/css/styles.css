@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rampart+One&family=Rubik+Distressed&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');*/
 
 .bgWhite {
     -fx-background-color: #FFF;
@@ -20,11 +19,29 @@
 }
 
 .banner-bg {
-    -fx-background-image: url("../assets/image/RiseOfValor.jpeg");
+    -fx-background-image: url("../assets/image/gameLogo.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
+
+/*.duoSelection-bg {*/
+/*    -fx-background-image: url("../assets/image/DuoMode.jpeg");*/
+/*    -fx-background-size: cover;*/
+/*    -fx-background-repeat: no-repeat;*/
+/*    -fx-background-position: center;*/
+/*    -fx-background-radius: 24; !* Ensure this matches the button's shape *!*/
+/*    -fx-border-radius: 24; !* Add border-radius to match *!*/
+/*}*/
+
+/*.quadSelection-bg {*/
+/*    -fx-background-image: url("../assets/image/QuadMode.jpeg");*/
+/*    -fx-background-size: cover;*/
+/*    -fx-background-repeat: no-repeat;*/
+/*    -fx-background-position: center;*/
+/*    -fx-background-radius: 24; !* Ensure this matches the button's shape *!*/
+/*    -fx-border-radius: 24; !* Add border-radius to match *!*/
+/*}*/
 
 .bg-radius {
     -fx-background-radius: 24; /* Ensure this matches the button's shape */
@@ -34,6 +51,10 @@
 .duoSelection-bg, .quadSelection-bg {
     -fx-padding: 0;
     -fx-background-insets: 0;
+}
+
+.bg-black {
+    -fx-background-color: #000;
 }
 
 /* Base button styling */
@@ -52,7 +73,64 @@
     -fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
     -fx-text-transform: uppercase;
+
 }
+
+/*Mode Select Menu Style*/
+.menu-button {
+    -fx-background-color: #01191D;
+    -fx-text-fill: #FFF;
+    -fx-font-family:  Roboto, "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-border-color: #01191D;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
+}
+
+.menu-button .menu-item {
+    -fx-background-color: #01191D;
+    -fx-text-fill: #FDD016;
+    -fx-font-family:  "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 16px;
+    -fx-padding: 5px 10px;
+    -fx-pref-width: 175px;
+}
+
+.menu-button .menu-item:hover {
+    -fx-background-color: #FDD016A1;
+    -fx-text-fill: #01191D;
+}
+
+.menu-button .menu-item:selected {
+    -fx-background-color: #16fdb8A1;
+    -fx-text-fill: #01191D;
+}
+
+/* Style for the ContextMenu */
+.context-menu {
+    -fx-background-color: #01191D;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-pref-width: 175px;
+    -fx-padding: 5px 10px;
+}
+
+.context-menu .menu-item {
+    -fx-background-color: #01191D;
+    -fx-text-fill: #FFFFFF; /* Set text color to white */
+    -fx-font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 16px;
+    -fx-padding: 5px 20px;
+    /*-fx-pref-width: 175px;*/
+}
+
+/*---------------------------------*/
+
 
 .select-btn{
     -fx-background-color: 	#437a37;
