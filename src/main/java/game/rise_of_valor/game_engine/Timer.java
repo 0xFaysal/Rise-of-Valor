@@ -1,13 +1,12 @@
 package game.rise_of_valor.game_engine;
 
-import game.rise_of_valor.utils.CustomFont;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import static game.rise_of_valor.game_engine.DataManager.getBackgroundTimer;
+import static game.rise_of_valor.shareData.DataManager.getBackgroundTimer;
 
 public class Timer {
     private double time; // time in seconds

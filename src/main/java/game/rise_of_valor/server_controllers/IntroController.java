@@ -1,17 +1,13 @@
-package game.rise_of_valor.controllers;
+package game.rise_of_valor.server_controllers;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -25,8 +21,6 @@ public class IntroController implements Initializable {
 
     @FXML
     private StackPane rootPane;
-    Media media;
-    MediaPlayer mediaPlayer;
 
 
     @Override
@@ -37,8 +31,8 @@ public class IntroController implements Initializable {
     private void playMedia() {
         // Load the video
         String videoPath = getClass().getResource("/game/rise_of_valor/assets/Videos/InceptionCoderLogo.mp4").toExternalForm();
-        media = new Media(videoPath);
-        mediaPlayer = new MediaPlayer(media);
+        Media media = new Media(videoPath);
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
 
         // Fade in the video
@@ -66,18 +60,16 @@ public class IntroController implements Initializable {
     }
 
     private void switchToNextScene() {
+        // Transition to the next scene (e.g., loading screen or main game)
 
         try {
             rootPane.getChildren().clear();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/loading.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/server_fxml/loading.fxml"));
             rootPane.getChildren().add(fxmlLoader.load());
-            media=null;
-            mediaPlayer=null;
-            mediaView.getMediaPlayer().dispose();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+}
 
 
 }
