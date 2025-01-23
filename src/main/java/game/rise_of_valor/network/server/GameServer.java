@@ -1,7 +1,10 @@
 package game.rise_of_valor.network.server;
 
 import game.rise_of_valor.models.Message;
+<<<<<<< HEAD
 import game.rise_of_valor.shareData.UserData;
+=======
+>>>>>>> 580b71d (server created and clien , server created and connection handle done.)
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -83,6 +86,7 @@ public class GameServer extends Thread {
         }
     }
 
+<<<<<<< HEAD
 //    public static void sendPlayerData(Message message, UserData userData) {
 //        for (ClientHandler clientHandler : clientHandlers) {
 //            try {
@@ -94,6 +98,8 @@ public class GameServer extends Thread {
 //        }
 //    }
 
+=======
+>>>>>>> 580b71d (server created and clien , server created and connection handle done.)
     public static void removeClientHandler(ClientHandler clientHandler) {
         clientHandlers.remove(clientHandler);
         System.out.println("Removed client: " + clientHandler.getUsername());
