@@ -4,6 +4,7 @@ import game.rise_of_valor.controllers.ServerConnectController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -24,6 +25,7 @@ public class Main extends Application {
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/game-play.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Ride of Valor");
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("assets/image/gameLogoLoginPage.png")));
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(this::handleWindowClose);
