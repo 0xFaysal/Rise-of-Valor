@@ -23,6 +23,7 @@ public class Main extends Application {
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/login-registration.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/lobby-view.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/game-play.fxml"));
+//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/waiting-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Ride of Valor");
         stage.getIcons().add(new Image(Main.class.getResourceAsStream("assets/image/gameLogoLoginPage.png")));

@@ -1,5 +1,6 @@
 package game.rise_of_valor.network.client;
 
+import game.rise_of_valor.models.ClientData;
 import game.rise_of_valor.models.Message;
 
 import java.io.IOException;
@@ -39,12 +40,15 @@ class ClientSenderThread extends Thread {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-//            try {
-////                socket.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+        }
+    }
+
+    public void createDueModeRoom(ClientData clientData) {
+        try {
+            objectOutputStream.writeObject(new Message("createdue", clientData));
+            objectOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

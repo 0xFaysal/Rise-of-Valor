@@ -1,6 +1,7 @@
 package game.rise_of_valor.controllers;
 
 import game.rise_of_valor.shareData.DataManager;
+import game.rise_of_valor.shareData.UserData;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -29,6 +30,7 @@ public class LoadingController implements Initializable {
     @FXML
     private ProgressBar progressbar;
     public static DataManager dataManager;
+    public static UserData userData;
     private boolean dataManagerInitialized = false;
     private Timeline[] dataManagerTimeline = {null};
     private boolean serverConnectionOpened = false;
@@ -55,6 +57,7 @@ public class LoadingController implements Initializable {
                 // Run DataManager initialization in a separate thread
                 dataLoaderThread = new  Thread(() -> {
                     dataManager = new DataManager();
+                    userData = new UserData();
                     Platform.runLater(() -> {
                         // Update progress bar to 100% after DataManager initialization
                         dataManagerTimeline[0] = new Timeline(

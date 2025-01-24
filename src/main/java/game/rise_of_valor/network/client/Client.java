@@ -1,5 +1,7 @@
 package game.rise_of_valor.network.client;
 
+import game.rise_of_valor.models.ClientData;
+
 import java.io.IOException;
 import java.net.Socket;
 
@@ -8,6 +10,8 @@ public class Client extends Thread {
     String hostAddress;
     int port;
     Socket socket;
+    ClientSenderThread clientSenderThread;
+    ClientReceiverThread clientReceiverThread;
     private ConnectionListener connectionListener;
 
    private boolean isClientConnected = false;
@@ -30,8 +34,10 @@ public class Client extends Thread {
         try {
             socket = new Socket(hostAddress, port);
             System.out.println("Connected to server on port " + port);
-            new ClientSenderThread(socket).start();
-            new ClientReceiverThread(socket, connectionListener).start();
+            clientSenderThread =  new ClientSenderThread(socket);
+            clientSenderThread.start();
+          clientReceiverThread =  new ClientReceiverThread(socket, connectionListener);
+            clientReceiverThread.start();
         } catch (IOException e) {
             System.out.println("Failed to connect to server on port " + port);
             e.printStackTrace();
@@ -49,6 +55,10 @@ public class Client extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void createDueModeRoom(ClientData clientData) {
+        clientSenderThread.createDueModeRoom(clientData);
     }
 
     public interface ConnectionListener {

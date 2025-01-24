@@ -1,6 +1,7 @@
 package game.rise_of_valor.network.server;
 
 import game.rise_of_valor.models.Message;
+import game.rise_of_valor.shareData.UserData;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -81,6 +82,17 @@ public class GameServer extends Thread {
             }
         }
     }
+
+//    public static void sendPlayerData(Message message, UserData userData) {
+//        for (ClientHandler clientHandler : clientHandlers) {
+//            try {
+//                clientHandler.getOutputStream().writeObject(message);
+//                clientHandler.getOutputStream().flush();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     public static void removeClientHandler(ClientHandler clientHandler) {
         clientHandlers.remove(clientHandler);

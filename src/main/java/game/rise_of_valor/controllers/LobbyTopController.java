@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -22,6 +23,8 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static game.rise_of_valor.controllers.LoadingController.userData;
 
 public class LobbyTopController  implements Initializable{
 
@@ -37,6 +40,23 @@ public class LobbyTopController  implements Initializable{
 
     private ContextMenu contextMenu;
 
+   private String selectedMode;
+
+    @FXML
+    private Label level;
+
+    @FXML
+    private ImageView profileImage;
+
+
+
+    @FXML
+    private Label playerName;
+
+
+    @FXML
+    private Label userName;
+
 
     public void playNowBtnClick(ActionEvent actionEvent) {
         try {
@@ -48,8 +68,13 @@ public class LobbyTopController  implements Initializable{
                 lobbyViewController.stopLobbyLoop();
             }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/game-play.fxml"));
-            stage.getScene().setRoot(loader.load());
+            if(menuButton.getText().equals("CLASSIC")){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/game-play.fxml"));
+                stage.getScene().setRoot(loader.load());
+            }else{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/mode-selection.fxml"));
+                stage.getScene().setRoot(loader.load());
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,6 +84,7 @@ public class LobbyTopController  implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        Font PressStart2P = Font.loadFont(getClass().getResourceAsStream("/game/rise_of_valor/assets/fonts/PressStart2P.ttf"), 24);
+       setUserData();
 
         playBtn.setFont(PressStart2P);
         playBtn.setFont(javafx.scene.text.Font.font(PressStart2P.getFamily(), 14));
@@ -92,5 +118,13 @@ public class LobbyTopController  implements Initializable{
             });
         });
 
+    }
+
+
+   public void setUserData(){
+        this.playerName.setText(userData.getName());
+        this.userName.setText("@"+userData.getUserName());
+        this.level.setText(""+userData.getLevel());
+        this.profileImage.setImage(userData.getProfilePic());
     }
 }

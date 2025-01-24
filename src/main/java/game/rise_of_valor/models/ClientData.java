@@ -1,31 +1,38 @@
 package game.rise_of_valor.models;
 
+import javafx.scene.image.Image;
+
+import java.io.PipedReader;
 import java.io.Serializable;
 
 public class ClientData implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String username;
+    private String image;
     private String IP;
     private int PORT;
     private int level;
-    private double loginTime;
-    private boolean isActive;
-    private boolean isPlaying;
 
 
-    public ClientData(String username, String IP, int PORT, int level, double loginTime, boolean isActive, boolean isPlaying) {
+
+    public ClientData(String username, int level,String image) {
         this.username = username;
-        this.IP = IP;
-        this.PORT = PORT;
         this.level = level;
-        this.loginTime = loginTime;
-        this.isActive = isActive;
-        this.isPlaying = isPlaying;
+        this.image = image;
+
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getIP() {
@@ -40,17 +47,7 @@ public class ClientData implements Serializable {
         return level;
     }
 
-    public double getLoginTime() {
-        return loginTime;
-    }
 
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public boolean isPlaying() {
-        return isPlaying;
-    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -68,17 +65,6 @@ public class ClientData implements Serializable {
         this.level = level;
     }
 
-    public void setLoginTime(double loginTime) {
-        this.loginTime = loginTime;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    public void setPlaying(boolean playing) {
-        isPlaying = playing;
-    }
 
     @Override
     public String toString() {
@@ -87,9 +73,6 @@ public class ClientData implements Serializable {
                 ", IP='" + IP + '\'' +
                 ", PORT=" + PORT +
                 ", level=" + level +
-                ", loginTime=" + loginTime +
-                ", isActive=" + isActive +
-                ", isPlaying=" + isPlaying +
                 '}';
     }
 }

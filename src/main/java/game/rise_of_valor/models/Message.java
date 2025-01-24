@@ -8,6 +8,9 @@ public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String username;
+    private String mode;
+    private ClientData clientData;
+
     private String message;
     private String receiver;
     private Player player;
@@ -20,13 +23,15 @@ public class Message implements Serializable {
     public Message(String username) {
         this.username = username;
     }
+
+
     public Message(boolean isConnectionSuccessful) {
         this.isConnectionSuccessful = isConnectionSuccessful;
     }
 
-    public Message(String message, String receiver) {
+    public Message(String message, ClientData clientData) {
         this.message = message;
-        this.receiver = receiver;
+        this.clientData = clientData;
     }
 
     public Message(String username, String messageText, String receiver) {
@@ -70,5 +75,9 @@ public class Message implements Serializable {
     @Override
     public String toString() {
         return "Message [message=" + message + ", receiver=" + receiver + ", username=" + username + "]";
+    }
+
+    public ClientData getClientData() {
+        return clientData;
     }
 }

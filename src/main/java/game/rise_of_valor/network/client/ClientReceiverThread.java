@@ -1,6 +1,9 @@
 package game.rise_of_valor.network.client;
 
+import game.rise_of_valor.models.ClientData;
 import game.rise_of_valor.models.Message;
+import game.rise_of_valor.shareData.DataManager;
+import javafx.application.Platform;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -24,15 +27,19 @@ class ClientReceiverThread extends Thread {
         try {
             while (socket.isConnected()) {
                 System.out.println("Waiting for messages..");
-                Message receivedMessage = (Message) objectInputStream.readObject();
-                if (receivedMessage.isConnectionSuccessful()) {
+                Message message = (Message) objectInputStream.readObject();
+                if (message.isConnectionSuccessful()) {
                     System.out.println("Connection successful");
                     if (connectionListener != null) {
                         connectionListener.onConnectionSuccessful();
                     }
                     continue;
                 }
-                System.out.println("\nReceived from " + receivedMessage.getUsername() + ": " + receivedMessage.getMessage());
+                if ("newPlayer".equalsIgnoreCase(message.getMessage()) || "existingPlayer".equalsIgnoreCase(message.getMessage())) {
+                    ClientData playerData = message.getClientData();
+                    System.out.println("Received player data: " + playerData);
+                }
+                System.out.println("\nReceived from " + message.getUsername() + ": " + message.getMessage());
             }
         } catch (EOFException e) {
             System.out.println("Connection closed by server.");
