@@ -4,8 +4,7 @@ module game.rise_of_valor {
     requires javafx.media;
     requires java.desktop;
     requires javafx.swing;
-
-
+    requires jdk.compiler;
 
     opens game.rise_of_valor.server_controllers to javafx.fxml;
 
