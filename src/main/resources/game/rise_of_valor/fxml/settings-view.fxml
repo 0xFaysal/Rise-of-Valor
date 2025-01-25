@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.settingsController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="960.0" styleClass="settings-bg" stylesheets="@../css/styles.css">
+         <children>
+            <VBox alignment="CENTER" layoutX="277.0" layoutY="81.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="384.0" prefWidth="406.0" styleClass="settingsMenu-bg" stylesheets="@../css/styles.css">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="406.0">
+                     <children>
+                        <Label text="SETTINGS" textFill="#e0e0e0">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="50.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="406.0">
+                     <children>
+                        <Label text="Music: " textFill="#e0e0e0">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="50.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Slider fx:id="MusicSlider" stylesheets="@../css/styles.css">
+                           <styleClass>
+                              <String fx:value="slider" />
+                              <String fx:value="thumb" />
+                              <String fx:value="track" />
+                           </styleClass>
+                        </Slider>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="406.0">
+                     <children>
+                        <Label text="VFX: " textFill="#e0e0e0">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="73.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Slider fx:id="VfxSlider" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="406.0">
+                     <children>
+                        <Label text="NOTIFICATION: " textFill="#e0e0e0">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" styleClass="btn-on" stylesheets="@../css/styles.css" text="ON">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" styleClass="btn-off" stylesheets="@../css/styles.css" text="OFF" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+   </children>
+</StackPane>
