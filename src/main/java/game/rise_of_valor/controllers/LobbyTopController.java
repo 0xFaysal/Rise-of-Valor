@@ -84,7 +84,10 @@ public class LobbyTopController  implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        Font PressStart2P = Font.loadFont(getClass().getResourceAsStream("/game/rise_of_valor/assets/fonts/PressStart2P.ttf"), 24);
+<<<<<<< HEAD
        setUserData();
+=======
+>>>>>>> c8ad346 (resolve confilct)
 
         playBtn.setFont(PressStart2P);
         playBtn.setFont(javafx.scene.text.Font.font(PressStart2P.getFamily(), 14));
