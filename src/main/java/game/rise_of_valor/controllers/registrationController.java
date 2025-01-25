@@ -53,14 +53,6 @@ public class registrationController {
         String passwordText = password.getText();
         String usernameText = username.getText();
         boolean isAgree = IAgree.isSelected();
-
-        if(nameText.isEmpty() || passwordText.isEmpty() || usernameText.isEmpty() || !isAgree) {
-            System.out.println("Please fill all the fields");
-            return;
-        }
-
-
-
         userData.setProfilePicName("pic1.png");
         userData.setData(usernameText, nameText, passwordText, 1, 0, DataManager.getProfilePic(userData.getProfilePicName()), false, isAgree);
         System.out.println("Username: " + userData);

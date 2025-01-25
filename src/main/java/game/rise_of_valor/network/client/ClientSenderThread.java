@@ -1,9 +1,6 @@
 package game.rise_of_valor.network.client;
 
-<<<<<<< HEAD
 import game.rise_of_valor.models.ClientData;
-=======
->>>>>>> 580b71d (server created and clien , server created and connection handle done.)
 import game.rise_of_valor.models.Message;
 
 import java.io.IOException;
@@ -43,7 +40,6 @@ class ClientSenderThread extends Thread {
             }
         } catch (IOException e) {
             e.printStackTrace();
-<<<<<<< HEAD
         }
     }
 
@@ -53,14 +49,6 @@ class ClientSenderThread extends Thread {
             objectOutputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
-=======
-        } finally {
-//            try {
-////                socket.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
->>>>>>> 580b71d (server created and clien , server created and connection handle done.)
         }
     }
 }
