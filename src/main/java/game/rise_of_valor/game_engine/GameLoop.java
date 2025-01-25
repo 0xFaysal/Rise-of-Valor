@@ -7,6 +7,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.io.IOException;
+<<<<<<< HEAD
+=======
+import java.util.PrimitiveIterator;
+>>>>>>> 91318b3 (last update)
 
 public class GameLoop {
 
@@ -111,8 +115,12 @@ public class GameLoop {
 
     private void loadWinBGView(Scene scene) {
         try {
+<<<<<<< HEAD
             clearAll();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/win-view.fxml"));
+=======
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/winBG-view.fxml"));
+>>>>>>> 91318b3 (last update)
             scene.setRoot(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
@@ -123,6 +131,7 @@ public class GameLoop {
         return gameWorld.getTopViewManager().getTimer();
    }
 
+<<<<<<< HEAD
     public void stop() {
         gameWorld.getTopViewManager().getTimer().stop();
         gameLoop1.stop();
@@ -141,4 +150,6 @@ public class GameLoop {
         gameLoop1 = null;
         gameLoop2 = null;
     }
+=======
+>>>>>>> 91318b3 (last update)
 }

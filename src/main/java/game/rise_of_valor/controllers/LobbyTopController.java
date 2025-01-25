@@ -140,6 +140,7 @@ public class LobbyTopController  implements Initializable{
 //        stage.getScene().setRoot(loader.load());
     }
 
+<<<<<<< HEAD
     @FXML
     void settingBtn(ActionEvent event) {
         try {
@@ -162,6 +163,8 @@ public class LobbyTopController  implements Initializable{
         }
 
     }
+=======
+>>>>>>> 91318b3 (last update)
 
 
     public void setUserData(){

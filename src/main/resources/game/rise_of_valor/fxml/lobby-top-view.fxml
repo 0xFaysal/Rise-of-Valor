@@ -99,7 +99,11 @@
             </Label>
          </children>
       </Pane>
+<<<<<<< HEAD
       <Button layoutX="23.0" layoutY="180.0" mnemonicParsing="false" onAction="#shopBtn" styleClass="bgTransparent" stylesheets="@../css/styles.css">
+=======
+      <Button layoutX="23.0" layoutY="192.0" mnemonicParsing="false" onAction="#shopBtn" styleClass="bgTransparent" stylesheets="@../css/styles.css">
+>>>>>>> 91318b3 (last update)
          <graphic>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #FDE588; -fx-background-radius: 10px;">
                <children>
@@ -112,7 +116,11 @@
             </Pane>
          </graphic>
       </Button>
+<<<<<<< HEAD
       <Button layoutX="23.0" layoutY="245.0" mnemonicParsing="false" onAction="#vaultBtn" styleClass="bgTransparent" stylesheets="@../css/styles.css">
+=======
+      <Button layoutX="23.0" layoutY="259.0" mnemonicParsing="false" onAction="#vaultBtn" styleClass="bgTransparent" stylesheets="@../css/styles.css">
+>>>>>>> 91318b3 (last update)
          <graphic>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #B0BEC5; -fx-background-radius: 10px;">
                <children>

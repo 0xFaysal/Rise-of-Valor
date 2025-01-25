@@ -52,4 +52,8 @@ public class DataManager {
     public static Image setProfilePic(String profilePic) {
         return new Image(Main.class.getResourceAsStream(UserData.getProfilePicName()));
     }
+
+    public void setCoinCount(int totalCoins) {
+        UserData.setCoin(totalCoins);
+    }
 }
