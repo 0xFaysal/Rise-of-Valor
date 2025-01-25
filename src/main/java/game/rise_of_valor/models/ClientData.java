@@ -72,7 +72,12 @@ public class ClientData implements Serializable {
                 "username='" + username + '\'' +
                 ", IP='" + IP + '\'' +
                 ", PORT=" + PORT +
+                ", image='" + image + '\'' +
                 ", level=" + level +
                 '}';
+    }
+
+    public void setPort(int port) {
+        this.PORT = port;
     }
 }

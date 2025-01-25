@@ -10,6 +10,7 @@ public class DataManager {
     public static Client client;
     static Image backgroundTimer;
     static Image searchIcon;
+   public static Image coinIcon;
 
 //    private static Image profilePic;
 
@@ -20,6 +21,8 @@ public class DataManager {
         loadSprite.loadPlayer(1);
         backgroundTimer = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/timer-bg1.png"));
         searchIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/search.png"));
+        coinIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/coin.png"));
+
 //        profilePic = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/profile/pic1.png"));
     }
 
@@ -42,6 +45,5 @@ public class DataManager {
     public static Image getProfilePic(String profilePic) {
 
        return new Image(DataManager.class.getResourceAsStream("/game/rise_of_valor/assets/profile/"+profilePic));
-
     }
 }

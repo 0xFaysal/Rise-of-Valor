@@ -12,6 +12,8 @@ import static game.rise_of_valor.game_engine.MapManager.*;
 
 public class Player extends Character {
     private boolean isMoving = false;
+    private int totalCoins = 0;
+
 
 
 
@@ -183,5 +185,12 @@ public class Player extends Character {
 
     public int getLevel() {
         return playerLevel;
+    }
+    public void addCoin() {
+        totalCoins++;
+    }
+
+    public int getTotalCoins() {
+        return totalCoins;
     }
 }

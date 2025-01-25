@@ -18,7 +18,7 @@
                 <Font name="Arial Black" size="24.0" />
             </font>
         </Button>
-        <Button alignment="CENTER" layoutX="907.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" stylesheets="@../css/styles.css">
+        <Button alignment="CENTER" layoutX="905.0" layoutY="31.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" stylesheets="@../css/styles.css">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -77,5 +77,37 @@
                 <Font name="Roboto Black" size="18.0" />
             </font>
         </MenuButton>
+      <Pane layoutX="722.0" layoutY="24.0" prefHeight="44.0" prefWidth="141.0" style="-fx-background-color: #F08157;" styleClass="bg-radius" stylesheets="@../css/styles.css">
+         <children>
+            <ImageView fitHeight="44.0" fitWidth="35.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/images/coin.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="coinCount" layoutX="53.0" layoutY="8.0" text="1,000" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="26.0" layoutY="191.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #FDE588; -fx-background-radius: 10px;">
+         <children>
+            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/images/shop.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="27.0" layoutY="254.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #B0BEC5; -fx-background-radius: 10px;">
+         <children>
+            <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/images/vault.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>

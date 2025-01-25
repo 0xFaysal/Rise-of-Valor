@@ -45,6 +45,7 @@ public class GameWorld {
 
 
     private final List<DeathEffect> deathEffects = new ArrayList<>();
+    private final List<Coin> coins = new ArrayList<>();
 
     private final TopViewManager topViewManager;
 
@@ -148,6 +149,8 @@ public class GameWorld {
             player.getGun().updateMousePosition(mouseX, mouseY);
         });
 
+
+
     }
 
     public void update(double deltaTime) {
@@ -203,6 +206,30 @@ public class GameWorld {
             bullet.update(deltaTime);
         }
 
+        // Update coins
+        Iterator<Coin> coinIterator = coins.iterator();
+        while (coinIterator.hasNext()) {
+            Coin coin = coinIterator.next();
+            coin.update(deltaTime, player);
+            if (!coin.isActive()) {
+                coinIterator.remove();
+            }
+        }
+
+        // Remove enemies with life less than or equal to 0 and add death effects and coins
+//        Iterator<Enemy> enemyIterator = enemies.iterator();
+//        while (enemyIterator.hasNext()) {
+//            Enemy enemy = enemyIterator.next();
+//            if (enemy.getLife() <= 0) {
+//                System.out.println("Enemy killed-----");
+//                deathEffects.add(new DeathEffect(enemy.getBody()[0] + enemy.getBody()[2] / 2.0, enemy.worldPositionY + enemy.getBody()[3] / 2.0, enemy.getBody()[2], enemy.getBody()[3], enemy.getCurrentCharacterId()));
+//                System.out.println("Coin created-----");
+//                coins.add(new Coin(enemy.worldPositionX, enemy.worldPositionY));
+//                enemyIterator.remove();
+//                topViewManager.updateKilledEnemy();
+//            }
+//        }
+
         // Remove bullets that are out of bounds or inactive
         bullets.removeIf(bullet -> bullet.isOutOfBounds((int) mapManager.getMapWidth(), (int) mapManager.getMapHeight()) || !bullet.isActive());
         enemyBullets.removeIf(bullet -> bullet.isOutOfBounds((int) mapManager.getMapWidth(), (int) mapManager.getMapHeight()) || !bullet.isActive());
@@ -241,6 +268,8 @@ public class GameWorld {
             Enemy enemy = enemyIterator.next();
             if (enemy.getLife() <= 0) {
                 deathEffects.add(new DeathEffect(enemy.getBody()[0] + enemy.getBody()[2] / 2.0, enemy.worldPositionY + enemy.getBody()[3] / 2.0, enemy.getBody()[2], enemy.getBody()[3], enemy.getCurrentCharacterId()));
+                System.out.println("Coin created-----");
+                coins.add(new Coin(enemy.worldPositionX, enemy.worldPositionY));
                 enemyIterator.remove();
                 topViewManager.updateKilledEnemy();
             }
@@ -251,6 +280,8 @@ public class GameWorld {
         topViewManager.update(deltaTime); // Update timer
         topViewManager.setRemainEnemy(enemies.size()); // Update remaining enemies
         topViewManager.setPlayerLife(player.getLife()); // Update player life
+        topViewManager.setCoinCount(player.getTotalCoins()); // Update coin count
+//        topViewManager.setCoinCount(coins.size()); // Update coin count
 
         //Add enemies to the game world
         enemyAddingManager.update(deltaTime, topViewManager.getKillingRate());
@@ -267,10 +298,18 @@ public class GameWorld {
         // Draw map
         mapManager.drawMap(gc);
 
+
+        // Draw coins
+        for (Coin coin : coins) {
+            coin.draw(gc);
+        }
+
+
         // Draw death effects
         for (DeathEffect effect : deathEffects) {
             effect.draw(gc);
         }
+
 
 
         // Create a list to hold both the player and enemies
@@ -288,6 +327,7 @@ public class GameWorld {
                 character.draw(gc);
             }
         }
+
 
         // Draw bullets
         for (Bullet bullet : bullets) {

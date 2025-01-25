@@ -42,7 +42,11 @@ class GameServerThread extends Thread {
                 System.out.println("Received from user-" + message.getUsername() + " : " + message);
 
                 if ("createdue".equalsIgnoreCase(message.getMessage())) {
+                    System.out.println("User " + message.getUsername() + " created a due mode room------");
+                    System.out.println("Client data: " + clientHandler.getUsername());
                     ClientData clientData = message.getClientData();
+                    clientData.setIP(socket.getInetAddress().getHostAddress());
+                    clientData.setPort(socket.getPort());
                     joinOrCreateRoom(clientData);
 
                 } else if ("all".equalsIgnoreCase(message.getReceiver())) {
@@ -84,6 +88,7 @@ class GameServerThread extends Thread {
                 // Notify the existing player in the room
                 ClientData existingPlayer = room.get(0);
                 Message newPlayerMessage = new Message("newPlayer", clientData);
+                System.out.println("Sending data to existing player: " + clientHandler.getUsername());
                 GameServer.sendMessageToUser(newPlayerMessage, existingPlayer.getUsername());
 
                 // Notify the new player about the existing player
