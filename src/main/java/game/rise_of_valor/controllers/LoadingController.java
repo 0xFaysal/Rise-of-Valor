@@ -2,10 +2,7 @@ package game.rise_of_valor.controllers;
 
 import game.rise_of_valor.models.ProfileImage;
 import game.rise_of_valor.shareData.DataManager;
-<<<<<<< HEAD
 import game.rise_of_valor.shareData.UserData;
-=======
->>>>>>> 580b71d (server created and clien , server created and connection handle done.)
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
