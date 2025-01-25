@@ -38,7 +38,7 @@ public class WaitingViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         animateSearchIcon();
         ClientData clientData = new ClientData(UserData.getUserName(), UserData.getLevel(), UserData.getProfilePicName());
-        client.createDueModeRoom(clientData);
+//        client.createDueModeRoom(clientData);
     }
 
     private void animateSearchIcon() {
