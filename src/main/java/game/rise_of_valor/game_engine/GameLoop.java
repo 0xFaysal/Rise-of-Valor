@@ -1,10 +1,12 @@
 package game.rise_of_valor.game_engine;
 
 import javafx.animation.AnimationTimer;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.io.IOException;
 import java.util.PrimitiveIterator;
 
 public class GameLoop {
@@ -85,6 +87,11 @@ public class GameLoop {
 
                 lastTime = now;
 
+                if (gameWorld.getTopViewManager().getTimer().isTimeUp()) {
+                    loadWinBGView(scene);
+                    stop();
+                }
+
             }
         };
 
@@ -100,4 +107,18 @@ public class GameLoop {
         gc.clearRect(0, 0, gameWorld.CANVAS_WIDTH, gameWorld.CANVAS_HEIGHT);
         gameWorld.render(gc);
     }
+
+    private void loadWinBGView(Scene scene) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/winBG-view.fxml"));
+            scene.setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+   public Timer getTimer(){
+        return gameWorld.getTopViewManager().getTimer();
+   }
+
 }

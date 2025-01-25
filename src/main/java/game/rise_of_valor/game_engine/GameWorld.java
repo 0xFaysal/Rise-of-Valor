@@ -17,6 +17,7 @@ import javafx.util.Duration;
 import java.util.*;
 
 import static game.rise_of_valor.controllers.LoadingController.dataManager;
+import static game.rise_of_valor.controllers.LoadingController.userData;
 import static game.rise_of_valor.game_engine.MapManager.space;
 
 
@@ -281,6 +282,7 @@ public class GameWorld {
         topViewManager.setRemainEnemy(enemies.size()); // Update remaining enemies
         topViewManager.setPlayerLife(player.getLife()); // Update player life
         topViewManager.setCoinCount(player.getTotalCoins()); // Update coin count
+        userData.setCoins(player.getTotalCoins());
 //        topViewManager.setCoinCount(coins.size()); // Update coin count
 
         //Add enemies to the game world
@@ -380,5 +382,9 @@ public class GameWorld {
         bullets.clear();
         deathEffects.clear();
         topViewManager.reset();
+    }
+
+    public TopViewManager getTopViewManager() {
+        return topViewManager;
     }
 }

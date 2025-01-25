@@ -18,19 +18,19 @@
                         <Font name="Berlin Sans FB Demi Bold" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="kill" prefHeight="30.0" prefWidth="69.0" text="150" textFill="#f9b514">
+                  <Label fx:id="killNum" prefHeight="30.0" prefWidth="69.0" text="150" textFill="#f9b514">
                      <font>
                         <Font name="Berlin Sans FB Demi Bold" size="25.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <Label fx:id="coin" layoutX="457.0" layoutY="346.0" prefHeight="30.0" prefWidth="89.0" text="75" textFill="#f9b514">
+            <Label fx:id="coinNum" layoutX="457.0" layoutY="346.0" prefHeight="30.0" prefWidth="89.0" text="75" textFill="#f9b514">
                <font>
                   <Font name="Berlin Sans FB Demi Bold" size="25.0" />
                </font>
             </Label>
-            <Button fx:id="collectBtn" layoutX="429.0" layoutY="394.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="37.0" prefWidth="110.0" style="-fx-background-color: transparent;" />
+            <Button layoutX="429.0" layoutY="394.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#collectBtn" prefHeight="37.0" prefWidth="110.0" style="-fx-background-color: transparent;" />
          </children>
       </AnchorPane>
    </children>

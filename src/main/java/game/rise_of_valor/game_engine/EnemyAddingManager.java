@@ -59,13 +59,13 @@ public class EnemyAddingManager {
         }
 
         if (elapsedTime >= spawnInterval) {
-            addEnemies(random.nextInt(8));
+            addEnemies(random.nextInt(2));
             elapsedTime = 0;
         }
     }
 
     private void addEnemies(int count) {
-    System.out.println("Adding enemy");
+//    System.out.println("Adding enemy");
 
        for(int i=0;i<count;i++) {// Define the range within which enemies should be added around the player
             int range = 200; // Adjust this value as needed
