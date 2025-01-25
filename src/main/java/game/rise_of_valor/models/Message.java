@@ -13,7 +13,6 @@ public class Message implements Serializable {
 
     private String message;
     private String receiver;
-    private Player player;
     private boolean isConnectionSuccessful;
 
 //    public Message(String message) {
@@ -59,12 +58,6 @@ public class Message implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-    public Player getPlayer() {
-        return player;
-    }
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 
     public boolean isConnectionSuccessful() {
         return isConnectionSuccessful;
@@ -74,7 +67,13 @@ public class Message implements Serializable {
     }
     @Override
     public String toString() {
-        return "Message [message=" + message + ", receiver=" + receiver + ", username=" + username + "]";
+        return "Message{" +
+                "username='" + username + '\'' +
+                ", message='" + message + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", clientData=" + clientData +
+                ", isConnectionSuccessful=" + isConnectionSuccessful +
+                '}';
     }
 
     public ClientData getClientData() {

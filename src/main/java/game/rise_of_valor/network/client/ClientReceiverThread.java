@@ -27,7 +27,11 @@ class ClientReceiverThread extends Thread {
         try {
             while (socket.isConnected()) {
                 System.out.println("Waiting for messages..");
+
                 Message message = (Message) objectInputStream.readObject();
+
+                System.out.println("Received message: " + message);
+
                 if (message.isConnectionSuccessful()) {
                     System.out.println("Connection successful");
                     if (connectionListener != null) {
@@ -35,6 +39,7 @@ class ClientReceiverThread extends Thread {
                     }
                     continue;
                 }
+
                 if ("newPlayer".equalsIgnoreCase(message.getMessage()) || "existingPlayer".equalsIgnoreCase(message.getMessage())) {
                     ClientData playerData = message.getClientData();
                     System.out.println("Received player data: " + playerData);
