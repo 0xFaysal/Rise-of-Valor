@@ -32,7 +32,7 @@
 
 /*loading page styles*/
 .banner-bg {
-    -fx-background-image: url("../assets/images/RiseOfValor.jpeg");
+    -fx-background-image: url("../assets/image/gameLogo.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;

@@ -86,7 +86,10 @@ public class LobbyTopController  implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        Font PressStart2P = Font.loadFont(getClass().getResourceAsStream("/game/rise_of_valor/assets/fonts/PressStart2P.ttf"), 24);
+<<<<<<< HEAD
        setUserData();
+=======
+>>>>>>> c8ad346 (resolve confilct)
 
        coinCount.setText(""+userData.getCoins());
 
