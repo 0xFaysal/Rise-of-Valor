@@ -1,8 +1,11 @@
 package game.rise_of_valor.shareData;
 
+
 import javafx.scene.image.Image;
 
-public class UserData {
+import java.io.Serializable;
+
+public class UserData implements Serializable {
     private static String name;
     private static String userName;
     private static String password;
