@@ -51,6 +51,9 @@ public class LobbyTopController  implements Initializable{
 
 
     @FXML
+    private Label coinCount;
+
+    @FXML
     private Label playerName;
 
 
@@ -86,6 +89,8 @@ public class LobbyTopController  implements Initializable{
        Font PressStart2P = Font.loadFont(getClass().getResourceAsStream("/game/rise_of_valor/assets/fonts/PressStart2P.ttf"), 24);
        setUserData();
 
+       coinCount.setText(""+userData.getCoins());
+
         playBtn.setFont(PressStart2P);
         playBtn.setFont(javafx.scene.text.Font.font(PressStart2P.getFamily(), 14));
 
@@ -120,8 +125,25 @@ public class LobbyTopController  implements Initializable{
 
     }
 
+    @FXML
+    void shopBtn(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
-   public void setUserData(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/shop-view.fxml"));
+        stage.getScene().setRoot(loader.load());
+    }
+
+    @FXML
+    void vaultBtn(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        System.out.println("Vault button clicked");
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/game-play.fxml"));
+//        stage.getScene().setRoot(loader.load());
+    }
+
+
+
+    public void setUserData(){
         this.playerName.setText(userData.getName());
         this.userName.setText("@"+userData.getUserName());
         this.level.setText(""+userData.getLevel());

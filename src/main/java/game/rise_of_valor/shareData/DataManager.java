@@ -46,4 +46,8 @@ public class DataManager {
 
        return new Image(DataManager.class.getResourceAsStream("/game/rise_of_valor/assets/profile/"+profilePic));
     }
+
+    public void setCoinCount(int totalCoins) {
+        UserData.setCoin(totalCoins);
+    }
 }

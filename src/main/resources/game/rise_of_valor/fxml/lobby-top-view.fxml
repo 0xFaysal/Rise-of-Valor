@@ -91,23 +91,31 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="26.0" layoutY="191.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #FDE588; -fx-background-radius: 10px;">
-         <children>
-            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/images/shop.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane layoutX="27.0" layoutY="254.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #B0BEC5; -fx-background-radius: 10px;">
-         <children>
-            <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/images/vault.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
+      <Button layoutX="23.0" layoutY="192.0" mnemonicParsing="false" onAction="#shopBtn" styleClass="bgTransparent" stylesheets="@../css/styles.css">
+         <graphic>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #FDE588; -fx-background-radius: 10px;">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/shop.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </graphic>
+      </Button>
+      <Button layoutX="23.0" layoutY="259.0" mnemonicParsing="false" onAction="#vaultBtn" styleClass="bgTransparent" stylesheets="@../css/styles.css">
+         <graphic>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #B0BEC5; -fx-background-radius: 10px;">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/vault.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </graphic>
+      </Button>
     </children>
 </AnchorPane>

@@ -108,4 +108,8 @@ public class TopViewManager {
     public void setCoinCount(int coinCount) {
         this.coinCount = coinCount;
     }
+
+    public Timer getTimer() {
+        return timer;
+    }
 }

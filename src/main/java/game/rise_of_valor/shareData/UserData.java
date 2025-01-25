@@ -111,4 +111,12 @@ public class UserData {
                 ", isAgree=" + isAgree +
                 '}';
     }
+
+    public int getCoins() {
+        return coin;
+    }
+
+    public void setCoins(int totalCoins) {
+        UserData.coin = totalCoins;
+    }
 }
