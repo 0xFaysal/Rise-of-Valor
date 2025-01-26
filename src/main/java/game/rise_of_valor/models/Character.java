@@ -165,11 +165,11 @@ public class Character {
         this.facingLeft = facingLeft;
     }
 
-    public double getPlayerWidth() {
+    public double getCharacterWidth() {
         return spriteWidth;
     }
 
-    public double getPlayerHeight() {
+    public double getCharacterHeight() {
         return spriteHeight;
     }
 
@@ -199,6 +199,10 @@ public class Character {
      */
     public double[] getBody() {
         return new double[]{bodyX, bodyY, bodyWidth, bodyHeight};
+    }
+
+    public boolean isFacingLeft() {
+        return facingLeft;
     }
 
 

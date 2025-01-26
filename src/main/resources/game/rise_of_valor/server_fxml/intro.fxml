@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.media.MediaView?>
+
+
+<StackPane fx:id="rootPane" styleClass="bg-black" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.server_controllers.IntroController">
+   <children>
+      <MediaView fx:id="mediaView" fitHeight="544.0" fitWidth="960.0" preserveRatio="true" />
+   </children>
+</StackPane>

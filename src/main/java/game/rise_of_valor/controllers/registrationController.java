@@ -1,6 +1,8 @@
 package game.rise_of_valor.controllers;
 
 import game.rise_of_valor.Main;
+import game.rise_of_valor.shareData.DataManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,9 +14,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.FileWriter;
 import java.io.IOException;
+
+import static game.rise_of_valor.controllers.LoadingController.dataManager;
+import static game.rise_of_valor.controllers.LoadingController.userData;
+
 
 public class registrationController {
 
@@ -24,16 +31,14 @@ public class registrationController {
     private CheckBox IAgree;
 
     @FXML
-    private TextField email;
+    private TextField name;
 
-    @FXML
-    private Button googleSignUpBtn;
+//    @FXML
+//    private Button googleSignUpBtn;
 
     @FXML
     private PasswordField password;
 
-    @FXML
-    private Button signUpBtn;
 
     @FXML
     private TextField username;
@@ -43,6 +48,39 @@ public class registrationController {
 
     public void setContainerPane(Pane containerPane) {
         this.containerPane = containerPane;
+    }
+
+
+    @FXML
+    void signUp(ActionEvent event) {
+        String nameText = name.getText();
+        String passwordText = password.getText();
+        String usernameText = username.getText();
+        boolean isAgree = IAgree.isSelected();
+
+        if(nameText.isEmpty() || passwordText.isEmpty() || usernameText.isEmpty() || !isAgree) {
+            System.out.println("Please fill all the fields");
+            return;
+        }
+
+
+
+        userData.setProfilePicName("pic1.png");
+        userData.setData(usernameText, nameText, passwordText, 1, 0, DataManager.getProfilePic(userData.getProfilePicName()), false, isAgree);
+        System.out.println("Username: " + userData);
+
+        // Load the lobby view
+        try {
+            Stage stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/lobby-view.fxml"));
+            Pane lobbyView = loader.load();
+
+
+
+            stage.getScene().setRoot(lobbyView);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

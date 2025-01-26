@@ -1,4 +1,4 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');*/
+
 
 .bgWhite {
     -fx-background-color: #FFF;
@@ -11,6 +11,9 @@
 .bgTransparent {
     -fx-background-color: transparent;
 }
+.bg-primery{
+    -fx-background-color: #B2BAB3;
+}
 
 .border {
     -fx-border-color: #E8E8E8;
@@ -20,7 +23,7 @@
 
 /*loading page styles*/
 .banner-bg {
-    -fx-background-image: url("../assets/image/gameLogo.png");
+    -fx-background-image: url("../assets/images/RiseOfValor.jpeg");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -44,7 +47,8 @@
     -fx-background-color: #000;
 }
 
-/* Base button styling */
+
+/* this btn class is for the lobby start btn */
 .btn {
     -fx-background-color: #FDD016;
     -fx-text-fill: #01191D;
@@ -63,9 +67,24 @@
 
 }
 
+
+.btn:hover {
+    -fx-background-color: #FDD016;
+    -fx-border-color: #FDD016,
+    rgba(253, 208, 22, 0.75),
+    rgba(253, 208, 22, 0.5),
+    rgba(253, 208, 22, 0.25);
+    -fx-border-insets: 0, -4, -8, -12;
+    -fx-border-width: 2px, 2px, 2px, 2px;
+    -fx-text-fill: #01191D;
+}
+/*---------------------------------*/
+
+
+
 /*Mode Select Menu Style*/
 .menu-button {
-    -fx-background-color: #01191D;
+    -fx-background-color: #1daabb;
     -fx-text-fill: #FFF;
     -fx-font-family:  Roboto, "Helvetica Neue", Arial, sans-serif;
     -fx-font-size: 18px;
@@ -80,7 +99,7 @@
 }
 
 .menu-button .menu-item {
-    -fx-background-color: #01191D;
+    -fx-background-color: rgba(0, 0, 0, 0);
     -fx-text-fill: #FDD016;
     -fx-font-family:  "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     -fx-font-size: 16px;
@@ -94,13 +113,15 @@
 }
 
 .menu-button .menu-item:selected {
-    -fx-background-color: #16fdb8A1;
+    /*-fx-background-color: #16fdb8A1;*/
+    -fx-background-color: #16f5fd;
+
     -fx-text-fill: #01191D;
 }
 
 /* Style for the ContextMenu */
 .context-menu {
-    -fx-background-color: #01191D;
+    -fx-background-color: #cbb05a;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
     -fx-pref-width: 175px;
@@ -108,66 +129,17 @@
 }
 
 .context-menu .menu-item {
-    -fx-background-color: #01191D;
+    -fx-background-color: rgba(1, 25, 29, 0);
     -fx-text-fill: #FFFFFF; /* Set text color to white */
     -fx-font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     -fx-font-size: 16px;
     -fx-padding: 5px 20px;
-    /*-fx-pref-width: 175px;*/
+
 }
 
 /*---------------------------------*/
 
 
-.select-btn{
-    -fx-background-color: 	#437a37;
-    -fx-text-fill: #143429;
-    /*-fx-border-color: linear-gradient(to right, #FDD016, #01191D);*/
-    -fx-cursor: hand;
-    -fx-font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Gamey font */
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-padding: 0px 5px;
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-background-radius: 10px; /* Rounded corners */
-    /*-fx-border-insets: 0, -4, -8, -12, -16, -20;*/
-    /*-fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;*/
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
-    -fx-text-transform: uppercase;
-}
-
-.select-btn:selected {
-    -fx-background-color: #16f5fd;
-    -fx-text-fill: #01191D;
-}
-
-.btn:hover {
-    -fx-background-color: #FDD016;
-    -fx-border-color: #FDD016,
-                    rgba(253, 208, 22, 0.75),
-                    rgba(253, 208, 22, 0.5),
-                    rgba(253, 208, 22, 0.25);
-    -fx-border-insets: 0, -4, -8, -12;
-    -fx-border-width: 2px, 2px, 2px, 2px;
-    -fx-text-fill: #01191D;
-}
-
-.btn-border {
-    -fx-border-color: #FFF;
-    -fx-border-width: 1px;
-    -fx-border-radius: 50px; /* Rounded corners */
-    -fx-background-radius: 50px; /* Rounded corners */
-}
-
-.btn-border-effect{
-    -fx-cursor: hand;
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-insets: 0, -4, -8, -12, -16, -20;
-    -fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
-    -fx-text-transform: uppercase;
-}
 
 .btn-border-effect:hover{
     -fx-background-color: #FDD016;
@@ -242,10 +214,6 @@
     -fx-border-radius: 24; /* Add border-radius to match */
 }
 
-.duoSelection-bg, .quadSelection-bg {
-    -fx-padding: 0;
-    -fx-background-insets: 0;
-}
 
 .rubik-distressed-regular {
     font-family: "Rubik Distressed", serif;

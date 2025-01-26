@@ -7,6 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import static game.rise_of_valor.shareData.DataManager.coinIcon;
+
 public class TopViewManager {
 
     private CustomFont customFont;
@@ -16,6 +18,8 @@ public class TopViewManager {
     private int killedEnemy;
     private Image gearIcon;
     private Image healthBar;
+
+    private int coinCount;
 
     double playerLife ;
 
@@ -43,6 +47,7 @@ public class TopViewManager {
 
     public void draw(GraphicsContext gc, double canvasWidth,double canvasHeight) {
         timer.draw(gc, canvasWidth);
+
         gc.setFill(Color.color(0.0, 0.0, 0.0, 0.6));
         gc.fillRect(15, 15, 85, 30);
         gc.fillRect(110, 15, 65, 30);
@@ -73,6 +78,14 @@ public class TopViewManager {
         gc.fillRect(25, 65, (healthBar.getWidth()*0.6-21)*(playerLife/100),12);
         gc.drawImage(healthBar, 15,60, healthBar.getWidth()*0.6, healthBar.getHeight()*0.6);
 
+        //coin
+//        gc.setFill(Color.GOLD);
+//        gc.fillOval(120, 60, 15, 15);
+        gc.drawImage(coinIcon, canvasWidth -250 , 15, 30, 30);
+        gc.setFont(Font.font(customFont.getDesporm().getFamily(), FontWeight.EXTRA_BOLD,16));
+        gc.setFill(Color.WHITE);
+        gc.fillText(String.valueOf(coinCount), canvasWidth-210, 35);
+
 
 
     }
@@ -90,5 +103,13 @@ public class TopViewManager {
 
     public double getKillingRate() {
         return (double) killedEnemy / (killedEnemy + remainEnemy);
+    }
+
+    public void setCoinCount(int coinCount) {
+        this.coinCount = coinCount;
+    }
+
+    public Timer getTimer() {
+        return timer;
     }
 }

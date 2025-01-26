@@ -18,7 +18,7 @@
                 <Font name="Arial Black" size="24.0" />
             </font>
         </Button>
-        <Button alignment="CENTER" layoutX="907.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" stylesheets="@../css/styles.css">
+        <Button alignment="CENTER" layoutX="905.0" layoutY="31.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" stylesheets="@../css/styles.css">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -44,7 +44,7 @@
                 <String fx:value="bg-radius" />
             </styleClass>
         </Pane>
-        <ImageView fitHeight="65.0" fitWidth="59.0" layoutX="24.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="profileImage" fitHeight="65.0" fitWidth="59.0" layoutX="24.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../assets/images/profile.jpg" />
             </image>
@@ -52,12 +52,12 @@
                 <Circle centerX="29.0" centerY="29.0" radius="29.0" />
             </clip>
         </ImageView>
-        <Label layoutX="94.0" layoutY="35.0" text="Player Name" textFill="WHITE">
+        <Label fx:id="playerName" layoutX="94.0" layoutY="35.0" text="Player Name" textFill="WHITE">
             <font>
                 <Font name="Roboto Black" size="22.0" />
             </font>
         </Label>
-        <Label layoutX="94.0" layoutY="59.0" text="\@user_name" textFill="WHITE">
+        <Label fx:id="userName" layoutX="94.0" layoutY="59.0" text="\@user_name" textFill="WHITE">
             <font>
                 <Font size="14.0" />
             </font>
@@ -67,7 +67,7 @@
                 <Font name="System Bold" size="13.0" />
             </font>
         </Label>
-        <Label layoutX="137.0" layoutY="19.0" prefHeight="20.0" prefWidth="50.0" text="01" textFill="WHITE">
+        <Label fx:id="level" layoutX="137.0" layoutY="19.0" prefHeight="20.0" prefWidth="50.0" text="01" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
@@ -77,5 +77,45 @@
                 <Font name="Roboto Black" size="18.0" />
             </font>
         </MenuButton>
+      <Pane layoutX="722.0" layoutY="24.0" prefHeight="44.0" prefWidth="141.0" style="-fx-background-color: #F08157;" styleClass="bg-radius" stylesheets="@../css/styles.css">
+         <children>
+            <ImageView fitHeight="44.0" fitWidth="35.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/images/coin.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="coinCount" layoutX="53.0" layoutY="8.0" text="1,000" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button layoutX="23.0" layoutY="192.0" mnemonicParsing="false" onAction="#shopBtn" styleClass="bgTransparent" stylesheets="@../css/styles.css">
+         <graphic>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #FDE588; -fx-background-radius: 10px;">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/shop.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </graphic>
+      </Button>
+      <Button layoutX="23.0" layoutY="259.0" mnemonicParsing="false" onAction="#vaultBtn" styleClass="bgTransparent" stylesheets="@../css/styles.css">
+         <graphic>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #B0BEC5; -fx-background-radius: 10px;">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/vault.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </graphic>
+      </Button>
     </children>
 </AnchorPane>
