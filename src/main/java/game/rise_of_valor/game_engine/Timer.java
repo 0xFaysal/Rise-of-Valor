@@ -13,6 +13,7 @@ public class Timer {
 
     private Font customFont;
     Image background;
+    private boolean isStopped = false;
 
 
     public Timer(double duration, Font font) {
@@ -22,8 +23,10 @@ public class Timer {
     }
 
     public void update(double deltaTime) {
-        if (time > 0) {
-            time -= deltaTime;
+        if(!isStopped) {
+            if (time > 0) {
+                time -= deltaTime;
+            }
         }
     }
 
@@ -32,9 +35,9 @@ public class Timer {
         int minutes = (int) (time / 60);
         int seconds = (int) (time % 60);
         String timeString = String.format("%02d:%02d", minutes, seconds);
+        gc.setFont(Font.font("Arial", FontWeight.BOLD, 14.0));
 
         gc.setFill(Color.BLACK);
-        gc.setFont(Font.font("Arial", FontWeight.BOLD, 14.0));
         gc.fillText("Time", canvasWidth / 2 - 9, 25); // Adjust the position as needed
         gc.setFont(customFont);
         gc.fillText(timeString, canvasWidth / 2 - 30, 50); // Adjust the position as needed
@@ -46,5 +49,9 @@ public class Timer {
 
     public void restartTimer(double duration) {
         time = duration;
+    }
+
+    public void stop() {
+        isStopped = true;
     }
 }

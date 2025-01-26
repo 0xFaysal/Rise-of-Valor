@@ -15,8 +15,7 @@ public class LoginController {
 
     private Pane containerPane;
 
-    @FXML
-    private Button GoogleSignInBtn;
+
 
     @FXML
     private Button SignInBtn;
@@ -86,17 +85,4 @@ public class LoginController {
     }
 
 
-//    @FXML
-//    void goRegister(MouseEvent event) {
-//        try {
-//            containerPane.getChildren().clear();
-//            FXMLLoader registerPaneLoader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/registration-view.fxml"));
-//            Pane registerPane = registerPaneLoader.load();
-//            registrationController registerCtrl = registerPaneLoader.getController();
-//            registerCtrl.setContainerPane(containerPane);
-//            containerPane.getChildren().add(registerPane);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

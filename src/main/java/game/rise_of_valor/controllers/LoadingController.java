@@ -1,5 +1,6 @@
 package game.rise_of_valor.controllers;
 
+import game.rise_of_valor.models.ProfileImage;
 import game.rise_of_valor.shareData.DataManager;
 import game.rise_of_valor.shareData.UserData;
 import javafx.animation.KeyFrame;
@@ -22,6 +23,9 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+//import static game.rise_of_valor.shareData.localCustomData.profileImage;
+import static game.rise_of_valor.shareData.localCustomData.profileImages;
+
 public class LoadingController implements Initializable {
 
     @FXML
@@ -39,6 +43,8 @@ public class LoadingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
         // Create a new Timeline object
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(progressbar.progressProperty(), 0)),
@@ -46,14 +52,19 @@ public class LoadingController implements Initializable {
         );
         timeline.setCycleCount(1); // Ensure it fills only once
         timeline.play();
+
+
         // Add a listener to the progress property
         progressbar.progressProperty().addListener((observable, oldValue, newValue) -> {
+
             double roundedValue = BigDecimal.valueOf(newValue.doubleValue())
-                    .setScale(2, RoundingMode.HALF_UP)
-                    .doubleValue();
+                    .setScale(2, RoundingMode.HALF_UP).doubleValue();
+
 
             if (roundedValue == 0.25 && !dataManagerInitialized) {
                 dataManagerInitialized = true; // Set the flag to true
+
+
                 // Run DataManager initialization in a separate thread
                 dataLoaderThread = new  Thread(() -> {
                     dataManager = new DataManager();
@@ -68,6 +79,7 @@ public class LoadingController implements Initializable {
                         dataManagerTimeline[0].play();
                     });
                 });
+
                 dataLoaderThread.start();
                 dataLoaderThread.setName("DataManagerThread");
             }
@@ -75,6 +87,7 @@ public class LoadingController implements Initializable {
             if (roundedValue == 0.3) {
                 System.out.println("Internet connection status: " + InternetConnectionChecker.isInternetAvailable());
             }
+
 
             if (roundedValue >= 0.4 && roundedValue <= 0.9 && !serverConnectionOpened) {
                 serverConnection();
@@ -85,6 +98,22 @@ public class LoadingController implements Initializable {
 
             if (newValue.doubleValue() == 1.0 && serverConnectionOpened) {
                 try {
+
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic1.png", true,true,100));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic2.png", false,false,200));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic3.png", false,false,250));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic4.png", false,false,300));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic5.png", false,false,320));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic6.png", false,false,350));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic7.png", false,false,400));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic8.png", false,false,420));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic9.png", false,false,450));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic10.png", false,false,500));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic11.png", false,false,550));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic12.png", false,false,600));
+                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic13.png", false,false,650));
+
+
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/login-registration.fxml"));
                     mainPane.getChildren().clear();
                     mainPane.getChildren().add(fxmlLoader.load());
@@ -112,13 +141,6 @@ public class LoadingController implements Initializable {
                 root.setLayoutX((mainPane.getWidth() - root.prefWidth(-1)) / 2);
                 root.setLayoutY((mainPane.getHeight() - root.prefHeight(-1)) / 2);
 
-                // Set the close request handler on the primary stage
-//                mainStage.setOnCloseRequest(event -> {
-//                    System.exit(0);
-//                    System.out.println("Shutting down server...");
-//                    dataLoaderThread.interrupt();
-//                    printActiveThreads();
-//                });
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -130,6 +152,7 @@ public class LoadingController implements Initializable {
             dataManagerTimeline[0].play();
         }
     }
+
 
 
     public void printActiveThreads() {

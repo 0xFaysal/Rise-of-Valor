@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -15,28 +17,18 @@
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="960.0" styleClass="settings-bg" stylesheets="@../css/styles.css">
          <children>
-            <VBox alignment="CENTER" layoutX="277.0" layoutY="81.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="384.0" prefWidth="406.0" styleClass="settingsMenu-bg" stylesheets="@../css/styles.css">
+            <VBox alignment="CENTER" layoutX="277.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="169.0" prefWidth="406.0" styleClass="settingsMenu-bg" stylesheets="@../css/styles.css">
                <children>
-                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="406.0">
-                     <children>
-                        <Label text="SETTINGS" textFill="#e0e0e0">
-                           <font>
-                              <Font name="System Bold" size="25.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="50.0" />
-                     </VBox.margin>
-                  </HBox>
+                  <Label text="Sound " textFill="#e0e0e0">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
                   <HBox alignment="CENTER" prefHeight="44.0" prefWidth="406.0">
                      <children>
                         <Label text="Music: " textFill="#e0e0e0">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font name="System Bold" size="22.0" />
                            </font>
                            <HBox.margin>
                               <Insets right="50.0" />
@@ -55,7 +47,7 @@
                      <children>
                         <Label text="VFX: " textFill="#e0e0e0">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                            <HBox.margin>
                               <Insets right="73.0" />
@@ -64,20 +56,107 @@
                         <Slider fx:id="VfxSlider" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="406.0">
+               </children>
+            </VBox>
+            <Button layoutX="886.0" layoutY="22.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefHeight="40.0" prefWidth="40.0" styleClass="bg-radius" stylesheets="@../css/styles.css">
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label layoutX="422.0" layoutY="45.0" text="SETTINGS" textFill="#e0e0e0">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" layoutX="75.0" layoutY="273.0" prefHeight="200.0" prefWidth="794.0" styleClass="settingsMenu-bg" stylesheets="@../css/styles.css">
+               <children>
+                  <Label text="Cursor" textFill="#e0e0e0">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="134.0" prefWidth="656.0" spacing="10.0">
                      <children>
-                        <Label text="NOTIFICATION: " textFill="#e0e0e0">
-                           <font>
-                              <Font name="System Bold" size="25.0" />
-                           </font>
-                        </Label>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" styleClass="btn-on" stylesheets="@../css/styles.css" text="ON">
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
+                        <Button mnemonicParsing="false" onAction="#cursor1" style="-fx-background-color: #161B2B; -fx-border-radius: 50px;">
+                           <graphic>
+                              <ImageView fitHeight="102.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/cursor/cursor1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" styleClass="btn-off" stylesheets="@../css/styles.css" text="OFF" />
+                        <Button layoutX="15.0" layoutY="22.0" mnemonicParsing="false" onAction="#cursor2" style="-fx-background-color: #161B2B; -fx-border-radius: 50px;">
+                           <graphic>
+                              <ImageView fitHeight="102.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/cursor/cursor2.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="112.0" layoutY="22.0" mnemonicParsing="false" onAction="#cursor3" style="-fx-background-color: #161B2B; -fx-border-radius: 50px;">
+                           <graphic>
+                              <ImageView fitHeight="102.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/cursor/cursor4.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="210.0" layoutY="22.0" mnemonicParsing="false" onAction="#cursor4" style="-fx-background-color: #161B2B; -fx-border-radius: 50px;">
+                           <graphic>
+                              <ImageView fitHeight="102.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/cursor/cursor3.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="308.0" layoutY="22.0" mnemonicParsing="false" onAction="#cursor5" style="-fx-background-color: #161B2B; -fx-border-radius: 50px;">
+                           <graphic>
+                              <ImageView fitHeight="102.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/cursor/cursor5.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="405.0" layoutY="22.0" mnemonicParsing="false" onAction="#cursor6" style="-fx-background-color: #161B2B; -fx-border-radius: 50px;">
+                           <graphic>
+                              <ImageView fitHeight="102.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/cursor/cursor6.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="503.0" layoutY="22.0" mnemonicParsing="false" onAction="#cursor7" style="-fx-background-color: #161B2B; -fx-border-radius: 50px;">
+                           <graphic>
+                              <ImageView fitHeight="102.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/cursor/cursor7.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="308.0" layoutY="22.0" mnemonicParsing="false" onAction="#cursor8" style="-fx-background-color: #161B2B; -fx-border-radius: 50px;">
+                           <graphic>
+                              <ImageView fitHeight="102.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/cursor/cursor8.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
                   </HBox>
                </children>
             </VBox>
