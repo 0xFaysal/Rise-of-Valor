@@ -8,19 +8,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.ServerConnectController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: #EEEEEE;" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.ServerConnectController">
    <children>
-      <Label layoutX="48.0" layoutY="43.0" prefHeight="46.0" prefWidth="303.0" text="Server Connection">
+      <Label layoutX="48.0" layoutY="43.0" prefHeight="46.0" prefWidth="303.0" text="Server Connection" textFill="#30475e">
          <font>
             <Font name="Inter 24pt Black" size="32.0" />
          </font>
       </Label>
-      <Button layoutX="63.0" layoutY="138.0" mnemonicParsing="false" onAction="#startServerBtn" text="Star Server ">
+      <Button layoutX="63.0" layoutY="138.0" mnemonicParsing="false" onAction="#startServerBtn" styleClass="serverBtn" stylesheets="@../css/styles.css" text="Star Server ">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="224.0" layoutY="138.0" mnemonicParsing="false" onAction="#joinServer" text="Join Server">
+      <Button layoutX="224.0" layoutY="138.0" mnemonicParsing="false" onAction="#joinServer" styleClass="serverBtn" stylesheets="@../css/styles.css" text="Join Server">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

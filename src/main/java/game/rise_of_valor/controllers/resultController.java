@@ -1,13 +1,19 @@
 package game.rise_of_valor.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-public class resultController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import static game.rise_of_valor.controllers.LoadingController.userData;
+
+public class resultController implements Initializable {
 
     @FXML
     private Label killLabel;
@@ -44,9 +50,14 @@ public class resultController {
 //        starsImage.setImage(new Image(getClass().getResourceAsStream(starImagePath)));
     }
 
-    @FXML
-    public void initialize() {
-       // continueButton.setOnAction(e -> closeWindow());
+//    @FXML
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        coinsLabel.setText(""+userData.getCoin());
+    }
+
+    public void setKillNum(int killNum) {
+        this.killLabel.setText(""+killNum);
     }
 
     private void closeWindow() {

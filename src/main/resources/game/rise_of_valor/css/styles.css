@@ -23,7 +23,7 @@
 
 /*loading page styles*/
 .banner-bg {
-    -fx-background-image: url("../assets/images/RiseOfValor.jpeg");
+    -fx-background-image: url("../assets/image/gameLogo.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -276,12 +276,12 @@
     -fx-background-position: center;
 }
 
-/*.lose-card-bg {*/
-/*    -fx-background-image: url("../assets/images/lose.png");*/
-/*    -fx-background-size: cover;*/
-/*    -fx-background-repeat: no-repeat;*/
-/*    -fx-background-position: center;*/
-/*}*/
+.lose-card-bg {
+    -fx-background-image: url("../assets/images/lose.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
 
 .star-bg {
     -fx-background-image: url("../assets/images/starBg.png");
@@ -320,3 +320,16 @@
     -fx-background-color: #00C8FF;
 }
 
+/* Buttons */
+.serverBtn {
+    -fx-background-color: #00ADB5;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 16px;
+}
+
+.serverBtn:hover {
+    -fx-background-color: #008891;
+}
