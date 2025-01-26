@@ -256,7 +256,7 @@
     -fx-background-position: center;
 }
 
-/*winBg style*/
+/*result style*/
 /*.win-bg {*/
 /*    -fx-background-image: url("../assets/images/winningBG.png");*/
 /*    -fx-background-size: cover;*/
@@ -276,28 +276,21 @@
     -fx-background-position: center;
 }
 
-/* Victory Title */
-/* Labels */
-.win-label {
-    -fx-font-size: 18px;
-    -fx-text-fill: white;
+/*.lose-card-bg {*/
+/*    -fx-background-image: url("../assets/images/lose.png");*/
+/*    -fx-background-size: cover;*/
+/*    -fx-background-repeat: no-repeat;*/
+/*    -fx-background-position: center;*/
+/*}*/
+
+.star-bg {
+    -fx-background-image: url("../assets/images/starBg.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }
 
-/* Continue Button */
-.continue-btn {
-    -fx-background-color: #FFD700;
-    -fx-text-fill: black;
-    -fx-font-size: 18px;
-    -fx-padding: 8px 16px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-}
-
-.continue-btn:hover {
-    -fx-background-color: #FFA500;
-}
-
-
+/*settings styles*/
 .settings-bg{
     -fx-background-color: linear-gradient(to right, rgba(20,0,36,1), rgb(63, 3, 97));
 }

@@ -25,7 +25,7 @@ public class Main extends Application {
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/game-play.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/shop-view.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/winBG-view.fxml"));
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/win-screen-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/result-view.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/settings-view.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/waiting-view.fxml"));
 
