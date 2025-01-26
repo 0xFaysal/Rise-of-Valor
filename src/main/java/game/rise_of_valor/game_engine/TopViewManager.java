@@ -28,7 +28,7 @@ public class TopViewManager {
         this.timer = new Timer(60, customFont.getDesporm());
         this.remainEnemy = 0;
         this.killedEnemy = 0;
-        this.gearIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/settings.png"));
+        this.gearIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/pause.png"));
         this.healthBar = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/healthbar.png"));
     }
 

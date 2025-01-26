@@ -40,7 +40,6 @@ public class LobbyTopController  implements Initializable{
 
     private ContextMenu contextMenu;
 
-   private String selectedMode;
 
     @FXML
     private Label level;
@@ -141,6 +140,28 @@ public class LobbyTopController  implements Initializable{
 //        stage.getScene().setRoot(loader.load());
     }
 
+    @FXML
+    void settingBtn(ActionEvent event) {
+        try {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/settings-view.fxml"));
+            stage.getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void profileBtn(ActionEvent event) {
+        try {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/profile-view.fxml"));
+            stage.getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
     public void setUserData(){

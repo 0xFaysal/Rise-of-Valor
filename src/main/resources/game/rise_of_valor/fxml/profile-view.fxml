@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.ProfileViewController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="960.0" styleClass="settings-bg" stylesheets="@../css/styles.css">
+         <children>
+            <VBox alignment="CENTER" layoutX="195.0" layoutY="46.0" prefHeight="170.0" prefWidth="570.0" styleClass="settingsMenu-bg" stylesheets="@../css/styles.css">
+               <children>
+                  <Label text="Player Info" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="434.0" spacing="10.0">
+                     <children>
+                        <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/profile/pic1.png" />
+                           </image>
+                        </ImageView>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="173.0" prefWidth="324.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="37.0" prefWidth="322.0" spacing="20.0">
+                                 <children>
+                                    <Label text="Name:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="name" focusTraversable="false" prefHeight="15.0" prefWidth="223.0" promptText="userName" stylesheets="@../css/styles.css" text="Name">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="bgTransparent" />
+                                          <String fx:value="text-white" />
+                                       </styleClass>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="20.0" prefHeight="32.0" prefWidth="322.0" spacing="20.0">
+                                 <children>
+                                    <Label text="Usename:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="userName" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="210.0" text="\@username" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#updateBtn" prefHeight="63.0" prefWidth="203.0" style="-fx-background-color: #FFDAB3;" text="Updata ">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <Pane layoutX="56.0" layoutY="310.0" prefHeight="218.0" prefWidth="847.0" styleClass="settingsMenu-bg" stylesheets="@../css/styles.css">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="15.0" prefHeight="200.0" prefWidth="819.0" style="-fx-background: transparent; -fx-background-color: transparent;" vbarPolicy="NEVER">
+                     <content>
+                        <HBox fx:id="profiles" prefHeight="198.0" prefWidth="818.0" spacing="10.0" />
+                     </content></ScrollPane>               </children>
+            </Pane>
+            <Button layoutX="900.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefHeight="35.0" prefWidth="35.0" styleClass="bg-radius" stylesheets="@../css/styles.css">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Pane layoutX="768.0" layoutY="16.0" prefHeight="35.0" prefWidth="114.0" style="-fx-background-color: #F08157; -fx-background-radius: 20px;" stylesheets="@../css/styles.css">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="6.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/images/coin.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="coinCount" layoutX="39.0" layoutY="4.0" text="1,000" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

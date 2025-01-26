@@ -1,11 +1,15 @@
 package game.rise_of_valor.controllers;
 
+import game.rise_of_valor.Main;
+import game.rise_of_valor.shareData.GameCache;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -14,8 +18,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static game.rise_of_valor.controllers.LoadingController.userData;
+import static game.rise_of_valor.shareData.localCustomData.cursor;
 
-public class winBgController implements Initializable {
+public class WinViewController implements Initializable {
     @FXML
     private Label coinNum;
 
@@ -28,14 +33,16 @@ public class winBgController implements Initializable {
 
         Stage stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/lobby-view.fxml"));
+
         Pane lobbyView = loader.load();
+        lobbyView.setCursor(new ImageCursor(new Image(Main.class.getResourceAsStream(cursor))));
         stage.getScene().setRoot(lobbyView);
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        coinNum.setText(""+userData.getCoin());
+        coinNum.setText(""+ GameCache.getCoinCount());
     }
 
     public void setKillNum(int killNum) {

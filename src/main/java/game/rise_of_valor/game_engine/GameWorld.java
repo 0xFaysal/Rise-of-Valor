@@ -282,7 +282,6 @@ public class GameWorld {
         topViewManager.setRemainEnemy(enemies.size()); // Update remaining enemies
         topViewManager.setPlayerLife(player.getLife()); // Update player life
         topViewManager.setCoinCount(player.getTotalCoins()); // Update coin count
-        userData.setCoins(player.getTotalCoins());
 //        topViewManager.setCoinCount(coins.size()); // Update coin count
 
         //Add enemies to the game world
@@ -366,12 +365,6 @@ public class GameWorld {
     public void resetGameWorld() {
         player = new Player(dataManager.getLoadSprite().getPlayerSprite(), (int) (mapManager.getMapWidth() / 2), (int) (mapManager.getMapHeight() / 2));
         enemies.clear();
-        Random random = new Random();
-        for (int i = 0; i < 80; i++) {
-            int x = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapWidth() - space)));
-            int y = (int) (mapManager.getSpace() + random.nextInt((int) (mapManager.getMapHeight() - space)));
-            enemies.add(new Enemy(dataManager.getLoadSprite().getEnemySprite(i % 4), Math.abs(x), Math.abs(y)));
-        }
         targetCameraX = player.worldPositionX - CANVAS_WIDTH / 2.0;
         targetCameraY = player.worldPositionY - CANVAS_HEIGHT / 2.0;
         cameraX = Math.max(0, Math.min(targetCameraX, mapManager.getMapWidth() - CANVAS_WIDTH));
