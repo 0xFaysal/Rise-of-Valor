@@ -110,7 +110,7 @@ public class GameLoop {
 
     private void loadWinBGView(Scene scene) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/winBG-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/result-view.fxml"));
             scene.setRoot(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
