@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class registrationController {
@@ -36,6 +37,9 @@ public class registrationController {
 
     @FXML
     private TextField username;
+
+
+
 
     public void setContainerPane(Pane containerPane) {
         this.containerPane = containerPane;
@@ -69,6 +73,14 @@ public class registrationController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//        try{
+//            FileWriter fw = new FileWriter("registration.txt");
+//            fw.write(mail + "\n" + pass + "\n" + user);
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
+
     }
 
 //    @FXML
