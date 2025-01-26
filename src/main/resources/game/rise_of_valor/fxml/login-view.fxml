@@ -46,12 +46,12 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="Email">
+                  <Label text="Username">
                      <VBox.margin>
                         <Insets bottom="5.0" left="2.5" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="email" focusTraversable="false" promptText="Email" stylesheets="@../css/styles.css">
+                  <TextField fx:id="email" focusTraversable="false" promptText="Username" stylesheets="@../css/styles.css">
                      <styleClass>
                         <String fx:value="bgWhite" />
                         <String fx:value="border" />
