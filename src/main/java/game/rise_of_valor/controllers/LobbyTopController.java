@@ -168,6 +168,6 @@ public class LobbyTopController  implements Initializable{
         this.playerName.setText(userData.getName());
         this.userName.setText("@"+userData.getUserName());
         this.level.setText(""+userData.getLevel());
-        this.profileImage.setImage(userData.getProfilePic());
+//        this.profileImage.setImage(userData.getProfilePic());
     }
 }

@@ -27,10 +27,9 @@ class ClientReceiverThread extends Thread {
         try {
             while (socket.isConnected()) {
                 System.out.println("Waiting for messages..");
-
                 Message message = (Message) objectInputStream.readObject();
-
                 System.out.println("Received message: " + message);
+
 
                 if (message.isConnectionSuccessful()) {
                     System.out.println("Connection successful");
@@ -40,22 +39,22 @@ class ClientReceiverThread extends Thread {
                     continue;
                 }
 
-                if ("newPlayer".equalsIgnoreCase(message.getMessage()) || "existingPlayer".equalsIgnoreCase(message.getMessage())) {
-                    ClientData playerData = message.getClientData();
-                    System.out.println("Received player data: " + playerData);
-                }
-                System.out.println("\nReceived from " + message.getUsername() + ": " + message.getMessage());
+//                if ("newPlayer".equalsIgnoreCase(message.getMessage()) || "existingPlayer".equalsIgnoreCase(message.getMessage())) {
+//                    ClientData playerData = message.getClientData();
+//                    System.out.println("Received player data: " + playerData);
+//                }
+//                System.out.println("\nReceived from " + message.getUsername() + ": " + message.getMessage());
             }
         } catch (EOFException e) {
             System.out.println("Connection closed by server.");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
-            try {
-                socket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                socket.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 }

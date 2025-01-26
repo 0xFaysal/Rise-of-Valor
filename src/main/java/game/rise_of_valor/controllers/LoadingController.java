@@ -41,8 +41,24 @@ public class LoadingController implements Initializable {
     Thread dataLoaderThread;
 
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic1.png", true, true, 100));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic2.png", false, false, 200));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic3.png", false, false, 250));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic4.png", false, false, 300));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic5.png", false, false, 320));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic6.png", false, false, 350));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic7.png", false, false, 400));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic8.png", false, false, 420));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic9.png", false, false, 450));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic10.png", false, false, 500));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic11.png", false, false, 550));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic12.png", false, false, 600));
+        profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic13.png", false, false, 650));
 
 
         // Create a new Timeline object
@@ -67,16 +83,21 @@ public class LoadingController implements Initializable {
 
                 // Run DataManager initialization in a separate thread
                 dataLoaderThread = new  Thread(() -> {
+
                     dataManager = new DataManager();
                     userData = new UserData();
+
                     Platform.runLater(() -> {
+
                         // Update progress bar to 100% after DataManager initialization
                         dataManagerTimeline[0] = new Timeline(
                                 new KeyFrame(Duration.ZERO, new KeyValue(progressbar.progressProperty(), 0.26)),
                                 new KeyFrame(Duration.seconds(1), new KeyValue(progressbar.progressProperty(), 1))
                         );
+
                         dataManagerTimeline[0].setCycleCount(1);
                         dataManagerTimeline[0].play();
+
                     });
                 });
 
@@ -99,19 +120,7 @@ public class LoadingController implements Initializable {
             if (newValue.doubleValue() == 1.0 && serverConnectionOpened) {
                 try {
 
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic1.png", true,true,100));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic2.png", false,false,200));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic3.png", false,false,250));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic4.png", false,false,300));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic5.png", false,false,320));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic6.png", false,false,350));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic7.png", false,false,400));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic8.png", false,false,420));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic9.png", false,false,450));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic10.png", false,false,500));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic11.png", false,false,550));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic12.png", false,false,600));
-                    profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic13.png", false,false,650));
+
 
 
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/login-registration.fxml"));
@@ -125,21 +134,26 @@ public class LoadingController implements Initializable {
 
     }
     private void serverConnection() {
+
         Platform.runLater(() -> {
+
             try {
+
                 FXMLLoader serverConnectionFxml = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/server-connect.fxml"));
                 Parent root = serverConnectionFxml.load();
                 ServerConnectController controller = serverConnectionFxml.getController();
 
-                Stage mainStage = (Stage) mainPane.getScene().getWindow();
+
                 // Add the server connection content on top of the existing children
                 mainPane.getChildren().add(root);
                 controller.setMainPane(mainPane);
                 controller.setLoadingController(this); // Pass the LoadingController instance
 
+
                 // Center the content in the mainPane
                 root.setLayoutX((mainPane.getWidth() - root.prefWidth(-1)) / 2);
                 root.setLayoutY((mainPane.getHeight() - root.prefHeight(-1)) / 2);
+
 
             } catch (IOException e) {
                 e.printStackTrace();

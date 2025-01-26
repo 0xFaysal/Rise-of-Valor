@@ -1,7 +1,6 @@
 package game.rise_of_valor.network.client;
 
-
-import game.rise_of_valor.models.ClientData;
+import game.rise_of_valor.models.Message;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -17,12 +16,13 @@ public class Client extends Thread {
 
     private ConnectionListener connectionListener;
 
-   private boolean isClientConnected = false;
+    private boolean isClientConnected = false;
+
     public Client(String hostAddress, int port) {
         this.hostAddress = hostAddress;
         this.port = port;
         this.setName("Client");
-
+        initializeClientSenderThread();
     }
 
     public Client(String hostAddress, int port, ConnectionListener connectionListener) {
@@ -30,16 +30,23 @@ public class Client extends Thread {
         this.port = port;
         this.connectionListener = connectionListener;
         this.setName("Client");
+        initializeClientSenderThread();
+    }
+
+    private void initializeClientSenderThread() {
+        try {
+            socket = new Socket(hostAddress, port);
+            clientSenderThread = new ClientSenderThread(socket);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         try {
-            socket = new Socket(hostAddress, port);
             System.out.println("Connected to server on port " + port);
-            clientSenderThread =  new ClientSenderThread(socket);
-            clientSenderThread.start();
-          clientReceiverThread =  new ClientReceiverThread(socket, connectionListener);
+            clientReceiverThread = new ClientReceiverThread(socket, connectionListener);
             clientReceiverThread.start();
         } catch (IOException e) {
             System.out.println("Failed to connect to server on port " + port);
@@ -60,9 +67,12 @@ public class Client extends Thread {
         }
     }
 
-
-    public void createDueModeRoom(ClientData clientData) {
-        clientSenderThread.createDueModeRoom(clientData);
+    public void sendMessage(Message message) {
+        if (clientSenderThread != null) {
+            clientSenderThread.sendMessage(message);
+        } else {
+            System.out.println("ClientSenderThread is not initialized. Cannot send message.");
+        }
     }
 
     public interface ConnectionListener {
