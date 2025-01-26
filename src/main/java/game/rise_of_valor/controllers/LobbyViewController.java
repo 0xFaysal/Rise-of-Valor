@@ -188,7 +188,7 @@ public class LobbyViewController implements Initializable {
 
 
 //            System.out.println(currentSprite+player.getUrl());
-            gc.drawImage(player, 300, 0,player.getWidth()*0.2,player.getHeight()*0.2);
+            gc.drawImage(player, 435, 208,player.getWidth()*0.2*2,player.getHeight()*0.2*2);
         }
     }
 }

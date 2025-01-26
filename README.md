@@ -33,3 +33,14 @@ To get started:
 
 ### **License**
 This project is licensed under the MIT License.
+
+---
+### **Minhaj last update** 
+#### What I have done
+- I have created the project structure and README.md file.
+- I have added the project description and the project structure.
+
+#### What need to do
+- I need to add the installation guide.
+- I need to add the contribution guide.
+- 

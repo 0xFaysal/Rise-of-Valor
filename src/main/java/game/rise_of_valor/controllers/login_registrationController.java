@@ -17,9 +17,9 @@ public class login_registrationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            FXMLLoader loginPaneLoader = new FXMLLoader(Main.class.getResource("fxml/login-view.fxml"));
+            FXMLLoader loginPaneLoader = new FXMLLoader(Main.class.getResource("fxml/registration-view.fxml"));
             Pane loginPane = loginPaneLoader.load();
-            LoginController loginCtrl = loginPaneLoader.getController();
+            registrationController loginCtrl = loginPaneLoader.getController();
             loginCtrl.setContainerPane(containerPane);
             containerPane.getChildren().add(loginPane);
         } catch (Exception e) {

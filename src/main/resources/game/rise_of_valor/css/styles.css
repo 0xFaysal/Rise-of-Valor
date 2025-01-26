@@ -1,11 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playpen+Sans:wght@100..800&display=swap');
+
+
 .bgWhite {
     -fx-background-color: #FFF;
 }
 
+.bg-black {
+    -fx-background-color: #000;
+}
+
 .bgTransparent {
     -fx-background-color: transparent;
+}
+.bg-primery{
+    -fx-background-color: #B2BAB3;
 }
 
 .border {
@@ -14,19 +21,34 @@
     -fx-border-radius: 5;
 }
 
+/*loading page styles*/
 .banner-bg {
-    -fx-background-image: url("../assets/image/RiseOfValor.jpeg");
+    -fx-background-image: url("../assets/images/RiseOfValor.jpeg");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
+}
 
+.custom-progress-bar .bar {
+    -fx-background-color: #fa3e3f; /* Change this to your desired color */
+}
+
+.bg-radius {
+    -fx-background-radius: 24; /* Ensure this matches the button's shape */
+    -fx-border-radius: 24; /* Add border-radius to match */
+}
+
+.duoSelection-bg, .quadSelection-bg {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
 }
 
 .bg-black {
     -fx-background-color: #000;
 }
 
-/* Base button styling */
+
+/* this btn class is for the lobby start btn */
 .btn {
     -fx-background-color: #FDD016;
     -fx-text-fill: #01191D;
@@ -45,55 +67,79 @@
 
 }
 
-.select-btn{
-    -fx-background-color: 	#437a37;
-    -fx-text-fill: #143429;
-    /*-fx-border-color: linear-gradient(to right, #FDD016, #01191D);*/
-    -fx-cursor: hand;
-    -fx-font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Gamey font */
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-padding: 0px 5px;
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-background-radius: 10px; /* Rounded corners */
-    /*-fx-border-insets: 0, -4, -8, -12, -16, -20;*/
-    /*-fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;*/
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
-    -fx-text-transform: uppercase;
-}
-
-.select-btn:selected {
-    -fx-background-color: #16f5fd;
-    -fx-text-fill: #01191D;
-}
 
 .btn:hover {
     -fx-background-color: #FDD016;
     -fx-border-color: #FDD016,
-                    rgba(253, 208, 22, 0.75),
-                    rgba(253, 208, 22, 0.5),
-                    rgba(253, 208, 22, 0.25);
+    rgba(253, 208, 22, 0.75),
+    rgba(253, 208, 22, 0.5),
+    rgba(253, 208, 22, 0.25);
     -fx-border-insets: 0, -4, -8, -12;
     -fx-border-width: 2px, 2px, 2px, 2px;
     -fx-text-fill: #01191D;
 }
+/*---------------------------------*/
 
-.btn-border {
-    -fx-border-color: #FFF;
-    -fx-border-width: 1px;
-    -fx-border-radius: 50px; /* Rounded corners */
-    -fx-background-radius: 50px; /* Rounded corners */
-}
 
-.btn-border-effect{
+
+/*Mode Select Menu Style*/
+.menu-button {
+    -fx-background-color: #1daabb;
+    -fx-text-fill: #FFF;
+    -fx-font-family:  Roboto, "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-border-color: #01191D;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px 10px;
     -fx-cursor: hand;
-    -fx-border-radius: 10px; /* Rounded corners */
-    -fx-background-radius: 10px; /* Rounded corners */
-    -fx-border-insets: 0, -4, -8, -12, -16, -20;
-    -fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
-    -fx-text-transform: uppercase;
 }
+
+.menu-button .menu-item {
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-text-fill: #FDD016;
+    -fx-font-family:  "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 16px;
+    -fx-padding: 5px 10px;
+    -fx-pref-width: 175px;
+}
+
+.menu-button .menu-item:hover {
+    -fx-background-color: #FDD016A1;
+    -fx-text-fill: #01191D;
+}
+
+.menu-button .menu-item:selected {
+    /*-fx-background-color: #16fdb8A1;*/
+    -fx-background-color: #16f5fd;
+
+    -fx-text-fill: #01191D;
+}
+
+/* Style for the ContextMenu */
+.context-menu {
+    -fx-background-color: #cbb05a;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-pref-width: 175px;
+    -fx-padding: 5px 10px;
+}
+
+.context-menu .menu-item {
+    -fx-background-color: rgba(1, 25, 29, 0);
+    -fx-text-fill: #FFFFFF; /* Set text color to white */
+    -fx-font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 16px;
+    -fx-padding: 5px 20px;
+
+}
+
+/*---------------------------------*/
+
+
 
 .btn-border-effect:hover{
     -fx-background-color: #FDD016;
@@ -105,6 +151,35 @@
     -fx-border-width: 2px, 2px, 2px, 2px;
 }
 
+/*Mode selection buttons styles*/
+.mode-btn-border {
+    -fx-border-color: #6f6d6d;
+    -fx-border-width: 2px;
+    -fx-border-radius: 50px; /* Rounded corners */
+    -fx-background-radius: 50px; /* Rounded corners */
+}
+
+.mode-btn-border-effect{
+    -fx-cursor: hand;
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-border-insets: 0, -4, -8, -12, -16, -20;
+    -fx-border-width: 2px, 2px, 2px, 2px, 2px, 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 0);
+    -fx-text-transform: uppercase;
+}
+
+.mode-btn-border-effect:hover{
+    -fx-background-color: #FDD016;
+    -fx-border-color: #FDD016,
+    rgba(253, 208, 22, 0.75),
+    rgba(253, 208, 22, 0.5),
+    rgba(253, 208, 22, 0.25);
+    -fx-border-insets: 0, -4, -8, -12;
+    -fx-border-width: 2px, 2px, 2px, 2px;
+}
+
+
 .duoSelection-bg {
     -fx-background-image: url("../assets/image/DuoMode.jpeg");
     -fx-background-size: cover;
@@ -112,6 +187,12 @@
     -fx-background-position: center;
     -fx-background-radius: 24; /* Ensure this matches the button's shape */
     -fx-border-radius: 24; /* Add border-radius to match */
+    -fx-transition: transform 0.5s ease-in-out; /* Smooth transition */
+}
+
+.duoSelection-bg:hover {
+    -fx-scale-x: 1.03; /* Zoom in horizontally */
+    -fx-scale-y: 1.03; /* Zoom in vertically */
 }
 
 .quadSelection-bg {
@@ -121,33 +202,94 @@
     -fx-background-position: center;
     -fx-background-radius: 24; /* Ensure this matches the button's shape */
     -fx-border-radius: 24; /* Add border-radius to match */
+    -fx-transition: transform 0.5s ease-in-out; /* Smooth transition */
 }
+.quadSelection-bg:hover {
+    -fx-scale-x: 1.03; /* Zoom in horizontally */
+    -fx-scale-y: 1.03; /* Zoom in vertically */
+}
+
 .bg-radius {
     -fx-background-radius: 24; /* Ensure this matches the button's shape */
     -fx-border-radius: 24; /* Add border-radius to match */
 }
 
-.duoSelection-bg, .quadSelection-bg {
-    -fx-padding: 0;
-    -fx-background-insets: 0;
-}
 
-.bg-black {
-    -fx-background-color: #000;
-}
-
-@font-face {
-    font-family: 'RigBoldHalftone';
-    src: url('../assets/fonts/Rig-BoldHalftone.ttf');
-    font-weight: 900;
+.rubik-distressed-regular {
+    font-family: "Rubik Distressed", serif;
+    font-weight: 400;
     font-style: normal;
-    font-display: swap;
+    -fx-font-size: 50px;
 }
 
-
-
-.btn-border-effect:hover .text-effect{
-    -fx-font-size: 48;
-    -fx-font-family: "Rig Bold Halftone";
-    /*-fx-font-family: "Press Start 2P", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; !* Gamey font *!*/
+.rampart-one-regular {
+    -fxfont-family: "Rampart One", serif;
+    font-weight: 400;
+    font-style: normal;
+    -fx-font-size: 50px;
 }
+
+.shop-bg {
+    -fx-background-image: url("../assets/image/shopBG.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.shopItems-bg {
+    -fx-background-image: url("../assets/images/shopItemBg.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.nextBtn-bg {
+    -fx-background-image: url("../assets/images/rightBtn.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.previousBtn-bg {
+    -fx-background-image: url("../assets/images/leftBtn.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+/*winBg style*/
+.win-bg {
+    -fx-background-image: url("../assets/images/winningBG.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.settings-bg{
+    -fx-background-color: linear-gradient(to right, rgba(20,0,36,1), rgb(63, 3, 97));
+}
+.settingsMenu-bg {
+    -fx-background-color: rgba(40, 40, 60, 0.8);
+    -fx-background-radius: 10px;
+    -fx-padding: 15px;
+}
+
+.btn-on {
+    -fx-background-color: #00C8FF;
+    -fx-text-fill: black;
+    -fx-background-radius: 5px;
+}
+
+.btn-off {
+    -fx-background-color: #FF5F5F;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+}
+
+.slider .track {
+    -fx-background-color: #444;
+}
+
+.slider .thumb {
+    -fx-background-color: #00C8FF;
+}
+

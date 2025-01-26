@@ -67,6 +67,13 @@ public class LoginController {
 
     @FXML
     void SignInBtnClick(ActionEvent event) {
+
+
+
+
+
+
+
         // go to lobby
         try {
             Stage stage =(Stage) ((Node)event.getSource()).getScene().getWindow();

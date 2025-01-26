@@ -25,6 +25,8 @@ public class IntroController implements Initializable {
 
     @FXML
     private StackPane rootPane;
+    Media media;
+    MediaPlayer mediaPlayer;
 
 
     @Override
@@ -35,8 +37,8 @@ public class IntroController implements Initializable {
     private void playMedia() {
         // Load the video
         String videoPath = getClass().getResource("/game/rise_of_valor/assets/Videos/InceptionCoderLogo.mp4").toExternalForm();
-        Media media = new Media(videoPath);
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        media = new Media(videoPath);
+        mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
 
         // Fade in the video
@@ -65,16 +67,17 @@ public class IntroController implements Initializable {
 
     private void switchToNextScene() {
 
-        // Transition to the next scene (e.g., loading screen or main game)
-
         try {
             rootPane.getChildren().clear();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/loading.fxml"));
             rootPane.getChildren().add(fxmlLoader.load());
+            media=null;
+            mediaPlayer=null;
+            mediaView.getMediaPlayer().dispose();
         } catch (IOException e) {
             e.printStackTrace();
         }
-}
+    }
 
 
 }

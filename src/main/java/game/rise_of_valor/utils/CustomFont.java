@@ -11,12 +11,14 @@ public class CustomFont {
     public Font AttackOfMonster;
     public Font Inter;
     public Font Desporm;
+    public Font PressStart2P;
 
 
     public CustomFont() {
         AttackOfMonster = Font.loadFont(getClass().getResourceAsStream("/game/rise_of_valor/assets/fonts/Attack Of Monster.ttf"), 24);
         Inter = Font.loadFont(getClass().getResourceAsStream("/game/rise_of_valor/assets/fonts/Inter_24pt-Regular.ttf"), 24);
         Desporm = Font.loadFont(getClass().getResourceAsStream("/game/rise_of_valor/assets/fonts/DESPORM.ttf"), 24);
+        PressStart2P = Font.loadFont(getClass().getResourceAsStream("/game/rise_of_valor/assets/fonts/PressStart2P.ttf"), 24);
 
 
         System.out.println("Loading fonts");
