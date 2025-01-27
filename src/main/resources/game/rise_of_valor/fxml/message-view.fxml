@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -10,23 +11,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.MessageViewController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="960.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="960.0" style="-fx-background-color: #1E1E2E;">
          <children>
-            <TextField fx:id="textField" layoutX="25.0" layoutY="463.0" prefHeight="50.0" prefWidth="775.0" />
-            <Button layoutX="844.0" layoutY="463.0" mnemonicParsing="false" onAction="#sendBtn" prefHeight="50.0" prefWidth="88.0" text="Send">
+            <TextField fx:id="textField" layoutX="25.0" layoutY="463.0" prefHeight="50.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #007ACC; -fx-border-radius: 10; -fx-background-radius: 10;" />
+            <Button layoutX="844.0" layoutY="463.0" mnemonicParsing="false" onAction="#sendBtn" prefHeight="50.0" prefWidth="88.0" style="-fx-background-color: #007ACC; -fx-background-radius: 10;" text="Send" textFill="#efeded">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
-            <ScrollPane hbarPolicy="NEVER" layoutX="25.0" layoutY="47.0" prefHeight="401.0" prefWidth="903.0">
+            <ScrollPane hbarPolicy="NEVER" layoutX="25.0" layoutY="47.0" prefHeight="401.0" prefWidth="903.0" style="-fx-border-radius: 24; -fx-background-radius: 24;" stylesheets="@../css/styles.css">
                <content>
-                  <VBox fx:id="messageBox" prefHeight="401.0" prefWidth="890.0" />
+                  <VBox fx:id="messageBox" prefHeight="402.0" prefWidth="889.0" style="-fx-background-color: #2E2E3E; -fx-border-color: #444; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10;" stylesheets="@../css/styles.css" />
                </content>
+               <styleClass>
+                  <String fx:value="scroll-bar" />
+                  <String fx:value="scroll-pane" />
+                  <String fx:value="bgTransparent" />
+               </styleClass>
             </ScrollPane>
-            <Button layoutX="914.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefHeight="35.0" prefWidth="35.0" styleClass="bg-radius" stylesheets="@../css/styles.css">
+            <Button layoutX="914.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #FF2E63;" styleClass="bg-radius" stylesheets="@../css/styles.css">
                <graphic>
                   <ImageView fitHeight="39.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
