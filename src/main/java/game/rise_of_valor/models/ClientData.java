@@ -70,6 +70,10 @@ public class ClientData implements Serializable {
         this.userData = userData;
     }
 
+    public ClientData(String username){
+        this.username = username;
+    }
+
     public String getUsername() {
         return username;
     }

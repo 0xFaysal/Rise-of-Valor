@@ -36,7 +36,7 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="warningMsg" onMouseClicked="#goSignIn" text=" Warning Message" textFill="#ea0340">
+            <Label fx:id="warningMsg" onMouseClicked="#goSignIn" textFill="#ea0340">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

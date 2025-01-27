@@ -1,5 +1,6 @@
 package game.rise_of_valor.network.client;
 
+import game.rise_of_valor.controllers.MessageViewController;
 import game.rise_of_valor.models.ClientData;
 import game.rise_of_valor.models.Message;
 import game.rise_of_valor.shareData.DataManager;
@@ -37,6 +38,13 @@ class ClientReceiverThread extends Thread {
                         connectionListener.onConnectionSuccessful();
                     }
                     continue;
+                }
+
+                if(message.getMode().equals("communication")) {
+                    System.out.println("Received createAccount message: " + message);
+                    if(message!=null) {
+                        MessageViewController.addLabel(message.getMessage(),Client.messageBox);
+                    }
                 }
 
 //                if ("newPlayer".equalsIgnoreCase(message.getMessage()) || "existingPlayer".equalsIgnoreCase(message.getMessage())) {

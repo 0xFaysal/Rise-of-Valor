@@ -22,6 +22,7 @@ import static game.rise_of_valor.controllers.LoadingController.dataManager;
 import static game.rise_of_valor.controllers.LoadingController.userData;
 import static game.rise_of_valor.shareData.DataManager.client;
 import static game.rise_of_valor.shareData.localCustomData.profileImages;
+import static game.rise_of_valor.storage.LocalStorageManager.signupData;
 
 
 public class registrationController {
@@ -78,7 +79,7 @@ public class registrationController {
         Message message = new Message("createAccount", clientData);
 
         client.sendMessage(message);
-
+        signupData(nameText, passwordText);
 
 
 

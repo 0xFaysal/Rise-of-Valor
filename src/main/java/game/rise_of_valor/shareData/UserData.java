@@ -111,6 +111,10 @@ public class UserData implements Serializable {
         UserData.profilePicName = profilePicName;
     }
 
+    public static String getUsername() {
+        return userName;
+    }
+
     @Override
     public String toString() {
         return "UserData{" +

@@ -2,6 +2,7 @@ package game.rise_of_valor.network.client;
 
 
 import game.rise_of_valor.models.Message;
+import javafx.scene.layout.VBox;
 
 
 import java.io.IOException;
@@ -27,6 +28,8 @@ public class Client extends Thread {
         initializeClientSenderThread();
     }
 
+  public static VBox messageBox;
+
     public Client(String hostAddress, int port, ConnectionListener connectionListener) {
         this.hostAddress = hostAddress;
         this.port = port;
@@ -35,10 +38,12 @@ public class Client extends Thread {
         initializeClientSenderThread();
     }
 
+
     private void initializeClientSenderThread() {
         try {
             socket = new Socket(hostAddress, port);
             clientSenderThread = new ClientSenderThread(socket);
+            clientSenderThread.start(); // Start the thread once
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,6 +81,10 @@ public class Client extends Thread {
             System.out.println("ClientSenderThread is not initialized. Cannot send message.");
         }
 
+    }
+
+    public static void setMessageView(VBox messageBox) {
+            Client.messageBox = messageBox;
     }
 
     public interface ConnectionListener {

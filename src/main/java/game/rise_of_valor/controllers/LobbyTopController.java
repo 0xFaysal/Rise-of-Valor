@@ -70,13 +70,13 @@ public class LobbyTopController  implements Initializable{
                 lobbyViewController.stopLobbyLoop();
             }
 
-            if(menuButton.getText().equals("CLASSIC")){
+//            if(menuButton.getText().equals("CLASSIC")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/game-play.fxml"));
                 stage.getScene().setRoot(loader.load());
-            }else{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/mode-selection.fxml"));
-                stage.getScene().setRoot(loader.load());
-            }
+//            }else{
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/mode-selection.fxml"));
+//                stage.getScene().setRoot(loader.load());
+//            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,32 +95,32 @@ public class LobbyTopController  implements Initializable{
 
 
 
-        contextMenu = new ContextMenu();
+//        contextMenu = new ContextMenu();
 
-        contextMenu.getStyleClass().add("context-menu"); // Add this line
+//        contextMenu.getStyleClass().add("context-menu"); // Add this line
 
-        MenuItem action1 = new MenuItem("MULTIPLAYER");
-        SeparatorMenuItem separator = new SeparatorMenuItem();
-        MenuItem action2 = new MenuItem("CLASSIC");
-        contextMenu.getItems().addAll(action1, separator, action2);
-
-        action1.setOnAction(event -> {
-            menuButton.setText(action1.getText());
-            menuButton.setGraphic(null); // Remove the icon
-            menuButton.setStyle("-fx-background-color: #16f5fd; -fx-text-fill: #000; -fx-font-size: 14px; -fx-font-family:'Book Antiqua'; -fx-text-alignment: center; " );
-        });
-        action2.setOnAction(event -> {
-            menuButton.setText(action2.getText());
-            menuButton.setGraphic(null); // Remove the icon
-            menuButton.setStyle("-fx-background-color: #228c22; -fx-text-fill: #000; -fx-font-size: 14px; -fx-font-family:'Book Antiqua'; -fx-text-alignment: center; " );
-        });
-
-        menuButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            contextMenu.show(menuButton, 1051, 430);
-            contextMenu.heightProperty().addListener((observable, oldValue, newValue) -> {
-                contextMenu.setY(menuButton.getLayoutY() - newValue.doubleValue());
-            });
-        });
+//        MenuItem action1 = new MenuItem("MULTIPLAYER");
+//        SeparatorMenuItem separator = new SeparatorMenuItem();
+//        MenuItem action2 = new MenuItem("CLASSIC");
+//        contextMenu.getItems().addAll(action1, separator, action2);
+//
+//        action1.setOnAction(event -> {
+//            menuButton.setText(action1.getText());
+//            menuButton.setGraphic(null); // Remove the icon
+//            menuButton.setStyle("-fx-background-color: #16f5fd; -fx-text-fill: #000; -fx-font-size: 14px; -fx-font-family:'Book Antiqua'; -fx-text-alignment: center; " );
+//        });
+//        action2.setOnAction(event -> {
+//            menuButton.setText(action2.getText());
+//            menuButton.setGraphic(null); // Remove the icon
+//            menuButton.setStyle("-fx-background-color: #228c22; -fx-text-fill: #000; -fx-font-size: 14px; -fx-font-family:'Book Antiqua'; -fx-text-alignment: center; " );
+//        });
+//
+//        menuButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+//            contextMenu.show(menuButton, 1051, 430);
+//            contextMenu.heightProperty().addListener((observable, oldValue, newValue) -> {
+//                contextMenu.setY(menuButton.getLayoutY() - newValue.doubleValue());
+//            });
+//        });
 
     }
 
@@ -130,6 +130,20 @@ public class LobbyTopController  implements Initializable{
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/shop-view.fxml"));
         stage.getScene().setRoot(loader.load());
+    }
+
+
+
+    @FXML
+    void msgBtn(ActionEvent event) {
+        try {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/message-view.fxml"));
+            stage.getScene().setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML

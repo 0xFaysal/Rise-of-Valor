@@ -15,8 +15,9 @@ class GameServerThread extends Thread {
 
     static boolean isRunning = true;
 
+   public static List<ClientHandler> clients = new ArrayList<>();
     ObjectInputStream objectInputStream;
-    ObjectOutputStream objectOutputStream;
+   ObjectOutputStream objectOutputStream;
 
     public GameServerThread(Socket socket,ObjectOutputStream outputStream) throws IOException {
         this.socket = socket;
@@ -28,8 +29,23 @@ class GameServerThread extends Thread {
     @Override
     public void run() {
         ServerSenderThread serverSenderThread = new ServerSenderThread(objectOutputStream);
-        ServerReceverThread serverReceverThread = new ServerReceverThread(objectInputStream, serverSenderThread);
+        ServerReceverThread serverReceverThread = new ServerReceverThread(objectInputStream, serverSenderThread,objectOutputStream);
         serverReceverThread.start();
+    }
+
+
+    public static void sentToAll(Message message,String sender) {
+        for (ClientHandler client : clients) {
+            try {
+                if(!client.getClientData().getUsername().equalsIgnoreCase(sender)) {
+                    client.getOutputStream().writeObject(message);
+                    client.getOutputStream().flush();
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

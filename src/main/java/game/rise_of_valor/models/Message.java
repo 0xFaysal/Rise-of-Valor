@@ -26,6 +26,12 @@ public class Message implements Serializable {
         this.clientData = clientData;
     }
 
+    public Message(String mode, String message, String receiver) {
+        this.mode = mode;
+        this.message = message;
+        this.receiver = receiver;
+    }
+
     public Message( String messageText, String receiver) {
         this.message = messageText;
         this.receiver = receiver;
@@ -69,5 +75,9 @@ public String getMode() {
 
     public ClientData getClientData() {
         return clientData;
+    }
+
+    public void setClientData(ClientData clientData) {
+        this.clientData = clientData;
     }
 }
