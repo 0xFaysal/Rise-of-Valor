@@ -65,6 +65,10 @@ public class registrationController {
             System.out.println("Please fill all the fields");
             warningMsg.setText("Please fill all the fields");
             return;
+        }else {
+            System.out.println("Name: " + nameText);
+            System.out.println("Password: " + passwordText);
+            System.out.println("Username: " + usernameText);
         }
 
         userData.setData(usernameText, nameText, passwordText, 1, 0, 0, false, isAgree);
@@ -74,7 +78,6 @@ public class registrationController {
         Message message = new Message("createAccount", clientData);
 
         client.sendMessage(message);
-
 
 
 
@@ -92,14 +95,6 @@ public class registrationController {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
-
 
     @FXML
     private void goSignIn() {

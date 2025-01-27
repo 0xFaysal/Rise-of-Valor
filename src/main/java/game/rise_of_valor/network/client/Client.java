@@ -1,6 +1,8 @@
 package game.rise_of_valor.network.client;
 
+
 import game.rise_of_valor.models.Message;
+
 
 import java.io.IOException;
 import java.net.Socket;
@@ -73,6 +75,7 @@ public class Client extends Thread {
         } else {
             System.out.println("ClientSenderThread is not initialized. Cannot send message.");
         }
+
     }
 
     public interface ConnectionListener {

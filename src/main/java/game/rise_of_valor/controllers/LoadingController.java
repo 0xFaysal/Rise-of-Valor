@@ -46,6 +46,7 @@ public class LoadingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic1.png", true, true, 100));
         profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic2.png", false, false, 200));
         profileImages.add(new ProfileImage("/game/rise_of_valor/assets/profile/pic3.png", false, false, 250));
@@ -122,7 +123,6 @@ public class LoadingController implements Initializable {
 
 
 
-
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/login-registration.fxml"));
                     mainPane.getChildren().clear();
                     mainPane.getChildren().add(fxmlLoader.load());
@@ -153,7 +153,6 @@ public class LoadingController implements Initializable {
                 // Center the content in the mainPane
                 root.setLayoutX((mainPane.getWidth() - root.prefWidth(-1)) / 2);
                 root.setLayoutY((mainPane.getHeight() - root.prefHeight(-1)) / 2);
-
 
             } catch (IOException e) {
                 e.printStackTrace();

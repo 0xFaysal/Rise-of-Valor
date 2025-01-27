@@ -58,7 +58,9 @@ public class ProfileViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         coinCount.setText(String.valueOf(UserData.getCoin()));
         userName.setText(UserData.getUserName());
+
 //        profilePic.setImage(UserData.getProfilePic());
+
         name.setText(UserData.getName());
         profileImages.forEach(profileImage -> {
             viewAllProfile(profileImage.getImageLink(), profileImage.isPurchased(), profileImage.isSet(), profileImage.getPrice(),profileImage);
@@ -121,7 +123,9 @@ public class ProfileViewController implements Initializable {
                             button.setOnAction(event1 -> {
                                 //set profile
                                 UserData.setProfilePicName(image);
+
 //                                UserData.setProfilePic(new javafx.scene.image.Image(getClass().getResourceAsStream(image)));
+
                                 profilePic.setImage(new javafx.scene.image.Image(getClass().getResourceAsStream(image)));
                             });
                         }
