@@ -42,13 +42,19 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(this::handleWindowClose);
+
     }
 
     private void handleWindowClose(WindowEvent event) {
         System.exit(0);
     }
 
+
+
+
     public static void main(String[] args) {
+
             launch();
+
     }
 }

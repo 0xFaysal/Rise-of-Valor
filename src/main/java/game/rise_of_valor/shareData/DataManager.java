@@ -23,7 +23,6 @@ public class DataManager {
         coinIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/coin.png"));
 
 
-
     }
 
     public static void loadNewPlayer(int playerCharacterId) {
@@ -31,10 +30,10 @@ public class DataManager {
     }
 
 
-    }
     public LoadSprite getLoadSprite() {
         return loadSprite;
     }
+
     public static Image getBackgroundTimer() {
         return backgroundTimer;
     }
@@ -52,8 +51,7 @@ public class DataManager {
     public static Image setProfilePic(String profilePic) {
         return new Image(Main.class.getResourceAsStream(UserData.getProfilePicName()));
     }
-
+}
 //    public void setCoinCount(int totalCoins) {
 //        UserData.setCoin(totalCoins);
 //    }
-}
