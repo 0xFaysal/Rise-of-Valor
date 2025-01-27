@@ -33,9 +33,6 @@ public class registrationController {
     @FXML
     private TextField name;
 
-//    @FXML
-//    private Button googleSignUpBtn;
-
     @FXML
     private PasswordField password;
 
@@ -61,13 +58,16 @@ public class registrationController {
         if(nameText.isEmpty() || passwordText.isEmpty() || usernameText.isEmpty() || !isAgree) {
             System.out.println("Please fill all the fields");
             return;
+        }else {
+            System.out.println("Name: " + nameText);
+            System.out.println("Password: " + passwordText);
+            System.out.println("Username: " + usernameText);
         }
 
-
-
         userData.setProfilePicName("pic1.png");
-        userData.setData(usernameText, nameText, passwordText, 1, 0, DataManager.getProfilePic(userData.getProfilePicName()), false, isAgree);
+        userData.setData(usernameText, nameText, passwordText, 1, 200, DataManager.getProfilePic(userData.getProfilePicName()), false, isAgree);
         System.out.println("Username: " + userData);
+
 
         // Load the lobby view
         try {
@@ -76,12 +76,12 @@ public class registrationController {
             Pane lobbyView = loader.load();
 
 
-
             stage.getScene().setRoot(lobbyView);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     private void goSignIn() {
@@ -121,54 +121,5 @@ public class registrationController {
 
     }
 
-//    @FXML
-//    void goSignIn(MouseEvent event) {
-//        if (containerPane == null) {
-//            System.err.println("Error: containerPane is not initialized.");
-//            return;
-//        }
-//
-//        try {
-//            // Swap back the positions
-//            HBox parentHBox = (HBox) containerPane.getParent();
-//            if (parentHBox == null) {
-//                System.err.println("Error: parent HBox is null.");
-//                return;
-//            }
-//
-//            // Get the image view
-//            ImageView imageView = (ImageView) parentHBox.getChildren().get(0);
-//
-//            // Remove both nodes and re-add in reverse order
-//            parentHBox.getChildren().removeAll(imageView, containerPane);
-//            parentHBox.getChildren().addAll(imageView, containerPane);
-//
-//            // Load the login view
-//            containerPane.getChildren().clear();
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/login-view.fxml"));
-//            Pane loginPane = loader.load();
-//            LoginController loginCtrl = loader.getController();
-//            loginCtrl.setContainerPane(containerPane);
-//            containerPane.getChildren().add(loginPane);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
-
-
-
-//    @FXML
-//    void goSignIn(MouseEvent event) {
-//        try {
-//            containerPane.getChildren().clear();
-//            FXMLLoader loginPaneLoader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/login-view.fxml"));
-//            Pane loginPane = loginPaneLoader.load();
-//            LoginController loginCtrl = loginPaneLoader.getController();
-//            loginCtrl.setContainerPane(containerPane);
-//            containerPane.getChildren().add(loginPane);
-//        }catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

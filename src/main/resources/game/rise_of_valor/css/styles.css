@@ -15,10 +15,19 @@
     -fx-background-color: #B2BAB3;
 }
 
+.scroll-pane .scroll-bar {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+}
+
 .border {
     -fx-border-color: #E8E8E8;
     -fx-border-width: 1;
     -fx-border-radius: 5;
+}
+
+.text-white {
+    -fx-text-fill: #FFF;
 }
 
 /*loading page styles*/
