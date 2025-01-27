@@ -45,7 +45,7 @@ public class GameServer extends Thread {
                 ClientHandler clientHandler = new ClientHandler(clientSocket, outputStream);
 
                 // Start the thread to handle client communication
-                GameServerThread serverThread = new GameServerThread(clientSocket, outputStream, clientHandler);
+                GameServerThread serverThread = new GameServerThread(clientSocket,outputStream);
                 serverThread.start();
 
                 // Add the client handler to the list after the username is set

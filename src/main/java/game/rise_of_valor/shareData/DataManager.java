@@ -6,7 +6,9 @@ import game.rise_of_valor.utils.LoadSprite;
 import javafx.scene.image.Image;
 
 public class DataManager {
-    LoadSprite loadSprite;
+
+    static LoadSprite loadSprite;
+
 
     public static Client client;
     static Image backgroundTimer;
@@ -21,6 +23,14 @@ public class DataManager {
         coinIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/coin.png"));
 
 
+
+    }
+
+    public static void loadNewPlayer(int playerCharacterId) {
+        loadSprite.loadPlayer(playerCharacterId);
+    }
+
+
     }
     public LoadSprite getLoadSprite() {
         return loadSprite;
@@ -31,11 +41,14 @@ public class DataManager {
 
     public static Image getProfilePic(String profilePic) {
 
+
         return new Image(DataManager.class.getResourceAsStream("/game/rise_of_valor/assets/profile/" + profilePic));
     }
+
     public void setCoinCount(int totalCoins) {
         UserData.setCoin(totalCoins);
     }
+
     public static Image setProfilePic(String profilePic) {
         return new Image(Main.class.getResourceAsStream(UserData.getProfilePicName()));
     }
