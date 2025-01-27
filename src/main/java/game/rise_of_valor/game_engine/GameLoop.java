@@ -7,7 +7,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.io.IOException;
-import java.util.PrimitiveIterator;
+
 
 public class GameLoop {
 
@@ -19,6 +19,8 @@ public class GameLoop {
     private static final double TIME_PER_FRAME = 1.0 / TARGET_FPS; // Target frame time in seconds
     private double accumulator = 0; // Time accumulator for updates
     private long lastTime = 0; // Last frame timestamp
+    AnimationTimer gameLoop1;
+    AnimationTimer gameLoop2;
 
     public GameLoop(Canvas canvas, Scene scene) {
         this.gc = canvas.getGraphicsContext2D();
@@ -27,7 +29,7 @@ public class GameLoop {
 //        gameWorld = new GameWorldV2(canvas, scene);
         System.out.println("Game loop created");
 
-        AnimationTimer gameLoop1 = new AnimationTimer() {
+        gameLoop1 = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (lastTime == 0) {
@@ -58,7 +60,7 @@ public class GameLoop {
 
             }
         };
-        AnimationTimer gameLoop2 = new AnimationTimer() {
+         gameLoop2 = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (lastTime == 0) {
@@ -110,7 +112,10 @@ public class GameLoop {
 
     private void loadWinBGView(Scene scene) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/winBG-view.fxml"));
+
+            clearAll();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game/rise_of_valor/fxml/win-view.fxml"));
+
             scene.setRoot(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
@@ -120,5 +125,25 @@ public class GameLoop {
    public Timer getTimer(){
         return gameWorld.getTopViewManager().getTimer();
    }
+
+
+    public void stop() {
+        gameWorld.getTopViewManager().getTimer().stop();
+        gameLoop1.stop();
+        gameLoop2.stop();
+    }
+
+    public void start() {
+        gameLoop1.start();
+        gameLoop2.start();
+    }
+
+    public void clearAll() {
+        gameWorld.resetGameWorld();
+        gameLoop1.stop();
+        gameLoop2.stop();
+        gameLoop1 = null;
+        gameLoop2 = null;
+    }
 
 }

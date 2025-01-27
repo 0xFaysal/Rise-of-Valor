@@ -15,15 +15,24 @@
     -fx-background-color: #B2BAB3;
 }
 
+.scroll-pane .scroll-bar {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+}
+
 .border {
     -fx-border-color: #E8E8E8;
     -fx-border-width: 1;
     -fx-border-radius: 5;
 }
 
+.text-white {
+    -fx-text-fill: #FFF;
+}
+
 /*loading page styles*/
 .banner-bg {
-    -fx-background-image: url("../assets/images/RiseOfValor.jpeg");
+    -fx-background-image: url("../assets/image/gameLogo.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -242,6 +251,20 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
+
+.nextBtn-bg {
+    -fx-background-image: url("../assets/images/rightBtn.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.previousBtn-bg {
+    -fx-background-image: url("../assets/images/leftBtn.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 
 .nextBtn-bg {
     -fx-background-image: url("../assets/images/rightBtn.png");

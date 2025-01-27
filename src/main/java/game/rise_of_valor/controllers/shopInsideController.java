@@ -1,6 +1,7 @@
 package game.rise_of_valor.controllers;
 
 import game.rise_of_valor.Main;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -28,6 +29,22 @@ public class shopInsideController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    @FXML
+    void buyPlayer1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buyPlayer2(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buyPlayer4(ActionEvent event) {
+
     }
 
     @FXML

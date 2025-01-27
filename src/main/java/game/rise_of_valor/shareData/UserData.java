@@ -9,24 +9,25 @@ public class UserData implements Serializable {
     private static String name;
     private static String userName;
     private static String password;
+
+    private static int playerCharacterId = 2;
     private static int level;
     private static int coin;
-    private static Image profilePic;
-
     private static String profilePicName;
+    private static int profilePicId;
     private static boolean isAgree;
     private static boolean isPlaying;
 
     public UserData() {
     }
 
-    public static void setData(String userName, String name, String password, int level, int coin, Image profilePic, boolean isPlaying, boolean isAgree) {
+    public static void setData(String userName, String name, String password, int level, int coin, int imageId, boolean isPlaying, boolean isAgree) {
         UserData.name = name;
         UserData.userName = userName;
         UserData.password = password;
         UserData.level = level;
         UserData.coin = coin;
-        UserData.profilePic = profilePic;
+        UserData.profilePicId = imageId;
         UserData.isPlaying = isPlaying;
         UserData.isAgree = isAgree;
     }
@@ -78,12 +79,20 @@ public class UserData implements Serializable {
         UserData.coin = coin;
     }
 
-    public static Image getProfilePic() {
-        return profilePic;
+    public static int getPlayerCharacterId() {
+        return playerCharacterId;
     }
 
-    public static void setProfilePic(Image profilePic) {
-        UserData.profilePic = profilePic;
+    public static void setPlayerCharacterId(int playerCharacterId) {
+        UserData.playerCharacterId = playerCharacterId;
+    }
+
+    public static int getProfilePicId() {
+        return profilePicId;
+    }
+
+    public static void setProfilePicId(int profilePicId) {
+        UserData.profilePicId = profilePicId;
     }
 
     public static boolean isIsPlaying() {
@@ -102,6 +111,10 @@ public class UserData implements Serializable {
         UserData.profilePicName = profilePicName;
     }
 
+    public static String getUsername() {
+        return userName;
+    }
+
     @Override
     public String toString() {
         return "UserData{" +
@@ -109,7 +122,6 @@ public class UserData implements Serializable {
                 ", password='" + password + '\'' +
                 ", level=" + level +
                 ", coin=" + coin +
-                ", profilePic=" + profilePic +
                 ", isPlaying=" + isPlaying +
                 ", isAgree=" + isAgree +
                 '}';

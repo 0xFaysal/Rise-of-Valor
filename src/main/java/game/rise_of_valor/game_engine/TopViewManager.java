@@ -28,7 +28,7 @@ public class TopViewManager {
         this.timer = new Timer(60, customFont.getDesporm());
         this.remainEnemy = 0;
         this.killedEnemy = 0;
-        this.gearIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/settings.png"));
+        this.gearIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/pause.png"));
         this.healthBar = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/healthbar.png"));
     }
 
@@ -51,7 +51,7 @@ public class TopViewManager {
         gc.setFill(Color.color(0.0, 0.0, 0.0, 0.6));
         gc.fillRect(15, 15, 85, 30);
         gc.fillRect(110, 15, 65, 30);
-        gc.fillOval(canvasWidth-50, 15, 30, 30);
+//        gc.fillOval(canvasWidth-50, 15, 30, 30);
 
 
 
@@ -59,7 +59,7 @@ public class TopViewManager {
         gc.setLineWidth(3);
         gc.strokeRect(15, 15, 85, 30);
         gc.strokeRect(110, 15, 65, 30);
-        gc.strokeOval(canvasWidth-50, 15, 30, 30);
+//        gc.strokeOval(canvasWidth-50, 15, 30, 30);
 
 
         gc.setFill(Color.WHITE);
@@ -68,10 +68,10 @@ public class TopViewManager {
         gc.fillText(rematinEnemyString, 20, 35);
         String killedEnemyString = String.format("Kill : %02d", killedEnemy);
         gc.fillText(killedEnemyString, 115, 35);
-        gc.drawImage(gearIcon, canvasWidth-45, 20, 20, 20);
+//        gc.drawImage(gearIcon, canvasWidth-45, 20, 20, 20);
         gc.setFont(Font.font(customFont.getDesporm().getFamily(), FontWeight.EXTRA_BOLD,10));
-        gc.setFill(Color.YELLOW);
-        gc.fillText("Esc", canvasWidth-25, 20);
+//        gc.setFill(Color.YELLOW);
+//        gc.fillText("Esc", canvasWidth-25, 20);
 
        //health bar
         gc.setFill(Color.RED);

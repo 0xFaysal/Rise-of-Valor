@@ -1,18 +1,18 @@
 package game.rise_of_valor.shareData;
 
+import game.rise_of_valor.Main;
 import game.rise_of_valor.network.client.Client;
 import game.rise_of_valor.utils.LoadSprite;
 import javafx.scene.image.Image;
 
 public class DataManager {
 
-    LoadSprite loadSprite;
+    static LoadSprite loadSprite;
+
+
     public static Client client;
     static Image backgroundTimer;
-    static Image searchIcon;
-   public static Image coinIcon;
-
-//    private static Image profilePic;
+    public static Image coinIcon;
 
 
     public DataManager() {
@@ -20,11 +20,15 @@ public class DataManager {
         loadSprite = new LoadSprite();
         loadSprite.loadPlayer(1);
         backgroundTimer = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/timer-bg1.png"));
-        searchIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/search.png"));
         coinIcon = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/images/coin.png"));
 
-//        profilePic = new Image(getClass().getResourceAsStream("/game/rise_of_valor/assets/profile/pic1.png"));
+
     }
+
+    public static void loadNewPlayer(int playerCharacterId) {
+        loadSprite.loadPlayer(playerCharacterId);
+    }
+
 
     public LoadSprite getLoadSprite() {
         return loadSprite;
@@ -34,20 +38,20 @@ public class DataManager {
         return backgroundTimer;
     }
 
-    public static Image getSearchIcon() {
-        return searchIcon;
-    }
-
-//    public static Image getProfilePic() {
-//        return profilePic;
-//    }
-
     public static Image getProfilePic(String profilePic) {
 
-       return new Image(DataManager.class.getResourceAsStream("/game/rise_of_valor/assets/profile/"+profilePic));
+
+        return new Image(DataManager.class.getResourceAsStream("/game/rise_of_valor/assets/profile/" + profilePic));
     }
 
     public void setCoinCount(int totalCoins) {
         UserData.setCoin(totalCoins);
     }
+
+    public static Image setProfilePic(String profilePic) {
+        return new Image(Main.class.getResourceAsStream(UserData.getProfilePicName()));
+    }
 }
+//    public void setCoinCount(int totalCoins) {
+//        UserData.setCoin(totalCoins);
+//    }

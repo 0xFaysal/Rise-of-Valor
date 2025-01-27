@@ -17,7 +17,7 @@
 
 <Pane prefHeight="506.0" prefWidth="380.0" styleClass="bgWhite" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.rise_of_valor.controllers.registrationController">
    <children>
-      <VBox layoutX="61.0" layoutY="42.0" prefHeight="430.0" prefWidth="260.0" spacing="5.0" styleClass="bgTransparent" stylesheets="@../css/styles.css">
+      <VBox alignment="CENTER" layoutX="61.0" layoutY="34.0" prefHeight="439.0" prefWidth="260.0" styleClass="bgTransparent" stylesheets="@../css/styles.css">
          <children>
             <HBox alignment="CENTER" prefHeight="47.0" prefWidth="260.0">
                <children>
@@ -35,6 +35,14 @@
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
+            </Label>
+            <Label fx:id="warningMsg" onMouseClicked="#goSignIn" textFill="#ea0340">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
             </Label>
             <VBox prefHeight="296.0" prefWidth="260.0">
                <children>

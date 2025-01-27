@@ -15,7 +15,6 @@ public class ServerConnectController {
 
     @FXML
     private AnchorPane rootPane;
-
     private Pane mainPane;
     private LoadingController loadingController;
 
@@ -24,6 +23,7 @@ public class ServerConnectController {
     void closeBtn(ActionEvent event) {
         System.exit(0);
     }
+
 
     @FXML
     void joinServer(ActionEvent event) {
@@ -45,6 +45,7 @@ public class ServerConnectController {
     }
 
 
+
     @FXML
     void startServerBtn(ActionEvent event) {
         try {
@@ -55,6 +56,8 @@ public class ServerConnectController {
             stage.setTitle("Rise of valor Server");
             stage.setScene(new Scene(root));
             stage.show();
+            stage.setX(10);
+            stage.setY(10);
 
             // Close the server Connection PopUp window
             closePopup();

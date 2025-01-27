@@ -42,46 +42,46 @@ public class GameServer extends Thread {
                 System.out.println("User-" + userCount + " connected");
 
                 ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
-                ClientHandler clientHandler = new ClientHandler(clientSocket, outputStream);
+//                ClientHandler clientHandler = new ClientHandler(clientSocket, outputStream);
 
                 // Start the thread to handle client communication
-                GameServerThread serverThread = new GameServerThread(clientSocket, outputStream, clientHandler);
+                GameServerThread serverThread = new GameServerThread(clientSocket,outputStream);
                 serverThread.start();
 
                 // Add the client handler to the list after the username is set
-                clientHandlers.add(clientHandler);
+//                clientHandlers.add(clientHandler);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+//
+//    public static void broadcastMessage(Message message, String senderUsername) {
+//        for (ClientHandler clientHandler : clientHandlers) {
+//            if (!clientHandler.getUsername().equals(senderUsername)) {
+//                try {
+//                    clientHandler.getOutputStream().writeObject(message);
+//                    clientHandler.getOutputStream().flush();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
 
-    public static void broadcastMessage(Message message, String senderUsername) {
-        for (ClientHandler clientHandler : clientHandlers) {
-            if (!clientHandler.getUsername().equals(senderUsername)) {
-                try {
-                    clientHandler.getOutputStream().writeObject(message);
-                    clientHandler.getOutputStream().flush();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public static void sendMessageToUser(Message message, String receiverUsername) {
-        for (ClientHandler clientHandler : clientHandlers) {
-            if (clientHandler.getUsername().equals(receiverUsername)) {
-                try {
-                    clientHandler.getOutputStream().writeObject(message);
-                    clientHandler.getOutputStream().flush();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
-        }
-    }
+//    public static void sendMessageToUser(Message message, String receiverUsername) {
+//        for (ClientHandler clientHandler : clientHandlers) {
+//            if (clientHandler.getUsername().equals(receiverUsername)) {
+//                try {
+//                    clientHandler.getOutputStream().writeObject(message);
+//                    clientHandler.getOutputStream().flush();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                break;
+//            }
+//        }
+//    }
 
 //    public static void sendPlayerData(Message message, UserData userData) {
 //        for (ClientHandler clientHandler : clientHandlers) {
@@ -96,16 +96,16 @@ public class GameServer extends Thread {
 
     public static void removeClientHandler(ClientHandler clientHandler) {
         clientHandlers.remove(clientHandler);
-        System.out.println("Removed client: " + clientHandler.getUsername());
+//        System.out.println("Removed client: " + clientHandler.getUsername());
     }
 
-    public static List<String> getActiveUsers() {
-        List<String> activeUsers = new ArrayList<>();
-        for (ClientHandler clientHandler : clientHandlers) {
-            activeUsers.add(clientHandler.getUsername());
-        }
-        return activeUsers;
-    }
+//    public static List<String> getActiveUsers() {
+//        List<String> activeUsers = new ArrayList<>();
+//        for (ClientHandler clientHandler : clientHandlers) {
+//            activeUsers.add(clientHandler.getUsername());
+//        }
+//        return activeUsers;
+//    }
 
 
     public void shutdown() {
@@ -114,7 +114,7 @@ public class GameServer extends Thread {
             this.interrupt();
             for (ClientHandler clientHandler : clientHandlers) {
                 clientHandler.getOutputStream().close();
-                clientHandler.getSocket().close();
+//                clientHandler.getSocket().close();
                 GameServerThread.isRunning = false;
             }
         } catch (IOException e) {

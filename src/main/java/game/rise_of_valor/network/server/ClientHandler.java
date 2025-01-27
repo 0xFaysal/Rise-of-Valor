@@ -1,32 +1,28 @@
 package game.rise_of_valor.network.server;
 
+import game.rise_of_valor.models.ClientData;
+
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 class ClientHandler {
-    private final Socket socket;
+
     private final ObjectOutputStream outputStream;
-    private String username;
+  private final ClientData clientData;
 
 
-    public ClientHandler(Socket socket, ObjectOutputStream outputStream) {
-        this.socket = socket;
+    public ClientHandler( ObjectOutputStream outputStream, ClientData clientData) {
+
         this.outputStream = outputStream;
+        this.clientData = clientData;
     }
 
     public ObjectOutputStream getOutputStream() {
         return outputStream;
     }
 
-    public String getUsername() {
-        return username;
+    public ClientData getClientData() {
+        return clientData;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public AutoCloseable getSocket() {
-        return socket;
-    }
 }
