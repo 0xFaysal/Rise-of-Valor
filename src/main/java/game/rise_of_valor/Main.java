@@ -26,14 +26,14 @@ public class Main extends Application {
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/lobby-view.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/game-play.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/shop-view.fxml"));
-<<<<<<< HEAD
+
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/win-view.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/settings-view.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/waiting-view.fxml"));
-=======
+
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/winBG-view.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/settings-view.fxml"));
->>>>>>> 91318b3 (last update)
+
 
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Ride of Valor");

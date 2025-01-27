@@ -53,7 +53,7 @@ public class DataManager {
         return new Image(Main.class.getResourceAsStream(UserData.getProfilePicName()));
     }
 
-    public void setCoinCount(int totalCoins) {
-        UserData.setCoin(totalCoins);
-    }
+//    public void setCoinCount(int totalCoins) {
+//        UserData.setCoin(totalCoins);
+//    }
 }
