@@ -15,7 +15,10 @@
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="960.0" style="-fx-background-color: #1E1E2E;">
          <children>
-            <TextField fx:id="textField" layoutX="25.0" layoutY="463.0" prefHeight="50.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #007ACC; -fx-border-radius: 10; -fx-background-radius: 10;" />
+            <TextField fx:id="textField" layoutX="25.0" layoutY="463.0" prefHeight="50.0" prefWidth="775.0" promptText="Write your message here" style="-fx-background-color: #FFFFFF; -fx-border-color: #007ACC; -fx-border-radius: 10; -fx-background-radius: 10;">
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
             <Button layoutX="844.0" layoutY="463.0" mnemonicParsing="false" onAction="#sendBtn" prefHeight="50.0" prefWidth="88.0" style="-fx-background-color: #007ACC; -fx-background-radius: 10;" text="Send" textFill="#efeded">
                <font>
                   <Font name="System Bold" size="24.0" />
